@@ -11,7 +11,7 @@ import ModalWrapper from "@/components/ModalWrapper";
 
 export const metadata: Metadata = {
   title: "Authentic Moroccan Adventures | Custom Travel & Tours 2024",
-  description: "Experience the magic of Morocco with Authentic Moroccan Adventures. Custom tours, desert treks, and imperial city experiences.",
+  description: "Discover and experience the magic of Morocco with Authentic Moroccan Adventures. Custom tours, desert treks, and imperial city experiences.",
 };
 
 export default function RootLayout({
