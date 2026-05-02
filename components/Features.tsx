@@ -1,30 +1,33 @@
 "use client";
 
 import Image from 'next/image';
+import Link from 'next/link';
 import chefchaouenImg from '../src/assets/images/chefchaouen.jpg';
 import ouzoudImg from '../src/assets/images/ouzoud.jpg';
 import atlasImg from '../src/assets/images/ait-ben-haddou.jpg';
 import { useModal } from '@/lib/ModalContext';
 
 const features = [
-// ... (rest of features)
   {
     title: "The Blue Pearl",
     description: "Wander through the enchanting blue-washed streets of Chefchaouen, a photographer's dream in the Rif Mountains.",
     image: chefchaouenImg,
-    tag: "City"
+    tag: "City",
+    slug: "chefchaouen"
   },
   {
-    title: "Atlas Cascades",
-    description: "Experience the thunderous beauty of Ouzoud Falls, the highest waterfalls in North Africa, nestled in the Grand Atlas.",
+    title: "Sahara Sands",
+    description: "Experience the magic of the dunes. Camel treks and luxury camps await in the heart of the Sahara.",
     image: ouzoudImg,
-    tag: "Nature"
+    tag: "Nature",
+    slug: "sahara"
   },
   {
-    title: "Ancient Kasbahs",
-    description: "Step back in time at Ait Ben Haddou, a UNESCO World Heritage site and a gateway to the Sahara's golden dunes.",
+    title: "Marrakech Magic",
+    description: "Discover the Red City, from the historic Medina to the vibrant Jemaa el-Fnaa square.",
     image: atlasImg,
-    tag: "Heritage"
+    tag: "Heritage",
+    slug: "marrakech"
   }
 ];
 
@@ -58,15 +61,23 @@ export default function Features() {
                 <p className="text-gray-600 leading-relaxed mb-6">
                   {feature.description}
                 </p>
-                <button 
-                  onClick={openBooking}
-                  className="text-terracotta font-bold flex items-center group-hover:gap-2 transition-all"
-                >
-                  Learn More 
-                  <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                  </svg>
-                </button>
+                <div className="flex justify-between items-center">
+                  <Link 
+                    href={`/destinations/${feature.slug}`}
+                    className="text-terracotta font-bold flex items-center group-hover:gap-2 transition-all"
+                  >
+                    Learn More 
+                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                  </Link>
+                  <button 
+                    onClick={openBooking}
+                    className="text-slate text-sm font-bold border-b-2 border-transparent hover:border-terracotta transition-all"
+                  >
+                    Book
+                  </button>
+                </div>
               </div>
             </div>
           ))}
