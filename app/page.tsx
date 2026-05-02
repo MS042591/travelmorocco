@@ -1,6 +1,5 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import Features from '@/components/Features';
 import BlogPreview from '@/components/BlogPreview';
 import FeaturedTours from '@/components/FeaturedTours';
 import Footer from '@/components/Footer';
@@ -17,7 +16,6 @@ export default function Home() {
       <main>
         <Hero />
         <FeaturedTours tours={tours} />
-        <Features />
         <BlogPreview posts={posts} />
       </main>
       <Footer />
