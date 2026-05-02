@@ -4,14 +4,6 @@ date: "2026-04-25"
 excerpt: "Discover the tranquil charm of Chefchaouen, where azure streets, fragrant markets, and breathtaking mountain vistas create an unforgettable Moroccan escape."
 image: "/images/marrakech-market.jpg"
 ---
-
-# Mystic Mornings in Chefchaouen: The Blue Pearl of Morocco
-
-*By the Travel Morocco team*  
-*Published: May 2026*
-
----
-
 ## Why Chefchaouen?
 Nestled in the Rif Mountains, Chefchaouen—affectionately called *the Blue Pearl*—is a small town that feels like stepping into a living watercolor. Its narrow alleys are washed in shades of sky‑blue, the air carries the scent of thyme and pine, and the locals greet you with a warm "Salam!" that lingers long after you leave.
 
