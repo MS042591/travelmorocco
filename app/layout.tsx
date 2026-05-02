@@ -10,7 +10,7 @@ import { ModalProvider } from "@/lib/ModalContext";
 import ModalWrapper from "@/components/ModalWrapper";
 
 export const metadata: Metadata = {
-  title: "Authentic Moroccan Adventures | Custom Travel & Tours",
+  title: "Authentic Moroccan Adventures | Custom Travel & Tours 2024",
   description: "Discover the magic of Morocco with Authentic Moroccan Adventures. Custom tours, desert treks, and imperial city experiences.",
 };
 
