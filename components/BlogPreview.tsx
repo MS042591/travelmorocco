@@ -1,48 +1,57 @@
+"use client";
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { getAllPosts } from '@/lib/posts';
+import { PostData } from '@/lib/posts-shared';
+import { motion } from 'framer-motion';
 
-export default function BlogPreview() {
-  const posts = getAllPosts();
+interface BlogPreviewProps {
+  posts: PostData[];
+}
 
+export default function BlogPreview({ posts }: BlogPreviewProps) {
   return (
-    <section id="blog" className="py-24 bg-white">
-      <div className="container mx-auto px-4 md:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-          <div>
-            <h2 className="text-terracotta font-bold tracking-widest text-sm uppercase mb-4 text-left">The Journal</h2>
-            <p className="text-4xl font-bold text-slate">Latest from our Blog</p>
+    <section id="blog" className="py-16 bg-white">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20">
+        <div className="flex justify-between items-end mb-12">
+          <div className="max-w-xl">
+            <h2 className="text-2xl font-bold text-ink mb-2 tracking-tight">Moroccan Travel Journal</h2>
+            <p className="text-sm text-muted">Deep dives into culture, hidden gems, and local tips.</p>
           </div>
-          <Link href="/blog" className="border-2 border-slate text-slate hover:bg-slate hover:text-white px-8 py-3 rounded-full font-bold transition-all">
-            View All Stories
+          <Link href="/blog" className="text-sm font-semibold text-ink underline hover:text-muted transition-colors">
+            View all stories
           </Link>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {posts.slice(0, 2).map((post) => (
-            <Link key={post.slug} href={`/blog/${post.slug}`} className="flex flex-col md:flex-row gap-8 items-center group cursor-pointer">
-              <div className="w-full md:w-1/2 aspect-video overflow-hidden rounded-2xl shadow-lg">
-                <Image 
-                  src={post.image} 
-                  alt={post.title} 
-                  width={600}
-                  height={400}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="w-full md:w-1/2">
-                <span className="text-terracotta font-bold text-xs uppercase">{post.date}</span>
-                <h3 className="text-2xl font-bold text-slate mt-2 mb-4 group-hover:text-terracotta transition-colors leading-tight">
-                  {post.title}
-                </h3>
-                <p className="text-gray-500 mb-6 line-clamp-2">
-                  {post.excerpt}
-                </p>
-                <span className="text-slate font-bold inline-flex items-center">
-                  Read Article <span className="ml-2">→</span>
-                </span>
-              </div>
-            </Link>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {posts.slice(0, 2).map((post, index) => (
+            <motion.div
+              key={post.slug}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="group cursor-pointer"
+            >
+              <Link href={`/blog/${post.slug}`} className="flex flex-col h-full">
+                <div className="relative h-72 md:h-80 overflow-hidden rounded-airbnb-md mb-4 shadow-sm group-hover:shadow-airbnb transition-all">
+                  <Image 
+                    src={post.image} 
+                    alt={post.title} 
+                    fill
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-muted">{post.date}</span>
+                  <h3 className="text-lg font-bold text-ink leading-tight group-hover:underline">
+                    {post.title}
+                  </h3>
+                  <p className="text-sm text-muted line-clamp-2">
+                    {post.excerpt}
+                  </p>
+                </div>
+              </Link>
+            </motion.div>
           ))}
         </div>
       </div>

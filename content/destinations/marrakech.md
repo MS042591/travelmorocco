@@ -2,6 +2,7 @@
 title: "Marrakech: The Red City"
 description: "Experience the vibrant heart of Morocco, from the bustling Jemaa el-Fnaa square to the serene Majorelle Garden."
 image: "/images/marrakech-market.jpg"
+gallery: ["/images/marrakech-market.jpg", "/images/riad-interior.png", "/images/sahara-sunset.png", "/images/atlas-village.png", "/images/tajine-spread.png"]
 highlights:
   - "Explore the historic Bahia Palace"
   - "Wander through the colorful spice souks"

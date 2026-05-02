@@ -9,6 +9,7 @@ export interface DestinationData {
   title: string;
   description: string;
   image: string;
+  gallery?: string[];
   highlights: string[];
   content: string;
 }
@@ -32,6 +33,7 @@ export function getAllDestinations(): DestinationData[] {
         title: data.title,
         description: data.description,
         image: data.image,
+        gallery: data.gallery || [],
         highlights: data.highlights || [],
         content,
       } as DestinationData;
@@ -51,6 +53,7 @@ export function getDestinationBySlug(slug: string): DestinationData | null {
       title: data.title,
       description: data.description,
       image: data.image,
+      gallery: data.gallery || [],
       highlights: data.highlights || [],
       content,
     } as DestinationData;

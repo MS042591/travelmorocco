@@ -2,6 +2,7 @@
 title: "Chefchaouen: The Blue Pearl"
 description: "Experience the tranquility of the Rif Mountains in Morocco's most photogenic city."
 image: "/images/chefchaouen.jpg"
+gallery: ["/images/chefchaouen.jpg", "/images/riad-interior.png", "/images/atlas-village.png", "/images/tajine-spread.png", "/images/marrakech-market.jpg"]
 highlights:
   - "Walk the blue-washed streets of the Medina"
   - "Hike to the Spanish Mosque for sunset"

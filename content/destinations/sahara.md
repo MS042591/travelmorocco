@@ -2,6 +2,7 @@
 title: "Sahara Desert: Sea of Sands"
 description: "Spend a night under the stars in the golden dunes of Merzouga."
 image: "/images/hero-sahara.jpg"
+gallery: ["/images/hero-sahara.jpg", "/images/sahara-sunset.png", "/images/atlas-village.png", "/images/riad-interior.png", "/images/tajine-spread.png"]
 highlights:
   - "Camel trek at sunset"
   - "Luxury desert glamping"

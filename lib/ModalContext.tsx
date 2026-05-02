@@ -4,7 +4,8 @@ import React, { createContext, useContext, useState } from 'react';
 
 interface ModalContextType {
   isBookingOpen: boolean;
-  openBooking: () => void;
+  selectedTour: string;
+  openBooking: (tourTitle?: string) => void;
   closeBooking: () => void;
 }
 
@@ -12,12 +13,21 @@ const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
 export function ModalProvider({ children }: { children: React.ReactNode }) {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [selectedTour, setSelectedTour] = useState('');
 
-  const openBooking = () => setIsBookingOpen(true);
-  const closeBooking = () => setIsBookingOpen(false);
+  const openBooking = (tourTitle?: string) => {
+    if (tourTitle) setSelectedTour(tourTitle);
+    else setSelectedTour('');
+    setIsBookingOpen(true);
+  };
+  
+  const closeBooking = () => {
+    setIsBookingOpen(false);
+    setSelectedTour('');
+  };
 
   return (
-    <ModalContext.Provider value={{ isBookingOpen, openBooking, closeBooking }}>
+    <ModalContext.Provider value={{ isBookingOpen, selectedTour, openBooking, closeBooking }}>
       {children}
     </ModalContext.Provider>
   );

@@ -6,6 +6,7 @@ import chefchaouenImg from '../src/assets/images/chefchaouen.jpg';
 import ouzoudImg from '../src/assets/images/ouzoud.jpg';
 import atlasImg from '../src/assets/images/ait-ben-haddou.jpg';
 import { useModal } from '@/lib/ModalContext';
+import { motion } from 'framer-motion';
 
 const features = [
   {
@@ -35,51 +36,49 @@ export default function Features() {
   const { openBooking } = useModal();
 
   return (
-    <section id="tours" className="py-24 bg-gray-50">
-      <div className="container mx-auto px-4 md:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-terracotta font-bold tracking-widest text-sm uppercase mb-4">Curated Experiences</h2>
-          <p className="text-4xl md:text-5xl font-bold text-slate mb-6">Discover the Heart of Morocco</p>
-          <div className="w-24 h-1 bg-terracotta mx-auto rounded-full"></div>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {features.map((feature) => (
-            <div key={feature.title} className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-              <div className="relative h-72 overflow-hidden">
-                <Image 
-                  src={feature.image} 
-                  alt={feature.title} 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-4 py-1 rounded-full text-xs font-bold text-slate">
-                  {feature.tag}
+    <section id="destinations" className="py-16 bg-white">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {features.map((feature, index) => (
+            <motion.div 
+              key={feature.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <Link href={`/destinations/${feature.slug}`} className="group cursor-pointer block">
+                <div className="relative aspect-square overflow-hidden rounded-airbnb-md mb-3">
+                  <Image 
+                    src={feature.image} 
+                    alt={feature.title} 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute top-3 left-3">
+                    <div className="bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-[11px] font-bold text-ink shadow-sm">
+                      Guest favorite
+                    </div>
+                  </div>
+                  <div className="absolute top-3 right-3">
+                    <button className="p-2 text-white/90 hover:scale-110 transition-transform">
+                      <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 stroke-white fill-black/30 stroke-2"><path d="m16 28c7-4.733 14-10 14-17 0-3.86599325-3.1340068-7-7-7-2.2666524 0-4.302302 1.08756041-5.6021876 2.81881682l-.3978124.52836636-.3978124-.52836636c-1.2998856-1.73125641-3.33553515-2.81881682-5.6021876-2.81881682-3.86599325 0-7 3.13400675-7 7 0 7 7 12.267 14 17z"></path></svg>
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div className="p-8">
-                <h3 className="text-2xl font-bold text-slate mb-4">{feature.title}</h3>
-                <p className="text-gray-600 leading-relaxed mb-6">
-                  {feature.description}
-                </p>
-                <div className="flex justify-between items-center">
-                  <Link 
-                    href={`/destinations/${feature.slug}`}
-                    className="text-terracotta font-bold flex items-center group-hover:gap-2 transition-all"
-                  >
-                    Learn More 
-                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                    </svg>
-                  </Link>
-                  <button 
-                    onClick={openBooking}
-                    className="text-slate text-sm font-bold border-b-2 border-transparent hover:border-terracotta transition-all"
-                  >
-                    Book
-                  </button>
+                
+                <div className="space-y-1">
+                  <div className="flex justify-between items-start">
+                    <h3 className="text-sm font-bold text-ink group-hover:underline">{feature.title}, Morocco</h3>
+                    <div className="flex items-center space-x-1 text-sm text-ink">
+                      <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 fill-ink"><path d="M15.094 1.579l-4.124 8.885-9.86 1.27a1 1 0 0 0-.542 1.736l7.293 6.565-1.965 9.752a1 1 0 0 0 1.483 1.061L16 25.951l8.625 4.918a1 1 0 0 0 1.482-1.06l-1.965-9.753 7.293-6.565a1 1 0 0 0-.542-1.736l-9.86-1.27-4.124-8.885a1 1 0 0 0-1.812 0z"></path></svg>
+                      <span>4.92</span>
+                    </div>
+                  </div>
+                  <p className="text-sm text-muted">Stay with local host</p>
+                  <p className="text-sm text-muted">Oct 22 – 27</p>
+                  <p className="text-sm text-ink mt-2"><span className="font-bold">$124</span> night</p>
                 </div>
-              </div>
-            </div>
+              </Link>
+            </motion.div>
           ))}
         </div>
       </div>

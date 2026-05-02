@@ -2,63 +2,63 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="bg-slate text-white/70 py-20">
-      <div className="container mx-auto px-4 md:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-          <div className="col-span-1 md:col-span-1">
-            <Link href="/" className="text-2xl font-bold tracking-tighter text-white mb-6 block">
-              TRAVEL<span className="text-terracotta">MOROCCO</span>
-            </Link>
-            <p className="mb-8 leading-relaxed">
-              Curating unforgettable journeys through the heart of the Kingdom. From the Sahara sands to the Atlantic coast.
-            </p>
-            <div className="flex space-x-4">
-              <a href="#" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-terracotta hover:border-terracotta hover:text-white transition-all">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-terracotta hover:border-terracotta hover:text-white transition-all">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.058-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-              </a>
-            </div>
-          </div>
-          
+    <footer className="bg-canvas border-t border-hairline py-12 pb-24">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16 border-b border-hairline pb-12">
           <div>
-            <h4 className="text-white font-bold mb-6">Explore</h4>
-            <ul className="space-y-4 text-sm">
-              <li><Link href="#" className="hover:text-terracotta transition-colors">Private Tours</Link></li>
-              <li><Link href="#" className="hover:text-terracotta transition-colors">Sahara Treks</Link></li>
-              <li><Link href="#" className="hover:text-terracotta transition-colors">Honeymoon Packages</Link></li>
-              <li><Link href="#" className="hover:text-terracotta transition-colors">Family Adventures</Link></li>
+            <h4 className="text-sm font-bold text-ink mb-4">Support</h4>
+            <ul className="space-y-3 text-sm text-ink">
+              <li><Link href="#" className="hover:underline">Help Center</Link></li>
+              <li><Link href="#" className="hover:underline">Safety information</Link></li>
+              <li><Link href="#" className="hover:underline">Cancellation options</Link></li>
+              <li><Link href="#" className="hover:underline">Our COVID-19 Response</Link></li>
             </ul>
           </div>
           
           <div>
-            <h4 className="text-white font-bold mb-6">Company</h4>
-            <ul className="space-y-4 text-sm">
-              <li><Link href="#" className="hover:text-terracotta transition-colors">Our Story</Link></li>
-              <li><Link href="#" className="hover:text-terracotta transition-colors">Reviews</Link></li>
-              <li><Link href="#" className="hover:text-terracotta transition-colors">Travel Insurance</Link></li>
-              <li><Link href="#" className="hover:text-terracotta transition-colors">Contact Us</Link></li>
+            <h4 className="text-sm font-bold text-ink mb-4">Community</h4>
+            <ul className="space-y-3 text-sm text-ink">
+              <li><Link href="#" className="hover:underline">Airbnb.org: disaster relief housing</Link></li>
+              <li><Link href="#" className="hover:underline">Support Afghan refugees</Link></li>
+              <li><Link href="#" className="hover:underline">Celebrating diversity & belonging</Link></li>
+              <li><Link href="#" className="hover:underline">Combating discrimination</Link></li>
             </ul>
           </div>
           
           <div>
-            <h4 className="text-white font-bold mb-6">Newsletter</h4>
-            <p className="text-sm mb-6">Get the latest travel tips and exclusive offers.</p>
-            <form className="flex">
-              <input type="email" placeholder="Email address" className="bg-white/10 border border-white/20 rounded-l-full px-4 py-3 text-sm w-full focus:outline-none focus:border-terracotta transition-colors" />
-              <button className="bg-terracotta text-white px-6 py-3 rounded-r-full font-bold hover:bg-[#d1624b] transition-all">
-                Join
-              </button>
-            </form>
+            <h4 className="text-sm font-bold text-ink mb-4">Hosting</h4>
+            <ul className="space-y-3 text-sm text-ink">
+              <li><Link href="#" className="hover:underline">Try hosting</Link></li>
+              <li><Link href="#" className="hover:underline">AirCover: protection for Hosts</Link></li>
+              <li><Link href="#" className="hover:underline">Explore hosting resources</Link></li>
+              <li><Link href="#" className="hover:underline">Visit our community forum</Link></li>
+            </ul>
           </div>
         </div>
         
-        <div className="border-t border-white/10 pt-10 flex flex-col md:flex-row justify-between items-center gap-6 text-xs uppercase tracking-widest font-medium">
-          <p>&copy; {new Date().getFullYear()} Travel Morocco Adventures. All rights reserved.</p>
-          <div className="flex space-x-8">
-            <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>
+        <div className="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0 text-sm text-ink font-normal">
+          <div className="flex flex-wrap justify-center lg:justify-start items-center space-x-2">
+            <span>© 2026 travelmorocco, Inc.</span>
+            <span className="hidden sm:inline">·</span>
+            <Link href="#" className="hover:underline">Privacy</Link>
+            <span className="hidden sm:inline">·</span>
+            <Link href="#" className="hover:underline">Terms</Link>
+            <span className="hidden sm:inline">·</span>
+            <Link href="#" className="hover:underline">Sitemap</Link>
+          </div>
+          
+          <div className="flex items-center space-x-6 font-bold">
+            <button className="flex items-center space-x-2 hover:underline">
+              <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 fill-ink"><path d="m8 0c-4.418278 0-8 3.581722-8 8s3.581722 8 8 8 8-3.581722 8-8-3.581722-8-8-8zm0 14.75c-3.7223348 0-6.75-3.0276652-6.75-6.75s3.0276652-6.75 6.75-6.75 6.75 3.0276652 6.75 6.75-3.0276652 6.75-6.75 6.75zm1.5-9.75h-3v1h3zm-3 2h3v1h-3zm3 2h-3v1h3zm-3 2h3v1h-3z"></path></svg>
+              <span>English (US)</span>
+            </button>
+            <button className="hover:underline">
+              <span>$ USD</span>
+            </button>
+            <div className="flex items-center space-x-4">
+              <Link href="#" className="hover:text-muted transition-colors"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 fill-ink"><path d="M23.25 24c0 .69-.31 1.25-.75 1.25h-13c-.44 0-.75-.56-.75-1.25s.31-1.25.75-1.25h13c.44 0 .75.56.75 1.25zm0-4c0 .69-.31 1.25-.75 1.25h-13c-.44 0-.75-.56-.75-1.25s.31-1.25.75-1.25h13c.44 0 .75.56.75 1.25zm0-4c0 .69-.31 1.25-.75 1.25h-13c-.44 0-.75-.56-.75-1.25s.31-1.25.75-1.25h13c.44 0 .75.56.75 1.25zm0-4c0 .69-.31 1.25-.75 1.25h-13c-.44 0-.75-.56-.75-1.25s.31-1.25.75-1.25h13c.44 0 .75.56.75 1.25z"></path></svg></Link>
+              <Link href="#" className="hover:text-muted transition-colors"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 fill-ink"><path d="M23.25 24c0 .69-.31 1.25-.75 1.25h-13c-.44 0-.75-.56-.75-1.25s.31-1.25.75-1.25h13c.44 0 .75.56.75 1.25zm0-4c0 .69-.31 1.25-.75 1.25h-13c-.44 0-.75-.56-.75-1.25s.31-1.25.75-1.25h13c.44 0 .75.56.75 1.25zm0-4c0 .69-.31 1.25-.75 1.25h-13c-.44 0-.75-.56-.75-1.25s.31-1.25.75-1.25h13c.44 0 .75.56.75 1.25zm0-4c0 .69-.31 1.25-.75 1.25h-13c-.44 0-.75-.56-.75-1.25s.31-1.25.75-1.25h13c.44 0 .75.56.75 1.25z"></path></svg></Link>
+            </div>
           </div>
         </div>
       </div>
