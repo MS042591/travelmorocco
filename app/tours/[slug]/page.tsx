@@ -179,8 +179,6 @@ export default async function TourPage({ params }: TourPageProps) {
             <div className="lg:col-span-4">
               <div className="sticky top-28 space-y-6">
                 <BookingCard price={tour.price} tourTitle={tour.title} />
-              </div>
-            </div>
 
                 <div className="p-6 rounded-airbnb-md border border-hairline bg-surface-soft/30">
                   <h4 className="text-sm font-bold text-ink mb-2">Need a custom route?</h4>
