@@ -5,13 +5,10 @@ import { PostData } from './posts-shared';
 
 const postsDirectory = path.join(process.cwd(), 'content/blog');
 
-const BASE_PATH = '/travelmorocco';
-
 function fixPath(p: string): string {
   if (!p) return p;
   if (p.startsWith('http')) return p;
-  if (p.startsWith(BASE_PATH)) return p;
-  return `${BASE_PATH}${p.startsWith('/') ? '' : '/'}${p}`;
+  return p;
 }
 
 export function getAllPosts(): PostData[] {

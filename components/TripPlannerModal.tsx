@@ -29,10 +29,10 @@ const STEPS: Step[] = [
     id: 'vibe',
     question: "What kind of soul are you seeking?",
     options: [
-      { id: 'desert', label: "Desert Nomad", sub: "Silence & Stars", icon: "🏜️", image: "/travelmorocco/images/tours/sunset-on-the-dunes-and-camels-of-the-merzouga-desert-in-morocco.webp" },
-      { id: 'medina', label: "Medina Explorer", sub: "Culture & Crafts", icon: "🕌", image: "/travelmorocco/images/tours/marrakech-djemaa-el-fna-square.webp" },
-      { id: 'coastal', label: "Coastal Wanderer", sub: "Ocean & Art", icon: "🌊", image: "/travelmorocco/images/tours/blue-wooden-rowboats-port-essaouira-harbor-morocco-north-africa.webp" },
-      { id: 'mountain', label: "Mountain Hiker", sub: "Peaks & Villages", icon: "⛰️", image: "/travelmorocco/images/tours/stunning-view-of-the-famous-ouika-valley-near-marrakech-morocco-traditional-berber-houses-with-the-high-atlas-mountain-in-the-background.webp" },
+      { id: 'desert', label: "Desert Nomad", sub: "Silence & Stars", icon: "🏜️", image: "/images/tours/sunset-on-the-dunes-and-camels-of-the-merzouga-desert-in-morocco.webp" },
+      { id: 'medina', label: "Medina Explorer", sub: "Culture & Crafts", icon: "🕌", image: "/images/tours/marrakech-djemaa-el-fna-square.webp" },
+      { id: 'coastal', label: "Coastal Wanderer", sub: "Ocean & Art", icon: "🌊", image: "/images/tours/blue-wooden-rowboats-port-essaouira-harbor-morocco-north-africa.webp" },
+      { id: 'mountain', label: "Mountain Hiker", sub: "Peaks & Villages", icon: "⛰️", image: "/images/tours/stunning-view-of-the-famous-ouika-valley-near-marrakech-morocco-traditional-berber-houses-with-the-high-atlas-mountain-in-the-background.webp" },
     ]
   },
   {

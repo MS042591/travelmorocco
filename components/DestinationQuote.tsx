@@ -24,7 +24,7 @@ export default function DestinationQuote() {
       </div>
       
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 opacity-[0.05] pointer-events-none -translate-x-1/2">
-         <Image src="/travelmorocco/logo.webp" alt="Travel Morocco" fill className="object-contain brightness-0 invert" />
+         <Image src="/logo.webp" alt="Travel Morocco" fill className="object-contain brightness-0 invert" />
       </div>
     </section>
   );
