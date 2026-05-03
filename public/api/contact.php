@@ -7,17 +7,13 @@ header("Content-Type: application/json");
 define('SMTP_HOST', 'mail.travelmorocco.co');
 define('SMTP_PORT', 465);
 define('SMTP_USER', 'contact@travelmorocco.co');
-define('SMTP_PASS', ',1Q-9=p73%D8,{*f'); // Set securely in PHP
+define('SMTP_PASS', ',1Q-9=p73%D8,{*f'); 
 
 function send_smtp_mail($to, $subject, $message, $from_email, $from_name, $reply_to) {
     $header = "From: " . $from_name . " <" . SMTP_USER . ">\r\n";
     $header .= "Reply-To: " . $reply_to . "\r\n";
     $header .= "MIME-Version: 1.0\r\n";
     $header .= "Content-Type: text/html; charset=UTF-8\r\n";
-
-    // Since we are on cPanel, the native mail() function is usually the most 
-    // reliable way to interface with the server's local SMTP agent (Exim/Postfix)
-    // while preserving the correct sender headers.
     return mail($to, $subject, $message, $header);
 }
 
@@ -58,6 +54,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div style='background: #f9f9f9; padding: 15px; border-radius: 5px; margin-top: 20px;'>
                         <p><strong>Special Requests:</strong><br>$requests</p>
                     </div>
+                </div>
+            </body>
+            </html>";
+    } elseif ($type === 'planner') {
+        $vibe = isset($data["vibe"]) ? ucfirst($data["vibe"]) : "Not specified";
+        $duration = isset($data["duration"]) ? ucfirst($data["duration"]) : "Not specified";
+        $comfort = isset($data["comfort"]) ? ucfirst($data["comfort"]) : "Not specified";
+        
+        $email_subject = "New Bespoke Trip Plan Request - $name";
+        $email_html = "
+            <html>
+            <body style='font-family: sans-serif; line-height: 1.6; color: #333;'>
+                <div style='max-width: 600px; margin: 0 auto; border: 1px solid #eee; padding: 20px; border-radius: 10px;'>
+                    <h2 style='color: #ff385c; border-bottom: 2px solid #ff385c; padding-bottom: 10px;'>✨ New Concierge Request</h2>
+                    <p>A new custom journey has been requested with the following preferences:</p>
+                    
+                    <div style='display: grid; grid-template-cols: 1fr 1fr; gap: 10px; background: #f9f9f9; padding: 20px; border-radius: 10px; margin: 20px 0;'>
+                        <p style='margin: 5px 0;'><strong>Traveler Vibe:</strong> $vibe</p>
+                        <p style='margin: 5px 0;'><strong>Desired Duration:</strong> $duration</p>
+                        <p style='margin: 5px 0;'><strong>Comfort Level:</strong> $comfort</p>
+                    </div>
+
+                    <h3 style='font-size: 14px; color: #888; text-transform: uppercase; letter-spacing: 1px;'>Client Information</h3>
+                    <p style='margin: 5px 0;'><strong>Name:</strong> $name</p>
+                    <p style='margin: 5px 0;'><strong>Email:</strong> $email</p>
                 </div>
             </body>
             </html>";

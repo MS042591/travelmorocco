@@ -97,7 +97,7 @@ export default function TripPlannerModal({ isOpen, onClose }: TripPlannerModalPr
         body: JSON.stringify({
           ...formProps,
           ...selections,
-          type: 'contact',
+          type: 'planner',
           subject: 'New Trip Planner Submission'
         })
       });
