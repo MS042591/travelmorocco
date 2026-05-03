@@ -17,13 +17,13 @@ export default function DestinationsPage() {
             <SectionReveal>
               <span className="text-[10px] font-black uppercase tracking-[0.6em] text-primary mb-6 block">The Collection</span>
               <h1 className="text-5xl md:text-8xl font-bold text-ink tracking-tighter font-heading leading-none mb-10">
-                Morocco's <br />
+                Morocco&apos;s <br />
                 <span className="text-muted-soft italic font-serif">Living Heritage</span>
               </h1>
               <div className="w-20 h-1 bg-primary/20 mx-auto mb-10 rounded-full" />
               <p className="text-muted text-xl md:text-2xl leading-relaxed max-w-2xl mx-auto font-medium">
                 From the imperial grandeur of Fes to the blue-washed tranquility of Chefchaouen. 
-                A curated guide to the Kingdom's most iconic destinations.
+                A curated guide to the Kingdom&apos;s most iconic destinations.
               </p>
             </SectionReveal>
           </div>

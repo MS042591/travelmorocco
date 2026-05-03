@@ -4,12 +4,27 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 
+interface Option {
+  id: string;
+  label: string;
+  sub: string;
+  icon: string;
+  image?: string;
+}
+
+interface Step {
+  id: string;
+  question: string;
+  options?: Option[];
+  isForm?: boolean;
+}
+
 interface TripPlannerModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const STEPS = [
+const STEPS: Step[] = [
   {
     id: 'vibe',
     question: "What kind of soul are you seeking?",

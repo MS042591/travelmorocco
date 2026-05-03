@@ -9,14 +9,7 @@ export const metadata = {
 };
 
 export default function ToursPage() {
-  let allTours = [];
-  
-  try {
-    allTours = getAllTours();
-    console.log(`Found ${allTours.length} tours`);
-  } catch (error) {
-    console.error("Error fetching tours:", error);
-  }
+  const allTours = getAllTours();
 
   return (
     <>

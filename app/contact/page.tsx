@@ -20,7 +20,7 @@ export default function ContactPage() {
               <div>
                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary mb-4 block">Get in Touch</span>
                 <h1 className="text-5xl font-bold text-ink tracking-tight font-heading leading-tight mb-8">
-                  Let's start your <br />
+                  Let&apos;s start your <br />
                   <span className="text-muted-soft italic font-serif">adventure</span>
                 </h1>
                 <p className="text-muted text-lg leading-relaxed">
@@ -71,7 +71,7 @@ export default function ContactPage() {
 
               <div className="pt-12 border-t border-hairline">
                 <p className="text-sm font-medium text-muted-soft italic">
-                  "Moroccan hospitality isn't just a tradition; it's our promise."
+                  &quot;Moroccan hospitality isn&apos;t just a tradition; it&apos;s our promise.&quot;
                 </p>
               </div>
             </div>

@@ -49,7 +49,7 @@ export default function SensoryPalette() {
               <span className="text-muted-soft italic font-serif">A Sensory Journey</span>
             </h2>
             <p className="text-muted text-lg leading-relaxed">
-              Morocco is not just a destination; it's a symphony of intricate patterns, 
+              Morocco is not just a destination; it&apos;s a symphony of intricate patterns, 
               aromatic spices, and ancient traditions waiting to be touched.
             </p>
           </div>

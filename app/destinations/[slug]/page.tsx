@@ -16,8 +16,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function DestinationDetailPage({ params }: { params: { slug: string } }) {
-  const destination = getDestinationBySlug(params.slug);
+export default async function DestinationDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const destination = getDestinationBySlug(slug);
 
   if (!destination) {
     notFound();
@@ -89,7 +90,7 @@ export default async function DestinationDetailPage({ params }: { params: { slug
 
               <div className="space-y-12">
                 <div className="bg-surface-soft p-10 rounded-[2.5rem] sticky top-32">
-                  <h3 className="text-xl font-bold text-ink mb-6 uppercase tracking-wider">Don't Miss</h3>
+                  <h3 className="text-xl font-bold text-ink mb-6 uppercase tracking-wider">Don&apos;t Miss</h3>
                   <ul className="space-y-6">
                     {destination.highlights.map((highlight) => (
                       <li key={highlight} className="flex items-start gap-4">

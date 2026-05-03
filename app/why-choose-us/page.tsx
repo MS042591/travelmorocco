@@ -11,7 +11,7 @@ const features = [
   {
     tag: "Philosophy",
     title: "Slow Travel, Deep Immersion",
-    desc: "We don't believe in rushed itineraries or 'checking boxes'. Our journeys are designed to let you breathe, to sit for a third glass of mint tea, and to truly connect with the rhythm of Moroccan life.",
+    desc: "We don&apos;t believe in rushed itineraries or &apos;checking boxes&apos;. Our journeys are designed to let you breathe, to sit for a third glass of mint tea, and to truly connect with the rhythm of Moroccan life.",
     image: "/images/tours/moroccan-man-preparing-maghrebi-mint-tea.jpg",
     align: "left"
   },

@@ -17,7 +17,7 @@ export default function DestinationQuote() {
             <path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H16.017C14.9124 8 14.017 7.10457 14.017 6V3L14.017 2H16.017C18.7784 2 21.017 4.23858 21.017 7V15C21.017 18.3137 18.3307 21 15.017 21H14.017ZM3 21L3 18C3 16.8954 3.89543 16 5 16H8C8.55228 16 9 15.5523 9 15V9C9 8.44772 8.55228 8 8 8H5C3.89543 8 3 7.10457 3 6V3L3 2H5C7.76142 2 10 4.23858 10 7V15C10 18.3137 7.31371 21 4 21H3Z" />
           </svg>
           <h3 className="text-3xl md:text-5xl font-serif italic mb-8 leading-relaxed">
-            "Traveling – it leaves you speechless, then turns you into a storyteller."
+            &quot;Traveling – it leaves you speechless, then turns you into a storyteller.&quot;
           </h3>
           <p className="text-[10px] font-black uppercase tracking-[0.4em] text-white/40">— Ibn Battuta</p>
         </motion.div>

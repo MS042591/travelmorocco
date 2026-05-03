@@ -49,10 +49,10 @@ export default function AboutPage() {
                 <div className="space-y-8">
                   <h2 className="text-4xl font-bold text-ink tracking-tight font-heading">Born from a Passion for Discovery</h2>
                   <p className="text-muted text-lg leading-relaxed">
-                    Travel Morocco was founded not as a business, but as a calling. It began in the winding alleys of the Fes Medina and the silent expanses of the Sahara, where we realized that the true magic of Morocco isn't found in guidebooks—it's found in the warmth of a Berber family's tea, the intricate stories carved into zellige tiles, and the rhythm of the Atlantic tides.
+                    Travel Morocco was founded not as a business, but as a calling. It began in the winding alleys of the Fes Medina and the silent expanses of the Sahara, where we realized that the true magic of Morocco isn&apos;t found in guidebooks—it&apos;s found in the warmth of a Berber family&apos;s tea, the intricate stories carved into zellige tiles, and the rhythm of the Atlantic tides.
                   </p>
                   <p className="text-muted text-lg leading-relaxed">
-                    Our mission is simple: to bridge the gap between the curious traveler and the authentic soul of the Kingdom. We don't just provide tours; we curate deep, immersive experiences that leave a lasting mark on your spirit.
+                    Our mission is simple: to bridge the gap between the curious traveler and the authentic soul of the Kingdom. We don&apos;t just provide tours; we curate deep, immersive experiences that leave a lasting mark on your spirit.
                   </p>
                   <div className="pt-4">
                     <div className="flex items-center gap-4">
