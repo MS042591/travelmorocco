@@ -83,13 +83,35 @@ export default function TripPlannerModal({ isOpen, onClose }: TripPlannerModalPr
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
+
+    const formData = new FormData(e.target as HTMLFormElement);
+    const formProps = Object.fromEntries(formData);
+    
+    try {
+      const response = await fetch('/api/contact.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formProps,
+          ...selections,
+          type: 'contact',
+          subject: 'New Trip Planner Submission'
+        })
+      });
+
+      if (response.ok) {
+        setIsSuccess(true);
+      } else {
+        alert("Submission failed. Please try WhatsApp.");
+      }
+    } catch (err) {
+      alert("Network error. Please try WhatsApp.");
+    } finally {
       setIsSubmitting(false);
-      setIsSuccess(true);
-    }, 2000);
+    }
   };
 
   const currentStepData = STEPS[step];
