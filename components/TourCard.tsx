@@ -1,0 +1,241 @@
+"use client";
+
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
+import { TourData } from '@/lib/tours-shared';
+import Image from 'next/image';
+
+import Skeleton from './Skeleton';
+
+interface TourCardProps {
+  tour: TourData;
+  index: number;
+}
+
+export default function TourCard({ tour, index }: TourCardProps) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [showQuickLook, setShowQuickLook] = useState(false);
+  const [isImageLoading, setIsImageLoading] = useState(true);
+  const [isModalImageLoading, setIsModalImageLoading] = useState(true);
+  
+  // Hover Gallery Effect
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isHovered && tour.gallery && tour.gallery.length > 1) {
+      interval = setInterval(() => {
+        setCurrentImageIndex((prev) => (prev + 1) % Math.min(tour.gallery!.length, 4));
+      }, 1500);
+    } else {
+      setCurrentImageIndex(0);
+    }
+    return () => clearInterval(interval);
+  }, [isHovered, tour.gallery]);
+
+  // Social Proof: Random booking count for effect
+  const [bookingCount, setBookingCount] = useState(0);
+
+  useEffect(() => {
+    setBookingCount(Math.floor(Math.random() * 5) + 1);
+  }, []);
+  return (
+    <>
+      <motion.div
+        initial={{ opacity: 0, y: 30, scale: 0.95 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        whileHover={{ y: -8, scale: 1.02 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ 
+          type: "spring",
+          stiffness: 260,
+          damping: 20,
+          delay: index * 0.05 
+        }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        className="relative group/card"
+      >
+        <div className="group cursor-pointer block relative">
+          <Link href={`/tours/${tour.slug}`}>
+            <div className="relative aspect-square overflow-hidden rounded-airbnb-md mb-3 shadow-sm group-hover:shadow-airbnb transition-all">
+              {isImageLoading && <Skeleton className="absolute inset-0 z-10" />}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentImageIndex}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="absolute inset-0"
+                >
+                  <Image 
+                    src={isHovered && tour.gallery && tour.gallery[currentImageIndex] ? tour.gallery[currentImageIndex] : tour.image} 
+                    alt={tour.title}
+                    fill
+                    onLoad={() => setIsImageLoading(false)}
+                    className={`object-cover transition-transform duration-700 ease-out ${isImageLoading ? 'opacity-0' : 'opacity-100'}`}
+                  />
+                </motion.div>
+              </AnimatePresence>
+              
+              {/* Image Indicators */}
+              {isHovered && tour.gallery && tour.gallery.length > 1 && (
+                <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 z-20">
+                  {tour.gallery.slice(0, 4).map((_, i) => (
+                    <div 
+                      key={i} 
+                      className={`w-1.5 h-1.5 rounded-full transition-all ${i === currentImageIndex ? 'bg-white scale-110' : 'bg-white/40'}`} 
+                    />
+                  ))}
+                </div>
+              )}
+
+              {/* Badges */}
+              <div className="absolute top-3 left-3 flex flex-col gap-2 z-20">
+                {tour.bestSeller && (
+                  <div className="bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-[10px] font-bold text-ink shadow-sm flex items-center gap-1.5">
+                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 fill-primary"><path d="m16 2a14 14 0 1 0 14 14 14.016 14.016 0 0 0 -14-14zm6.707 10.707-8 8a1 1 0 0 1 -1.414 0l-4-4a1 1 0 1 1 1.414-1.414l3.293 3.293 7.293-7.293a1 1 0 0 1 1.414 1.414z"></path></svg>
+                    Guest favorite
+                  </div>
+                )}
+                {isHovered && (
+                  <motion.div 
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className="bg-primary text-white px-3 py-1 rounded-full text-[10px] font-bold shadow-sm"
+                  >
+                    {bookingCount} booked today
+                  </motion.div>
+                )}
+              </div>
+
+              {/* Quick Look Trigger */}
+              <button 
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowQuickLook(true);
+                }}
+                className={`absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-ink px-3 py-1.5 rounded-airbnb-pill text-[10px] font-bold shadow-sm hover:bg-white transition-all z-30 ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}
+              >
+                Quick View
+              </button>
+
+
+
+            </div>
+          </Link>
+          
+          <div className="space-y-1">
+            <Link href={`/tours/${tour.slug}`}>
+              <div className="flex justify-between items-start">
+                <h3 className="text-sm font-bold text-ink group-hover:underline line-clamp-1">{tour.title}</h3>
+                <div className="flex items-center space-x-1 text-sm text-ink">
+                  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 fill-ink"><path d="M15.094 1.579l-4.124 8.885-9.86 1.27a1 1 0 0 0-.542 1.736l7.293 6.565-1.965 9.752a1 1 0 0 0 1.483 1.061L16 25.951l8.625 4.918a1 1 0 0 0 1.482-1.06l-1.965-9.753 7.293-6.565a1 1 0 0 0-.542-1.736l-9.86-1.27-4.124-8.885a1 1 0 0 0-1.812 0z"></path></svg>
+                  <span>4.92</span>
+                </div>
+              </div>
+              <p className="text-sm text-muted">{tour.duration} experience</p>
+              <p className="text-sm text-muted line-clamp-1">{tour.excerpt}</p>
+              <div className="flex items-center justify-between mt-2 pt-2 border-t border-hairline/50">
+                <p className="text-sm text-ink"><span className="font-bold">{tour.price}</span> per person</p>
+                <div className="flex gap-1.5">
+                  <span className="px-2 py-0.5 bg-surface-soft text-[9px] font-bold text-muted-soft rounded uppercase tracking-tighter">Verified</span>
+                  {tour.bestSeller && <span className="px-2 py-0.5 bg-primary/5 text-[9px] font-bold text-primary rounded uppercase tracking-tighter">Top Pick</span>}
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Quick Look Modal */}
+      <AnimatePresence>
+        {showQuickLook && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowQuickLook(false)}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="relative w-full max-w-4xl bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[90vh]"
+            >
+              <button 
+                onClick={() => setShowQuickLook(false)}
+                className="absolute top-4 left-4 z-50 p-2 bg-white/90 rounded-full shadow-sm hover:bg-white transition-colors"
+              >
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 fill-ink" stroke="currentColor" strokeWidth="3"><path d="m6 6 20 20M26 6 6 26"></path></svg>
+              </button>
+
+              <div className="w-full md:w-1/2 relative h-64 md:h-auto">
+                {isModalImageLoading && <Skeleton className="absolute inset-0 z-10" />}
+                <Image 
+                  src={tour.image} 
+                  alt={tour.title}
+                  fill
+                  onLoad={() => setIsModalImageLoading(false)}
+                  className={`object-cover transition-opacity duration-500 ${isModalImageLoading ? 'opacity-0' : 'opacity-100'}`}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent md:hidden" />
+                <div className="absolute bottom-6 left-6 text-white md:hidden">
+                   <h2 className="text-2xl font-bold">{tour.title}</h2>
+                   <p className="text-sm opacity-90">{tour.duration} experience</p>
+                </div>
+              </div>
+
+              <div className="w-full md:w-1/2 p-8 md:p-12 overflow-y-auto">
+                <div className="hidden md:block mb-8">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="px-2 py-0.5 bg-surface-strong text-[10px] font-bold text-ink rounded uppercase tracking-wider">{tour.category}</span>
+                    <div className="flex items-center gap-1 text-xs font-bold text-ink">
+                      <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 fill-ink"><path d="M15.094 1.579l-4.124 8.885-9.86 1.27a1 1 0 0 0-.542 1.736l7.293 6.565-1.965 9.752a1 1 0 0 0 1.483 1.061L16 25.951l8.625 4.918a1 1 0 0 0 1.482-1.06l-1.965-9.753 7.293-6.565a1 1 0 0 0-.542-1.736l-9.86-1.27-4.124-8.885a1 1 0 0 0-1.812 0z"></path></svg>
+                      4.92 (120+ reviews)
+                    </div>
+                  </div>
+                  <h2 className="text-3xl font-bold text-ink tracking-tight mb-2">{tour.title}</h2>
+                  <p className="text-muted font-medium">{tour.duration} • {tour.price} per person</p>
+                </div>
+
+                <div className="space-y-8">
+                  <div>
+                    <h3 className="text-sm font-bold uppercase tracking-widest text-muted mb-4">Highlights</h3>
+                    <div className="grid grid-cols-2 gap-3">
+                      {tour.highlights?.map(h => (
+                        <div key={h} className="flex items-center gap-2 text-sm text-body">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                          {h}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+
+                  <div className="pt-8 border-t border-hairline flex flex-col sm:flex-row gap-4">
+                    <Link 
+                      href={`/tours/${tour.slug}`}
+                      className="flex-1 bg-ink text-white text-center font-bold py-4 rounded-airbnb-sm hover:bg-ink/90 transition-all"
+                    >
+                      Full Details
+                    </Link>
+                    <button 
+                      onClick={() => setShowQuickLook(false)}
+                      className="flex-1 bg-surface-soft text-ink text-center font-bold py-4 rounded-airbnb-sm hover:bg-surface-strong transition-all"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}

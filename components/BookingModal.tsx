@@ -28,13 +28,32 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
     }
   }, [isOpen, selectedTour]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => {
-      onClose();
-      setIsSubmitted(false);
-    }, 3000);
+    
+    // Get form data
+    const form = e.target as HTMLFormElement;
+    const data = new FormData(form);
+    
+    try {
+      const response = await fetch("https://formspree.io/f/sardaoui.m@gmail.com", {
+        method: "POST",
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        setIsSubmitted(true);
+        setTimeout(() => {
+          onClose();
+          setIsSubmitted(false);
+        }, 5000);
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+    }
   };
 
   return (
@@ -76,6 +95,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                         <label className="text-[10px] font-bold uppercase tracking-wider text-muted ml-1">Your Name</label>
                         <input 
                           required
+                          name="name"
                           type="text" 
                           placeholder="Full Name"
                           className="w-full bg-white border border-hairline rounded-airbnb-sm px-4 py-3 focus:border-ink focus:outline-none transition-all text-sm"
@@ -85,6 +105,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                         <label className="text-[10px] font-bold uppercase tracking-wider text-muted ml-1">Email</label>
                         <input 
                           required
+                          name="email"
                           type="email" 
                           placeholder="email@example.com"
                           className="w-full bg-white border border-hairline rounded-airbnb-sm px-4 py-3 focus:border-ink focus:outline-none transition-all text-sm"
@@ -96,6 +117,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                       <label className="text-[10px] font-bold uppercase tracking-wider text-muted ml-1">Selected Tour</label>
                       <input 
                         type="text" 
+                        name="tour"
                         value={formData.tour}
                         onChange={(e) => setFormData({ ...formData, tour: e.target.value })}
                         placeholder="e.g. Sahara Desert Trek"
@@ -106,7 +128,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-1">
                         <label className="text-[10px] font-bold uppercase tracking-wider text-muted ml-1">Travelers</label>
-                        <select className="w-full bg-white border border-hairline rounded-airbnb-sm px-4 py-3 focus:border-ink focus:outline-none transition-all text-sm appearance-none">
+                        <select name="travelers" className="w-full bg-white border border-hairline rounded-airbnb-sm px-4 py-3 focus:border-ink focus:outline-none transition-all text-sm appearance-none">
                           <option>1-2 Person</option>
                           <option>3-5 People</option>
                           <option>Group (6+)</option>
@@ -114,7 +136,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                       </div>
                       <div className="space-y-1">
                         <label className="text-[10px] font-bold uppercase tracking-wider text-muted ml-1">When</label>
-                        <select className="w-full bg-white border border-hairline rounded-airbnb-sm px-4 py-3 focus:border-ink focus:outline-none transition-all text-sm appearance-none">
+                        <select name="timing" className="w-full bg-white border border-hairline rounded-airbnb-sm px-4 py-3 focus:border-ink focus:outline-none transition-all text-sm appearance-none">
                           <option>This Month</option>
                           <option>Next 3 Months</option>
                           <option>Later this year</option>
@@ -125,6 +147,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                     <div className="space-y-1">
                       <label className="text-[10px] font-bold uppercase tracking-wider text-muted ml-1">Special Requests</label>
                       <textarea 
+                        name="requests"
                         rows={3}
                         placeholder="Dietary needs, preferred cities, etc."
                         className="w-full bg-white border border-hairline rounded-airbnb-sm px-4 py-3 focus:border-ink focus:outline-none transition-all text-sm resize-none"

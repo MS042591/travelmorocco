@@ -15,12 +15,21 @@ export interface TourData {
   itinerary?: { day: number; title: string; description: string; image?: string }[];
   included?: string[];
   excluded?: string[];
+  essentials?: {
+    groupSize?: string;
+    activityLevel?: string;
+    transport?: string;
+    groupType?: string;
+  };
+  faqs?: { q: string; a: string }[];
+  route?: string[];
 }
 
 export const TOUR_CATEGORIES = [
-  "Tour from Casablanca",
+  "Desert Tours",
   "Tours from Marrakech",
+  "Tours from Casablanca",
   "Tours from Tangier",
-  "Tours from Fes",
-  "Morocco Luxury Tours"
+  "From Fes Tours",
+  "Luxury Tours"
 ];

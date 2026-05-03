@@ -1,19 +1,11 @@
 ---
-title: "Chefchaouen: The Blue Pearl"
-description: "Experience the tranquility of the Rif Mountains in Morocco's most photogenic city."
-image: "/images/chefchaouen.jpg"
-gallery: ["/images/chefchaouen.jpg", "/images/riad-interior.png", "/images/atlas-village.png", "/images/tajine-spread.png", "/images/marrakech-market.jpg"]
-highlights:
-  - "Walk the blue-washed streets of the Medina"
-  - "Hike to the Spanish Mosque for sunset"
-  - "Visit the Akchour Waterfalls nearby"
-  - "Shop for unique handmade Rif textiles"
+title: "Chefchaouen"
+image: "/images/tours/tourist-observing-a-panoramic-view-of-blue-city-of-chefchaouen-from-point-of-view-morocco.jpg"
+description: "The Blue Pearl of the Rif Mountains, famous for its dreamlike blue-washed streets and serene mountain atmosphere."
+gallery: ["/images/tours/small-colorful-streets-in-medina-of-chefchaouen.jpg", "/images/tours/sunset-over-chefchaouen-medina-in-morocco-travel-destination-in-morocco.jpg", "/images/tours/woman-admiring-the-blue-houses-in-chefchaouen.jpg", "/images/tours/woman-sits-on-the-stairs-in-a-narrow-blue-street-of-the-old-medina-in-chefchaouen-town-in-morocco.jpg"]
+highlights: ["The Blue Medina", "Ras el-Maa Waterfall", "Spanish Mosque", "Rif Mountain Treks"]
 ---
 
-Chefchaouen is a dream in blue. Located in the northwest of Morocco, this city is famous for the various shades of blue paint that cover its houses and streets.
+Chefchaouen is perhaps the most photographed city in Morocco, and for good reason. Every street, doorway, and staircase in its medina is painted in shades of blue—ranging from pale sky to deep indigo. Legend says the color was introduced by Jewish refugees to symbolize heaven, while others say it keeps mosquitoes away.
 
-### The Blue Mystery
-Why is the city blue? Theories range from keeping mosquitoes away to religious symbolism representing the sky and heaven. Whatever the reason, the result is magical.
-
-### Photography Tips
-The best time for photos is early morning (before 9 AM) when the streets are empty and the light is soft.
+Beyond its aesthetic charm, Chefchaouen offers a slower pace of life. It's a gateway to the Rif Mountains, where you can hike to hidden waterfalls or simply enjoy a mint tea on a rooftop terrace overlooking the blue maze below.

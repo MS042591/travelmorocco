@@ -1,6 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:wght@400;500;600;700;800;900&display=swap');
 
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@utility first-letter-cap {
+  &::first-letter {
+    float: left;
+    font-size: 4.5rem;
+    line-height: 1;
+    font-weight: 800;
+    margin-right: 0.75rem;
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+  }
+}
 
 @theme {
   --color-primary: #ff385c; /* Rausch */
@@ -17,6 +30,8 @@
   --color-hairline-soft: #ebebeb;
   --color-border-strong: #c1c1c1;
   --font-inter: "Inter", -apple-system, system-ui, sans-serif;
+  --font-heading: "Montserrat", sans-serif;
+  --font-playfair: "Playfair Display", serif;
   
   --shadow-airbnb: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.02);
 }
@@ -72,4 +87,13 @@ h1, h2, h3, h4 {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+@keyframes kenburns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.08);
+  }
 }

@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useMemo, useEffect } from 'react';
-import Link from 'next/link';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { TourData, TOUR_CATEGORIES } from '@/lib/tours-shared';
-import { useModal } from '@/lib/ModalContext';
+import TourCard from './TourCard';
+import Skeleton from './Skeleton';
+import SectionReveal from './SectionReveal';
 
 interface TourListingProps {
   initialTours: TourData[];
@@ -16,184 +17,233 @@ const TESTIMONIALS = [
   { text: "The Fes Medina tour was sensory overload in the best possible way.", author: "Yuki W., Japan" }
 ];
 
+const CATEGORY_ICONS: Record<string, string> = {
+  "All": "M16 2L2 22h28L16 2z", // Globe-like
+  "Desert Tours": "M16 2c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6s6-2.69 6-6c0-3.31-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z", // Sun/Desert
+  "Tours from Marrakech": "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z", // Pin/Marrakech
+  "Tours from Casablanca": "M19 13h-4V3c0-1.1-.9-2-2-2s-2 .9-2 2v10H7c-1.1 0-2 .9-2 2s.9 2 2 2h4v10c0 1.1.9 2 2 2s2-.9 2-2V17h4c1.1 0 2-.9 2-2s-.9-2-2-2z", // City/Building
+  "Tours from Tangier": "M20 21c-1.39 0-2.55-.47-3.48-1.27-.92-.8-1.52-1.87-1.52-3.23 0-2.73 2.55-4.5 5-4.5s5 1.77 5 4.5c0 1.36-.6 2.43-1.52 3.23-.93.8-2.09 1.27-3.48 1.27z", // Sea/Port
+  "From Fes Tours": "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z", // Medina Circle
+  "Luxury Tours": "M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" // Shield/Crown
+};
+
 export default function TourListing({ initialTours }: TourListingProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
-  const { openBooking } = useModal();
-  const { scrollY } = useScroll();
+  const [durationFilter, setDurationFilter] = useState('All');
+  const [sortBy, setSortBy] = useState('Featured');
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 300);
+    };
+    window.addEventListener('scroll', handleScroll);
+    // Simulate initial loading for skeleton effect
+    const timer = setTimeout(() => setIsLoading(false), 800);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timer);
+    };
+  }, []);
 
   const filteredTours = useMemo(() => {
-    return initialTours.filter(tour => {
-      const matchesSearch = tour.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                           tour.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+    let result = initialTours.filter(tour => {
+      const title = tour.title || "";
+      const excerpt = tour.excerpt || "";
+      const matchesSearch = title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                           excerpt.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory = activeCategory === 'All' || tour.category === activeCategory;
-      return matchesSearch && matchesCategory;
+      
+      let matchesDuration = true;
+      if (durationFilter !== 'All') {
+        const daysMatch = tour.duration.match(/\d+/);
+        const days = daysMatch ? parseInt(daysMatch[0]) : 0;
+        if (durationFilter === 'short') matchesDuration = days <= 3;
+        else if (durationFilter === 'medium') matchesDuration = days > 3 && days <= 7;
+        else if (durationFilter === 'long') matchesDuration = days > 7;
+      }
+
+      return matchesSearch && matchesCategory && matchesDuration;
     });
-  }, [initialTours, searchQuery, activeCategory]);
+
+    // Sorting logic
+    if (sortBy === 'Price: Low to High') {
+      result.sort((a, b) => {
+        const priceA = parseInt(a.price.replace(/[^\d]/g, ''));
+        const priceB = parseInt(b.price.replace(/[^\d]/g, ''));
+        return priceA - priceB;
+      });
+    } else if (sortBy === 'Price: High to Low') {
+      result.sort((a, b) => {
+        const priceA = parseInt(a.price.replace(/[^\d]/g, ''));
+        const priceB = parseInt(b.price.replace(/[^\d]/g, ''));
+        return priceB - priceA;
+      });
+    } else if (sortBy === 'Duration: Shortest') {
+      result.sort((a, b) => parseInt(a.duration) - parseInt(b.duration));
+    } else if (sortBy === 'Duration: Longest') {
+      result.sort((a, b) => parseInt(b.duration) - parseInt(a.duration));
+    }
+
+    return result;
+  }, [initialTours, searchQuery, activeCategory, durationFilter, sortBy]);
 
   const categories = ['All', ...TOUR_CATEGORIES];
 
-  const scrollToCategory = (category: string) => {
-    setActiveCategory(category);
-    if (category === 'All') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-    const element = document.getElementById(category.toLowerCase().replace(/\s+/g, '-'));
-    if (element) {
-      const offset = 150;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
-  };
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = { 'All': initialTours.length };
+    TOUR_CATEGORIES.forEach(cat => {
+      counts[cat] = initialTours.filter(t => t.category === cat).length;
+    });
+    return counts;
+  }, [initialTours]);
 
   return (
-    <div className="space-y-16 pb-32">
-      {/* Search & Floating Pill Nav */}
-      <div className="flex flex-col items-center gap-8 sticky top-24 z-40 px-4">
-        <div className="w-full max-w-2xl bg-white rounded-full shadow-airbnb p-2 flex items-center h-14 border border-hairline group">
-          <div className="flex-1 px-6 flex flex-col justify-center border-r border-hairline">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-ink">Location</span>
-            <input
-              type="text"
-              placeholder="Where to?"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-transparent border-none focus:outline-none text-sm text-ink placeholder:text-muted"
-            />
+    <div className="space-y-12 pb-32">
+      {/* Sticky Filter Bar Container */}
+      <div className={`sticky top-20 z-40 bg-canvas/95 backdrop-blur-md transition-all duration-300 py-4 ${isScrolled ? 'shadow-md border-b border-hairline translate-y-0' : 'border-b border-hairline/30'}`}>
+        <div className="max-w-[1400px] mx-auto px-4 space-y-6">
+          {/* Top Row: Search and Sort */}
+          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+            <div className="relative w-full md:max-w-md group">
+              <input 
+                type="text" 
+                placeholder="Search for cities, experiences..." 
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-surface-soft border border-hairline rounded-full py-3.5 pl-12 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all group-hover:bg-white"
+              />
+              <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 fill-muted" stroke="currentColor" strokeWidth="2"><path d="m13 24c6.0751322 0 11-4.9248678 11-11 0-6.07513225-4.9248678-11-11-11-6.07513225 0-11 4.92486775-11 11 0 6.0751322 4.92486775 11 11 11zm8-3 9 9"></path></svg>
+              {searchQuery && (
+                <button onClick={() => setSearchQuery('')} className="absolute right-4 top-1/2 -translate-y-1/2 text-muted hover:text-ink">
+                  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 fill-current" stroke="currentColor" strokeWidth="3"><path d="m6 6 20 20M26 6 6 26"></path></svg>
+                </button>
+              )}
+            </div>
+
+            <div className="flex gap-4 w-full md:w-auto overflow-x-auto no-scrollbar">
+              <select 
+                value={durationFilter}
+                onChange={(e) => setDurationFilter(e.target.value)}
+                className="bg-white border border-hairline rounded-full px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-ink hover:border-ink transition-all cursor-pointer focus:outline-none"
+              >
+                <option value="All">All Durations</option>
+                <option value="short">Short (1-3 days)</option>
+                <option value="medium">Classic (4-7 days)</option>
+                <option value="long">Grand (8+ days)</option>
+              </select>
+
+              <select 
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="bg-white border border-hairline rounded-full px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-ink hover:border-ink transition-all cursor-pointer focus:outline-none"
+              >
+                <option value="Featured">Featured</option>
+                <option value="Price: Low to High">Price: Low to High</option>
+                <option value="Price: High to Low">Price: High to Low</option>
+                <option value="Duration: Shortest">Duration: Shortest</option>
+                <option value="Duration: Longest">Duration: Longest</option>
+              </select>
+            </div>
           </div>
-          <div className="flex-1 px-6 flex flex-col justify-center">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-ink">Guest</span>
-            <span className="text-sm text-muted">Add guests</span>
+
+          {/* Bottom Row: Category Pills */}
+          <div className="flex items-center space-x-2 overflow-x-auto no-scrollbar pb-1">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`flex items-center gap-2 whitespace-nowrap px-5 py-2.5 rounded-full text-xs font-bold transition-all border ${
+                  activeCategory === cat 
+                  ? 'bg-ink text-white border-ink shadow-lg shadow-ink/10' 
+                  : 'bg-white text-muted border-hairline hover:border-ink hover:text-ink'
+                }`}
+              >
+                {/* Visual Category Pill Icons */}
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className={`w-3.5 h-3.5 ${activeCategory === cat ? 'fill-white' : 'fill-muted group-hover:fill-ink'}`}>
+                  <path d={CATEGORY_ICONS[cat] || "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"} />
+                </svg>
+                {cat === 'All' ? 'All Expeditions' : cat}
+                <span className={`text-[10px] ${activeCategory === cat ? 'text-white/60' : 'text-muted-soft'}`}>
+                  {categoryCounts[cat]}
+                </span>
+              </button>
+            ))}
           </div>
-          
-          <button className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white ml-2 hover:bg-primary-active transition-colors shadow-sm">
-            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 fill-white" stroke="white" strokeWidth="4"><path d="m13 24c6.0751322 0 11-4.9248678 11-11 0-6.07513225-4.9248678-11-11-11-6.07513225 0-11 4.92486775-11 11 0 6.0751322 4.92486775 11 11 11zm8-3 9 9"></path></svg>
-          </button>
-        </div>
-        
-        <div className="flex space-x-8 overflow-x-auto no-scrollbar pb-2 border-b border-hairline w-full max-w-5xl">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => scrollToCategory(cat)}
-              className={`whitespace-nowrap pb-3 text-xs font-semibold transition-all border-b-2 ${
-                activeCategory === cat 
-                ? 'border-ink text-ink' 
-                : 'border-transparent text-muted hover:text-ink hover:border-hairline'
-              }`}
-            >
-              {cat === 'All' ? 'All Stays' : cat.replace('Tours from ', '').replace('Tour from ', '')}
-            </button>
-          ))}
         </div>
       </div>
 
-      <div className="space-y-32 mt-16">
-        {TOUR_CATEGORIES.map((category, catIndex) => {
-          const toursInCategory = filteredTours.filter(tour => tour.category === category);
-          if (toursInCategory.length === 0) return null;
+      {/* Main Listing Content */}
+      <div className="space-y-24">
+        {isLoading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-4 max-w-[1400px] mx-auto">
+            {[1, 2, 3, 4, 5, 6].map(n => <Skeleton key={n} className="aspect-square rounded-airbnb-md" />)}
+          </div>
+        ) : activeCategory === 'All' ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-4 max-w-[1400px] mx-auto">
+            {filteredTours.map((tour, index) => (
+              <TourCard key={tour.slug} tour={tour} index={index} />
+            ))}
+          </div>
+        ) : (
+          <div className="space-y-32">
+            {TOUR_CATEGORIES.filter(c => activeCategory === 'All' || c === activeCategory).map((category, catIndex) => {
+              const toursInCategory = filteredTours.filter(tour => tour.category === category);
+              if (toursInCategory.length === 0) return null;
+              const testimonial = TESTIMONIALS[catIndex % TESTIMONIALS.length];
 
-          const testimonial = TESTIMONIALS[catIndex % TESTIMONIALS.length];
-
-          return (
-            <div key={category} className="space-y-24">
-              <section id={category.toLowerCase().replace(/\s+/g, '-')} className="scroll-mt-48">
-                <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 px-4">
-                  <div>
-                    <h2 className="text-2xl font-bold text-ink tracking-tight">
-                      {category}
-                    </h2>
-                    <p className="text-sm text-muted">Hand-picked itineraries for authentic discovery.</p>
+              return (
+                <div key={category} className="space-y-16">
+                  <SectionReveal>
+                    <div className="px-4 max-w-[1400px] mx-auto">
+                      <h2 className="text-3xl font-bold text-ink tracking-tight mb-2 font-heading">{category}</h2>
+                      <p className="text-sm text-muted">Hand-picked itineraries for authentic discovery in {category.replace('Tours from ', '').replace(' Tours', '')}.</p>
+                    </div>
+                  </SectionReveal>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 px-4 max-w-[1400px] mx-auto">
+                    {toursInCategory.map((tour, index) => (
+                      <TourCard key={tour.slug} tour={tour} index={index} />
+                    ))}
                   </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 px-4">
-                  {toursInCategory.map((tour, index) => (
-                    <motion.div
-                      key={tour.slug}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-50px" }}
+                  <SectionReveal delay={0.2}>
+                    <motion.div 
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      className="py-16 text-center max-w-3xl mx-auto px-4"
                     >
-                      <Link href={`/tours/${tour.slug}`} className="group cursor-pointer block">
-                        <div className="relative aspect-square overflow-hidden rounded-airbnb-md mb-3 shadow-sm group-hover:shadow-airbnb transition-all">
-                          <img 
-                            src={tour.image} 
-                            alt={tour.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                          />
-                          {tour.bestSeller && (
-                            <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-[11px] font-bold text-ink shadow-sm">
-                              Guest favorite
-                            </div>
-                          )}
-                          <div className="absolute top-3 right-3">
-                            <button className="p-2 text-white/90 hover:scale-110 transition-transform">
-                              <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 stroke-white fill-black/30 stroke-2"><path d="m16 28c7-4.733 14-10 14-17 0-3.86599325-3.1340068-7-7-7-2.2666524 0-4.302302 1.08756041-5.6021876 2.81881682l-.3978124.52836636-.3978124-.52836636c-1.2998856-1.73125641-3.33553515-2.81881682-5.6021876-2.81881682-3.86599325 0-7 3.13400675-7 7 0 7 7 12.267 14 17z"></path></svg>
-                            </button>
-                          </div>
-                        </div>
-                        
-                        <div className="space-y-1">
-                          <div className="flex justify-between items-start">
-                            <h3 className="text-sm font-bold text-ink group-hover:underline">{tour.title}</h3>
-                            <div className="flex items-center space-x-1 text-sm text-ink">
-                              <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 fill-ink"><path d="M15.094 1.579l-4.124 8.885-9.86 1.27a1 1 0 0 0-.542 1.736l7.293 6.565-1.965 9.752a1 1 0 0 0 1.483 1.061L16 25.951l8.625 4.918a1 1 0 0 0 1.482-1.06l-1.965-9.753 7.293-6.565a1 1 0 0 0-.542-1.736l-9.86-1.27-4.124-8.885a1 1 0 0 0-1.812 0z"></path></svg>
-                              <span>4.88</span>
-                            </div>
-                          </div>
-                          <p className="text-sm text-muted">{tour.duration} experience</p>
-                          <p className="text-sm text-muted line-clamp-1">{tour.excerpt}</p>
-                          <div className="flex items-center justify-between mt-2 pt-2 border-t border-hairline/50">
-                            <p className="text-sm text-ink"><span className="font-bold">{tour.price}</span> per person</p>
-                            <span className="text-xs font-bold text-primary group-hover:underline">Details</span>
-                          </div>
-                        </div>
-                      </Link>
+                      <div className="text-6xl text-hairline mb-8 font-serif italic">“</div>
+                      <h3 className="text-xl md:text-3xl font-bold text-ink mb-8 tracking-tight leading-snug font-heading italic">
+                        {testimonial.text}
+                      </h3>
+                      <p className="text-muted text-sm font-bold uppercase tracking-widest">— {testimonial.author}</p>
                     </motion.div>
-                  ))}
+                  </SectionReveal>
                 </div>
-              </section>
-
-              {/* Airbnb Style Testimonial */}
-              <motion.div 
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                className="py-16 text-center max-w-2xl mx-auto px-4"
-              >
-                <div className="text-5xl text-hairline mb-6 font-serif">“</div>
-                <h3 className="text-xl md:text-2xl font-bold text-ink mb-6 tracking-tight leading-snug">
-                  {testimonial.text}
-                </h3>
-                <p className="text-muted text-sm">— {testimonial.author}</p>
-              </motion.div>
-            </div>
-          );
-        })}
+              );
+            })}
+          </div>
+        )}
       </div>
       
       <AnimatePresence>
-        {filteredTours.length === 0 && (
+        {!isLoading && filteredTours.length === 0 && (
           <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            className="text-center py-32 bg-white rounded-[4rem] shadow-2xl mx-4 border border-slate-50"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            className="text-center py-40 bg-surface-soft rounded-[4rem] mx-4 border border-hairline/50"
           >
-            <div className="text-8xl mb-10">🏜️</div>
-            <h3 className="text-4xl font-black text-slate-900 mb-4 font-playfair italic">The desert is quiet...</h3>
-            <p className="text-slate-500 text-lg max-w-md mx-auto leading-relaxed">We couldn&apos;t find any journeys matching your search. Perhaps try a different city?</p>
+            <div className="text-9xl mb-12 animate-bounce">🏜️</div>
+            <h3 className="text-4xl font-bold text-ink mb-6 font-heading tracking-tight">The desert is quiet...</h3>
+            <p className="text-muted text-lg max-w-md mx-auto leading-relaxed">
+              We couldn&apos;t find any journeys matching your current filters. 
+              Try broadening your search or resetting your preferences.
+            </p>
             <button 
-              onClick={() => {setSearchQuery(''); setActiveCategory('All');}}
-              className="mt-12 bg-slate-900 text-white px-10 py-5 rounded-full font-black text-xs uppercase tracking-[0.2em] hover:bg-terracotta transition-all shadow-2xl"
+              onClick={() => {setSearchQuery(''); setActiveCategory('All'); setDurationFilter('All'); setSortBy('Featured');}}
+              className="mt-12 bg-ink text-white px-12 py-5 rounded-full font-bold text-xs uppercase tracking-[0.2em] hover:bg-primary transition-all shadow-2xl hover:scale-105 active:scale-95"
             >
               Show All Journeys
             </button>

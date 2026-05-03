@@ -8,8 +8,11 @@ import "@fontsource/montserrat/800.css";
 import "./globals.css";
 import { ModalProvider } from "@/lib/ModalContext";
 import ModalWrapper from "@/components/ModalWrapper";
+import PageTransition from "@/components/PageTransition";
+import Preloader from "@/components/Preloader";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://travelmorocco.co'),
   title: "Authentic Moroccan Adventures | Custom Travel & Tours 2024",
   description: "Discover and experience the magic of Morocco with Authentic Moroccan Adventures. Custom tours, desert treks, and imperial city experiences.",
 };
@@ -20,10 +23,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="min-h-screen">
+    <html lang="en" className="scroll-smooth">
+      <body className="min-h-screen bg-canvas text-ink antialiased">
         <ModalProvider>
-          {children}
+          <Preloader />
+          <PageTransition>
+            {children}
+          </PageTransition>
           <ModalWrapper />
         </ModalProvider>
       </body>

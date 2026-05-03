@@ -1,29 +1,13 @@
-import { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import { getDestinationBySlug, getAllDestinations } from '@/lib/destinations';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import ReactMarkdown from 'react-markdown';
-
-interface DestinationPageProps {
-  params: Promise<{ slug: string }>;
-}
-
-export async function generateMetadata({ params }: DestinationPageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const destination = getDestinationBySlug(slug);
-
-  if (!destination) {
-    return { title: 'Destination Not Found' };
-  }
-
-  return {
-    title: `${destination.title} | Travel Morocco Destinations`,
-    description: destination.description,
-  };
-}
+import Image from 'next/image';
+import { getDestinationBySlug, getAllDestinations } from '@/lib/destinations';
+import { notFound } from 'next/navigation';
+import SectionReveal from '@/components/SectionReveal';
+import { getAllTours } from '@/lib/tours';
+import TourCard from '@/components/TourCard';
+import DestinationGallery from '@/components/DestinationGallery';
+import InquiryButton from '@/components/InquiryButton';
 
 export async function generateStaticParams() {
   const destinations = getAllDestinations();
@@ -32,154 +16,119 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function DestinationPage({ params }: DestinationPageProps) {
-  const { slug } = await params;
-  const destination = getDestinationBySlug(slug);
+export default async function DestinationDetailPage({ params }: { params: { slug: string } }) {
+  const destination = getDestinationBySlug(params.slug);
 
   if (!destination) {
     notFound();
   }
 
+  // Find related tours (basic keyword match)
+  const allTours = getAllTours();
+  const relatedTours = allTours.filter(tour => 
+    tour.title.toLowerCase().includes(destination.title.toLowerCase()) ||
+    tour.category.toLowerCase().includes(destination.title.toLowerCase()) ||
+    tour.excerpt.toLowerCase().includes(destination.title.toLowerCase())
+  ).slice(0, 3);
+
   return (
     <>
       <Navbar />
-      <main className="bg-canvas min-h-screen pt-24 pb-32">
-        {/* Title and Quick Stats */}
-        <div className="container mx-auto px-4 md:px-8 lg:px-20 mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-ink mb-2 tracking-tight">
-            {destination.title}
-          </h1>
-          <div className="flex items-center gap-4 text-sm text-muted font-medium">
-            <span className="flex items-center gap-1">
-              <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 fill-ink"><path d="M16 31a15 15 0 1 1 15-15 15.017 15.017 0 0 1 -15 15zm0-28a13 13 0 1 0 13 13 13.015 13.015 0 0 0 -13-13zm1 17h-2v-10h2zm0-12h-2v-2h2z"></path></svg>
-              Destination Guide
-            </span>
-            <span>•</span>
-            <span>Morocco</span>
+      <main className="bg-canvas">
+        {/* Hero Section */}
+        <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
+          <Image 
+            src={destination.image} 
+            alt={destination.title} 
+            fill 
+            className="object-cover brightness-[0.7]"
+            priority
+          />
+          <div className="relative z-10 text-center px-4">
+            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white mb-4 block">Destination</span>
+            <h1 className="text-6xl md:text-8xl font-bold !text-white tracking-tighter font-heading drop-shadow-2xl">
+              {destination.title}
+            </h1>
           </div>
-        </div>
-
-        {/* Photo Gallery - Airbnb Style Grid */}
-        <div className="container mx-auto px-4 md:px-8 lg:px-20 mb-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-2 h-[400px] md:h-[500px] w-full overflow-hidden rounded-airbnb-md shadow-sm">
-            {/* Main large image */}
-            <div className="md:col-span-2 md:row-span-2 relative group overflow-hidden">
-              <Image 
-                src={destination.image} 
-                alt={destination.title}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-700 cursor-pointer"
-                priority
+          
+          {/* Curvy Section Divider */}
+          <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] transform translate-y-[1px] scale-y-[-1]">
+            <svg 
+              className="relative block w-[calc(100%+1.3px)] h-[80px]" 
+              viewBox="0 0 1200 120" 
+              preserveAspectRatio="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path 
+                d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5,73.84-4.36,147.54,16.88,218.2,35.26,69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" 
+                className="fill-canvas"
               />
-            </div>
-            {/* Smaller images */}
-            {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="hidden md:block relative group overflow-hidden">
-                <Image 
-                  src={destination.gallery?.[i + 1] || destination.image} 
-                  alt={`${destination.title} gallery ${i + 1}`}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700 cursor-pointer"
-                />
-              </div>
-            ))}
+            </svg>
           </div>
-        </div>
+        </section>
 
-        <div className="container mx-auto px-4 md:px-8 lg:px-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-16">
-            {/* Main Content */}
-            <div className="lg:col-span-8 space-y-12">
-              {/* Quick Info Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pb-12 border-b border-hairline">
-                <div className="space-y-1">
-                  <h4 className="text-[10px] font-bold uppercase tracking-wider text-muted">Vibe</h4>
-                  <p className="text-sm font-bold text-ink">Bustling & Cultural</p>
-                </div>
-                <div className="space-y-1">
-                  <h4 className="text-[10px] font-bold uppercase tracking-wider text-muted">Best Time</h4>
-                  <p className="text-sm font-bold text-ink">March - May</p>
-                </div>
-                <div className="space-y-1">
-                  <h4 className="text-[10px] font-bold uppercase tracking-wider text-muted">Access</h4>
-                  <p className="text-sm font-bold text-ink">International Airport</p>
-                </div>
-              </div>
-
-              {/* Description */}
-              <div className="pb-12 border-b border-hairline">
-                <h2 className="text-2xl font-bold text-ink mb-6">Explore {destination.title.split(':')[0]}</h2>
-                <div className="prose prose-lg prose-slate max-w-none text-body leading-relaxed">
-                  <ReactMarkdown>{destination.content}</ReactMarkdown>
-                </div>
-              </div>
-              
-              {/* Highlights */}
-              <div className="pb-12">
-                <h3 className="text-xl font-bold text-ink mb-8">What makes it special</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {destination.highlights.map((highlight, index) => (
-                    <div key={index} className="flex items-start gap-4">
-                      <div className="mt-1">
-                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 fill-ink"><path d="M16 2a14 14 0 1 0 14 14 14.016 14.016 0 0 0 -14-14zm6.707 10.707-8 8a1 1 0 0 1 -1.414 0l-4-4a1 1 0 1 1 1.414-1.414l3.293 3.293 7.293-7.293a1 1 0 0 1 1.414 1.414z"></path></svg>
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-ink mb-1">{highlight}</h4>
-                        <p className="text-sm text-muted">Discover the unique charm and history of this iconic Moroccan landmark.</p>
-                      </div>
+        {/* Content Section */}
+        <section className="py-24">
+          <div className="container mx-auto px-4 md:px-8 lg:px-20">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+              <div className="lg:col-span-2 space-y-12">
+                <SectionReveal>
+                  <div className="prose prose-lg max-w-none text-muted leading-relaxed">
+                    <p className="text-2xl text-ink font-medium leading-snug mb-8">
+                      {destination.description}
+                    </p>
+                    <div className="whitespace-pre-line">
+                      {destination.content}
                     </div>
-                  ))}
-                </div>
+                  </div>
+                </SectionReveal>
+
+                {/* Gallery Grid */}
+                <DestinationGallery images={destination.gallery} title={destination.title} />
               </div>
-            </div>
 
-            {/* Sidebar / CTA */}
-            <div className="lg:col-span-4">
-              <div className="sticky top-28 space-y-8">
-                <div className="bg-white rounded-airbnb-md p-6 shadow-airbnb border border-hairline">
-                  <h3 className="text-xl font-bold text-ink mb-4">Interested in visiting?</h3>
-                  <p className="text-sm text-body mb-8 leading-relaxed">
-                    Our curators can design a private, tailor-made journey to {destination.title.split(':')[0]} and surrounding areas.
-                  </p>
+              <div className="space-y-12">
+                <div className="bg-surface-soft p-10 rounded-[2.5rem] sticky top-32">
+                  <h3 className="text-xl font-bold text-ink mb-6 uppercase tracking-wider">Don't Miss</h3>
+                  <ul className="space-y-6">
+                    {destination.highlights.map((highlight) => (
+                      <li key={highlight} className="flex items-start gap-4">
+                        <div className="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                        </div>
+                        <span className="text-ink font-medium">{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
                   
-                  <div className="space-y-3">
-                    <Link 
-                      href="#contact" 
-                      className="block text-center bg-primary hover:bg-primary-active text-white py-3.5 rounded-airbnb-sm font-bold transition-all shadow-sm active:scale-95"
-                    >
-                      Start Planning
-                    </Link>
-                    <p className="text-[11px] text-center text-muted">Free consultation • No commitment</p>
-                  </div>
-
-                  <div className="mt-6 pt-6 border-t border-hairline">
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-ink mb-4">Included in Custom Trips:</h4>
-                    <ul className="space-y-3">
-                      {['Luxury Riads', 'Private Drivers', 'Licensed Guides', 'Custom Routes'].map(item => (
-                        <li key={item} className="flex items-center gap-2 text-xs text-ink font-medium">
-                          <svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-                
-                <div className="p-6 rounded-airbnb-md border border-hairline bg-surface-soft/30">
-                  <p className="text-xs font-bold uppercase tracking-widest text-muted mb-6">Explore More</p>
-                  <div className="space-y-4">
-                     {['Marrakech', 'Chefchaouen', 'Sahara Desert'].map(dest => (
-                       <Link key={dest} href={`/destinations/${dest.toLowerCase().replace(' ', '-')}`} className="flex items-center justify-between group">
-                         <span className="text-sm font-bold text-ink group-hover:underline">{dest}</span>
-                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 fill-ink group-hover:translate-x-1 transition-transform"><path d="m12 1 12 12-12 12-1.414-1.414L21.172 13 10.586 2.414z"></path></svg>
-                       </Link>
-                     ))}
+                  <div className="mt-12 pt-12 border-t border-hairline">
+                    <p className="text-xs text-muted-soft font-bold uppercase tracking-widest mb-4">Start your journey</p>
+                    <InquiryButton destinationTitle={destination.title} />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
+
+        {/* Related Tours */}
+        {relatedTours.length > 0 && (
+          <section className="py-24 bg-surface-soft">
+            <div className="container mx-auto px-4 md:px-8 lg:px-20">
+              <div className="flex justify-between items-end mb-12">
+                <div>
+                  <h2 className="text-3xl font-bold text-ink mb-2">Expeditions through {destination.title}</h2>
+                  <p className="text-sm text-muted">Hand-picked journeys that feature this incredible destination.</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                {relatedTours.map((tour, index) => (
+                  <TourCard key={tour.slug} tour={tour} index={index} />
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
       </main>
       <Footer />
     </>

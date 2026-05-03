@@ -4,20 +4,34 @@ import { getAllTours } from '@/lib/tours';
 import TourListing from '@/components/TourListing';
 
 export const metadata = {
-  title: 'Luxury Morocco Tour Packages | Curated Journeys from Casablanca & Marrakech',
-  description: 'Experience the magic of Morocco with our curated collection of premium tours. From private desert treks to imperial city explorations, discover the Kingdom in luxury.',
+  title: 'Luxury Morocco Tour Packages | Curated Journeys',
+  description: 'Experience the magic of Morocco with our curated collection of premium tours.',
 };
 
 export default function ToursPage() {
-  const allTours = getAllTours();
+  let allTours = [];
+  
+  try {
+    allTours = getAllTours();
+    console.log(`Found ${allTours.length} tours`);
+  } catch (error) {
+    console.error("Error fetching tours:", error);
+  }
 
   return (
     <>
       <Navbar />
       <main className="min-h-screen bg-canvas pt-32">
         <div className="container mx-auto px-4 md:px-8 lg:px-20 mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-ink mb-2 tracking-tight">Moroccan Expeditions</h1>
-          <p className="text-sm text-muted">Discover our curated selection of stays and experiences across the Kingdom.</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-ink mb-2 tracking-tight font-heading">
+            Moroccan Expeditions
+          </h1>
+          <p className="text-sm text-muted">
+            {allTours.length > 0 
+              ? `Discover our curated selection of ${allTours.length} journeys across the Kingdom.`
+              : "Loading our curated journeys..."
+            }
+          </p>
         </div>
 
         <div className="container mx-auto px-4 md:px-8 lg:px-20 pb-20">
