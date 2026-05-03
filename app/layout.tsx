@@ -40,19 +40,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`scroll-smooth ${inter.variable} ${montserrat.variable} ${playfair.variable}`}>
-      <head>
-        <style dangerouslySetInnerHTML={{ __html: `
-          .preloader-critical {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background-color: #222222;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-        `}} />
-      </head>
       <body className="min-h-screen bg-canvas text-ink antialiased font-inter">
         <ModalProvider>
           <Preloader />

@@ -13,21 +13,9 @@ interface TourCardProps {
 
 export default function TourCard({ tour, index }: TourCardProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showQuickLook, setShowQuickLook] = useState(false);
   
-  // Hover Gallery Effect
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (isHovered && tour.gallery && tour.gallery.length > 1) {
-      interval = setInterval(() => {
-        setCurrentImageIndex((prev) => (prev + 1) % Math.min(tour.gallery!.length, 4));
-      }, 1500);
-    } else {
-      setCurrentImageIndex(0);
-    }
-    return () => clearInterval(interval);
-  }, [isHovered, tour.gallery]);
+
 
   // Social Proof: Random booking count for effect
   const [bookingCount, setBookingCount] = useState(0);
@@ -54,36 +42,13 @@ export default function TourCard({ tour, index }: TourCardProps) {
       >
         <div className="group cursor-pointer block relative">
           <Link href={`/tours/${tour.slug}`}>
-            <div className="relative aspect-square overflow-hidden rounded-airbnb-md mb-3 shadow-sm group-hover:shadow-airbnb transition-all">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentImageIndex}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="absolute inset-0"
-                >
-                  <SmartImage 
-                    src={isHovered && tour.gallery && tour.gallery[currentImageIndex] ? tour.gallery[currentImageIndex] : tour.image} 
-                    alt={tour.title}
-                    fill
-                    className="object-cover transition-transform duration-700 ease-out"
-                  />
-                </motion.div>
-              </AnimatePresence>
-              
-              {/* Image Indicators */}
-              {isHovered && tour.gallery && tour.gallery.length > 1 && (
-                <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 z-20">
-                  {tour.gallery.slice(0, 4).map((_, i) => (
-                    <div 
-                      key={i} 
-                      className={`w-1.5 h-1.5 rounded-full transition-all ${i === currentImageIndex ? 'bg-white scale-110' : 'bg-white/40'}`} 
-                    />
-                  ))}
-                </div>
-              )}
+              <div className="relative aspect-square overflow-hidden rounded-airbnb-md mb-3 shadow-sm group-hover:shadow-airbnb transition-all">
+                <SmartImage 
+                  src={tour.image} 
+                  alt={tour.title}
+                  fill
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                />
 
               {/* Badges */}
               <div className="absolute top-3 left-3 flex flex-col gap-2 z-20">
