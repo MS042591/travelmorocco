@@ -4,7 +4,6 @@ import "./globals.css";
 import { ModalProvider } from "@/lib/ModalContext";
 import ModalWrapper from "@/components/ModalWrapper";
 import PageTransition from "@/components/PageTransition";
-import Preloader from "@/components/Preloader";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -70,7 +69,6 @@ export default function RootLayout({
           }) }}
         />
         <ModalProvider>
-          <Preloader />
           <PageTransition>
             {children}
           </PageTransition>
