@@ -28,20 +28,23 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
     }
   }, [isOpen, selectedTour]);
 
+  const [isSending, setIsSending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSending(true);
+    setError(null);
     
-    // Get form data
     const form = e.target as HTMLFormElement;
-    const data = new FormData(form);
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
     
     try {
-      const response = await fetch("https://formspree.io/f/sardaoui.m@gmail.com", {
+      const response = await fetch("/api/contact.php", {
         method: "POST",
-        body: data,
-        headers: {
-          'Accept': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, type: 'booking' })
       });
       
       if (response.ok) {
@@ -49,10 +52,15 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
         setTimeout(() => {
           onClose();
           setIsSubmitted(false);
+          setIsSending(false);
         }, 5000);
+      } else {
+        setError("Failed to send. Please try WhatsApp.");
+        setIsSending(false);
       }
-    } catch (error) {
-      console.error("Submission error:", error);
+    } catch (err) {
+      setError("Network error. Please try WhatsApp.");
+      setIsSending(false);
     }
   };
 
@@ -155,11 +163,13 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                     </div>
 
                     <button 
+                      disabled={isSending}
                       type="submit"
-                      className="w-full bg-primary text-white font-bold py-3.5 rounded-airbnb-sm shadow-sm hover:bg-primary-active transition-all active:scale-95 text-base"
+                      className="w-full bg-primary text-white font-bold py-3.5 rounded-airbnb-sm shadow-sm hover:bg-primary-active transition-all active:scale-95 text-base disabled:opacity-50"
                     >
-                      Reserve now
+                      {isSending ? 'Sending...' : 'Reserve now'}
                     </button>
+                    {error && <p className="text-xs text-rose-600 text-center mt-2 font-bold">{error}</p>}
                   </form>
                 </>
               ) : (

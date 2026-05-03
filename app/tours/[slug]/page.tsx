@@ -299,7 +299,7 @@ export default async function TourPage({ params }: TourPageProps) {
                 <div className="p-6 rounded-airbnb-md border border-hairline bg-surface-soft/30">
                   <h4 className="text-sm font-bold text-ink mb-2">Need a custom route?</h4>
                   <p className="text-xs text-muted mb-4">Our Morocco experts can tailor this itinerary to your specific interests and dates.</p>
-                  <Link href="mailto:sardaoui.m@gmail.com" className="text-sm font-bold text-ink flex items-center gap-2 group">
+                  <Link href="mailto:contact@travelmorocco.co" className="text-sm font-bold text-ink flex items-center gap-2 group">
                     Contact an expert
                     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 fill-ink group-hover:translate-x-1 transition-transform"><path d="m12 1 12 12-12 12-1.414-1.414L21.172 13 10.586 2.414z"></path></svg>
                   </Link>

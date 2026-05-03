@@ -1,13 +1,38 @@
+"use client";
+
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Image from 'next/image';
-
-export const metadata = {
-  title: 'Contact Us | Travel Morocco - Personalized Journeys',
-  description: 'Reach out to our Moroccan travel experts to plan your dream vacation. We are here to help you every step of the way.',
-};
+import { useState } from 'react';
 
 export default function ContactPage() {
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus('sending');
+
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      const res = await fetch('/api/contact.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, type: 'contact' }),
+      });
+
+      if (res.ok) {
+        setStatus('success');
+        (e.target as HTMLFormElement).reset();
+      } else {
+        setStatus('error');
+      }
+    } catch (err) {
+      setStatus('error');
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -51,7 +76,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-xs font-black uppercase tracking-widest text-muted-soft mb-1">Email Inquiry</h3>
-                    <p className="text-lg font-bold text-ink">sardaoui.m@gmail.com</p>
+                    <p className="text-lg font-bold text-ink">contact@travelmorocco.co</p>
                   </div>
                 </div>
 
@@ -79,11 +104,12 @@ export default function ContactPage() {
             {/* Form Column */}
             <div className="lg:w-2/3">
               <div className="bg-surface-soft p-8 md:p-16 rounded-[3rem] border border-hairline shadow-sm">
-                <form action="https://formspree.io/f/sardaoui.m@gmail.com" method="POST" className="space-y-8">
+                <form onSubmit={handleSubmit} className="space-y-8">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-2">
                       <label htmlFor="name" className="text-xs font-bold uppercase tracking-widest text-ink ml-1">Your Name</label>
                       <input 
+                        required
                         type="text" 
                         id="name"
                         name="name"
@@ -94,6 +120,7 @@ export default function ContactPage() {
                     <div className="space-y-2">
                       <label htmlFor="email" className="text-xs font-bold uppercase tracking-widest text-ink ml-1">Email Address</label>
                       <input 
+                        required
                         type="email" 
                         id="email"
                         name="email"
@@ -120,6 +147,7 @@ export default function ContactPage() {
                   <div className="space-y-2">
                     <label htmlFor="message" className="text-xs font-bold uppercase tracking-widest text-ink ml-1">Your Message</label>
                     <textarea 
+                      required
                       id="message"
                       name="message"
                       rows={6}
@@ -129,11 +157,19 @@ export default function ContactPage() {
                   </div>
 
                   <button 
+                    disabled={status === 'sending'}
                     type="submit"
-                    className="w-full bg-primary text-white font-bold py-5 rounded-2xl shadow-lg hover:bg-primary-active hover:scale-[1.02] active:scale-[0.98] transition-all text-lg"
+                    className="w-full bg-primary text-white font-bold py-5 rounded-2xl shadow-lg hover:bg-primary-active hover:scale-[1.02] active:scale-[0.98] transition-all text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Send Message
+                    {status === 'sending' ? 'Sending...' : 'Send Message'}
                   </button>
+
+                  {status === 'success' && (
+                    <p className="text-emerald-600 font-bold text-center animate-fade-in">Shukran! Your message has been sent successfully.</p>
+                  )}
+                  {status === 'error' && (
+                    <p className="text-rose-600 font-bold text-center animate-fade-in">Oops! Something went wrong. Please try again or contact us via WhatsApp.</p>
+                  )}
                 </form>
               </div>
             </div>

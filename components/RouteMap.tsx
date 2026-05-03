@@ -10,9 +10,9 @@ const fixLeafletIcons = () => {
   // @ts-ignore
   delete L.Icon.Default.prototype._getIconUrl;
   L.Icon.Default.mergeOptions({
-    iconRetinaUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.webp',
-    iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.webp',
-    shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.webp',
+    iconRetinaUrl: '/icons/leaflet/marker-icon-2x.png',
+    iconUrl: '/icons/leaflet/marker-icon.png',
+    shadowUrl: '/icons/leaflet/marker-shadow.png',
   });
 };
 
