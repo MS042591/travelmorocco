@@ -13,14 +13,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import BookingCard from '@/components/BookingCard';
 import SmartImage from '@/components/SmartImage';
 
-// Dynamic Imports for Performance
-const MapWrapper = dynamic(() => import('@/components/MapWrapper'), { 
-  ssr: false, 
-  loading: () => <div className="h-96 w-full bg-surface-soft animate-pulse rounded-3xl" /> 
-});
-const MoroccoLiveWidget = dynamic(() => import('@/components/MoroccoLiveWidget'), { ssr: false });
-const FAQAccordion = dynamic(() => import('@/components/FAQAccordion'));
-const TourItinerary = dynamic(() => import('@/components/TourItinerary'));
+import TourClientDetails from '@/components/TourClientDetails';
 
 interface TourPageProps {
   params: Promise<{ slug: string }>;
@@ -180,124 +173,14 @@ export default async function TourPage({ params }: TourPageProps) {
                 </div>
               </div>
 
-              <TourItinerary itinerary={tour.itinerary || []} duration={tour.duration} />
-
-              <div className="pb-12 border-b border-hairline">
-                <h3 className="text-xl font-bold text-ink mb-6">What this place offers</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {tour.highlights?.map(h => (
-                    <div key={h} className="flex items-center gap-4">
-                      <div className="w-6 h-6 flex-shrink-0">
-                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-full h-full fill-ink"><path d="m16 2a14 14 0 1 0 14 14 14.016 14.016 0 0 0 -14-14zm6.707 10.707-8 8a1 1 0 0 1 -1.414 0l-4-4a1 1 0 1 1 1.414-1.414l3.293 3.293 7.293-7.293a1 1 0 0 1 1.414 1.414z"></path></svg>
-                      </div>
-                      <span className="text-sm md:text-base text-ink">{h}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Route Map */}
-              <div className="pb-12 border-b border-hairline">
-                <h3 className="text-xl font-bold text-ink mb-6 font-heading">Route Map</h3>
-                <MapWrapper tourTitle={tour.title} route={tour.route} itinerary={tour.itinerary} />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 pb-12 border-b border-hairline">
-                <div>
-                  <h3 className="text-xl font-bold text-ink mb-6 font-heading">What&apos;s included</h3>
-                  <ul className="space-y-4">
-                    {tour.included?.map(item => (
-                      <li key={item} className="flex items-start gap-3 text-body text-sm leading-relaxed">
-                        <div className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-green-50 flex items-center justify-center">
-                          <svg className="w-3.5 h-3.5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                          </svg>
-                        </div>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-ink mb-6 font-heading">What&apos;s not included</h3>
-                  <ul className="space-y-4">
-                    {tour.excluded?.map(item => (
-                      <li key={item} className="flex items-start gap-3 text-muted-soft text-sm leading-relaxed">
-                        <div className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-red-50 flex items-center justify-center">
-                          <svg className="w-3.5 h-3.5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
-                          </svg>
-                        </div>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              {/* Trust Section */}
-              <div className="pb-12 border-b border-hairline">
-                <div className="bg-surface-soft/50 rounded-2xl p-8 border border-hairline">
-                  <h3 className="text-xl font-bold text-ink mb-8 font-heading text-center">Why choose Travel Morocco?</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div className="text-center space-y-3">
-                      <div className="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center mx-auto text-primary">
-                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 fill-current"><path d="M16 2a14 14 0 1 0 14 14 14.016 14.016 0 0 0 -14-14zm0 26a12 12 0 1 1 12-12 12.014 12.014 0 0 1 -12 12zm1-13h6a1 1 0 0 1 0 2h-7a1 1 0 0 1 -1-1v-8a1 1 0 0 1 2 0z"></path></svg>
-                      </div>
-                      <h4 className="font-bold text-sm text-ink">Bespoke Itineraries</h4>
-                      <p className="text-xs text-muted leading-relaxed">Tailored to your pace and specific interests.</p>
-                    </div>
-                    <div className="text-center space-y-3">
-                      <div className="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center mx-auto text-primary">
-                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 fill-current"><path d="M16 15.503A5.041 5.041 0 1 0 16 5.42a5.041 5.041 0 0 0 0 10.083zm0 2.015c-6.191 0-11.209 4.28-11.209 9.556 0 .556.452 1.006 1.008 1.006h20.402c.556 0 1.008-.45 1.008-1.006 0-5.276-5.018-9.556-11.209-9.556z"></path></svg>
-                      </div>
-                      <h4 className="font-bold text-sm text-ink">Expert Local Guides</h4>
-                      <p className="text-xs text-muted leading-relaxed">Professional, passionate storytellers born in Morocco.</p>
-                    </div>
-                    <div className="text-center space-y-3">
-                      <div className="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center mx-auto text-primary">
-                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 fill-current"><path d="M16 2a14 14 0 1 0 14 14 14.016 14.016 0 0 0 -14-14zm0 26a12 12 0 1 1 12-12 12.014 12.014 0 0 1 -12 12zm1-13h6a1 1 0 0 1 0 2h-7a1 1 0 0 1 -1-1v-8a1 1 0 0 1 2 0z"></path></svg>
-                      </div>
-                      <h4 className="font-bold text-sm text-ink">Handpicked Hotels</h4>
-                      <p className="text-xs text-muted leading-relaxed">The finest authentic Riads and boutique experiences.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* FAQ & Policies Section */}
-              <div className="pb-12 border-b border-hairline">
-                <h3 className="text-xl font-bold text-ink mb-8 font-heading">Good to know</h3>
-                <FAQAccordion 
-                  items={tour.faqs && tour.faqs.length > 0 ? tour.faqs : [
-                    { q: "What should I pack?", a: "We recommend comfortable walking shoes, a sun hat, and layers for the cool desert nights. A small daypack for water and camera gear is also essential." },
-                    { q: "Is Wi-Fi available during the tour?", a: "Wi-Fi is available in most Riads and hotels. In the Sahara desert camp, connectivity is limited, allowing you to fully immerse in the experience." },
-                    { q: "Can the tour be customized?", a: "Absolutely. All our tours are private and can be adjusted to your pace, interests, and dietary requirements." }
-                  ]} 
-                />
-              </div>
-
-              <div className="pb-12">
-                <h3 className="text-xl font-bold text-ink mb-6 font-heading">Cancellation Policy</h3>
-                <div className="flex gap-4 items-start p-6 bg-surface-soft/30 rounded-2xl border border-hairline">
-                  <div className="w-10 h-10 bg-white rounded-full flex-shrink-0 flex items-center justify-center text-primary shadow-sm">
-                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 fill-current"><path d="M16 2a14 14 0 1 0 14 14 14.016 14.016 0 0 0 -14-14zm0 26a12 12 0 1 1 12-12 12.014 12.014 0 0 1 -12 12zm1-18h-2v8.414l4.293 4.293 1.414-1.414L17 16.586V10z"></path></svg>
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-ink mb-1">Free cancellation</h4>
-                    <p className="text-xs text-muted leading-relaxed">
-                      Cancel up to 7 days before your experience starts for a full refund. No refunds for cancellations made within 7 days of the start date.
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <TourClientDetails tour={tour} />
             </div>
             
             <div className="lg:col-span-4">
               <div className="sticky top-28 space-y-6">
                 <BookingCard price={tour.price} tourTitle={tour.title} />
-
-                <MoroccoLiveWidget />
+              </div>
+            </div>
 
                 <div className="p-6 rounded-airbnb-md border border-hairline bg-surface-soft/30">
                   <h4 className="text-sm font-bold text-ink mb-2">Need a custom route?</h4>
