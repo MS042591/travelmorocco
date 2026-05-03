@@ -5,7 +5,7 @@ import Link from 'next/link';
 import SmartImage from './SmartImage';
 
 const slides = [
-  { src: "/images/hero-sahara-opt.png", alt: "Sahara Desert golden dunes" },
+  { src: "/images/hero-sahara-opt.jpg", alt: "Sahara Desert golden dunes" },
   { src: "/images/tours/blue-stairway-with-colourful-flowerpots.webp", alt: "Blue streets of Chefchaouen" },
   { src: "/images/tours/ait-benhaddou-kasbah-at-dawn-morocco.webp", alt: "Ancient Kasbah Ait Ben Haddou" },
   { src: "/images/tours/beautiful-sunset-in-the-jemaa-el-fna-square-in-the-city-of-marrakech-with-bustle-activity-street-food-market-lights-and-colorful-sky-picture-taken-during-travel-vacations-in-morocco.webp", alt: "Vibrant Marrakech market" },

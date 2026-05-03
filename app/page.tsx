@@ -16,7 +16,7 @@ export default function Home() {
       <link 
         rel="preload" 
         as="image" 
-        href="/images/hero-sahara-opt.png"
+        href="/images/hero-sahara-opt.jpg"
         fetchPriority="high"
       />
       <Navbar />

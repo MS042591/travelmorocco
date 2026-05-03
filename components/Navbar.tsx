@@ -31,7 +31,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center group">
             <div className={`relative transition-all duration-500 group-hover:scale-105 ${scrolled ? 'h-12 w-48' : 'h-24 w-96'}`}>
               <Image 
-                src="/logo_tiny.png" 
+                src="/logo_tiny.jpg" 
                 alt="Travel Morocco" 
                 fill
                 sizes="(max-width: 768px) 150px, 200px"
