@@ -14,13 +14,10 @@ import BookingCard from '@/components/BookingCard';
 import SmartImage from '@/components/SmartImage';
 
 // Dynamic Imports for Performance
-const MapWrapper = dynamic(() => import('@/components/MapWrapper'), { 
-  ssr: false,
-  loading: () => <div className="h-[400px] bg-surface-soft animate-pulse rounded-3xl" />
-});
-const MoroccoLiveWidget = dynamic(() => import('@/components/MoroccoLiveWidget'), { ssr: false });
-const FAQAccordion = dynamic(() => import('@/components/FAQAccordion'), { ssr: false });
-const TourItinerary = dynamic(() => import('@/components/TourItinerary'), { ssr: false });
+import MapWrapper from '@/components/MapWrapper';
+import MoroccoLiveWidget from '@/components/MoroccoLiveWidget';
+import FAQAccordion from '@/components/FAQAccordion';
+import TourItinerary from '@/components/TourItinerary';
 
 interface TourPageProps {
   params: Promise<{ slug: string }>;
