@@ -31,14 +31,14 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://travelmorocco.co'),
   title: "Authentic Moroccan Adventures | Custom Travel & Tours 2024",
   description: "Discover and experience the magic of Morocco with Authentic Moroccan Adventures. Custom tours, desert treks, and imperial city experiences.",
-  manifest: '/travelmorocco/site.webmanifest',
+  manifest: '/site.webmanifest',
   icons: {
     icon: [
-      { url: '/travelmorocco/icons/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/travelmorocco/icons/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/icons/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/icons/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
     ],
     apple: [
-      { url: '/travelmorocco/icons/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/icons/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
   },
 };
@@ -62,7 +62,7 @@ export default function RootLayout({
             "@type": "Organization",
             "name": "Travel Morocco",
             "url": "https://travelmorocco.co",
-            "logo": "https://travelmorocco.co/travelmorocco/logo.webp",
+            "logo": "https://travelmorocco.co/logo.webp",
             "sameAs": [
               "https://www.facebook.com/travelmorocco",
               "https://www.instagram.com/travelmorocco"
