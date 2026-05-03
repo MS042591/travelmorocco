@@ -1,7 +1,8 @@
 "use client";
 
 import { useModal } from "@/lib/ModalContext";
-import BookingModal from "./BookingModal";
+import dynamic from 'next/dynamic';
+const BookingModal = dynamic(() => import('./BookingModal'), { ssr: false });
 
 export default function ModalWrapper() {
   const { isBookingOpen, closeBooking } = useModal();

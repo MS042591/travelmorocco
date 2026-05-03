@@ -5,7 +5,8 @@ import { useModal } from '@/lib/ModalContext';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
-import TripPlannerModal from './TripPlannerModal';
+import dynamic from 'next/dynamic';
+const TripPlannerModal = dynamic(() => import('./TripPlannerModal'), { ssr: false });
 
 export default function Navbar() {
   const { openBooking } = useModal();

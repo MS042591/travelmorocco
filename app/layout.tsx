@@ -68,6 +68,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`scroll-smooth ${inter.variable} ${montserrat.variable} ${playfair.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body className="min-h-screen bg-canvas text-ink antialiased font-inter">
         <script
           type="application/ld+json"
