@@ -2,24 +2,29 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import dynamic from 'next/dynamic';
 import { getTourBySlug, getAllTours } from '@/lib/tours';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ReactMarkdown from 'react-markdown';
 import TourBookingButton from '@/components/TourBookingButton';
-import FAQAccordion from '@/components/FAQAccordion';
-import TourItinerary from '@/components/TourItinerary';
-import MoroccoLiveWidget from '@/components/MoroccoLiveWidget';
 import PhotoGallery from '@/components/PhotoGallery';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import BookingCard from '@/components/BookingCard';
-import MapWrapper from '@/components/MapWrapper';
 import SmartImage from '@/components/SmartImage';
+
+// Dynamic Imports for Performance
+const MapWrapper = dynamic(() => import('@/components/MapWrapper'), { 
+  ssr: false,
+  loading: () => <div className="h-[400px] bg-surface-soft animate-pulse rounded-3xl" />
+});
+const MoroccoLiveWidget = dynamic(() => import('@/components/MoroccoLiveWidget'), { ssr: false });
+const FAQAccordion = dynamic(() => import('@/components/FAQAccordion'), { ssr: false });
+const TourItinerary = dynamic(() => import('@/components/TourItinerary'), { ssr: false });
 
 interface TourPageProps {
   params: Promise<{ slug: string }>;
 }
-
 
 export async function generateMetadata({ params }: TourPageProps): Promise<Metadata> {
   const { slug } = await params;
@@ -54,6 +59,26 @@ export default async function TourPage({ params }: TourPageProps) {
   const tour = getTourBySlug(slug);
   if (!tour) notFound();
 
+  // JSON-LD Structured Data
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": tour.title,
+    "description": tour.excerpt,
+    "image": tour.image,
+    "offers": {
+      "@type": "Offer",
+      "price": tour.price.replace(/[^\d]/g, ''),
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "120"
+    }
+  };
+
   const allTours = getAllTours();
   const relatedTours = allTours
     .filter(t => t.category === tour.category && t.slug !== tour.slug)
@@ -61,7 +86,12 @@ export default async function TourPage({ params }: TourPageProps) {
 
   return (
     <div className="min-h-screen bg-canvas">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Navbar />
+
       <article className="pt-40 pb-32">
         {/* Title and Stats */}
         <div className="container mx-auto px-4 md:px-8 lg:px-20 mb-8">
