@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getTourBySlug, getAllTours } from '@/lib/tours';
 import Navbar from '@/components/Navbar';
@@ -268,7 +269,12 @@ export default async function TourPage({ params }: TourPageProps) {
               {relatedTours.map(t => (
                 <Link key={t.slug} href={`/tours/${t.slug}`} className="group block">
                   <div className="relative aspect-square rounded-airbnb-md overflow-hidden mb-3 shadow-sm">
-                    <img src={t.image} alt={t.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    <Image 
+                      src={t.image} 
+                      alt={t.title} 
+                      fill 
+                      className="object-cover group-hover:scale-105 transition-transform duration-700" 
+                    />
                   </div>
                   <div className="space-y-1">
                     <h3 className="text-sm font-bold text-ink">{t.title}</h3>

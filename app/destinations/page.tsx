@@ -35,6 +35,7 @@ export default function DestinationsPage() {
                 key={city.slug} 
                 destination={city} 
                 index={index}
+                priority={index < 3}
               />
             ))}
           </div>

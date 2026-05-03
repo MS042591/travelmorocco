@@ -9,9 +9,10 @@ interface DestinationCardProps {
   destination: DestinationData;
   index: number;
   className?: string;
+  priority?: boolean;
 }
 
-export default function DestinationCard({ destination, index, className = "" }: DestinationCardProps) {
+export default function DestinationCard({ destination, index, className = "", priority = false }: DestinationCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -27,6 +28,7 @@ export default function DestinationCard({ destination, index, className = "" }: 
             src={destination.image} 
             alt={destination.title} 
             fill 
+            priority={priority}
             className="object-cover group-hover:scale-110 transition-transform duration-[1.5s] ease-out"
           />
           {/* Subtle Corner Badge */}

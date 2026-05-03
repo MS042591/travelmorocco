@@ -109,6 +109,7 @@ export default function Hero() {
                   src={dest.image}
                   alt={dest.label}
                   fill
+                  priority
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors duration-300"></div>

@@ -28,10 +28,10 @@ export default function Preloader() {
 
   const variants = {
     initial: {
-      top: 0
+      y: 0
     },
     exit: {
-      top: "-100vh",
+      y: "-100%",
       transition: { duration: 1.2, ease: [0.76, 0, 0.24, 1], delay: 0.2 }
     }
   };
@@ -68,7 +68,7 @@ export default function Preloader() {
                 <circle cx="50" cy="50" r="30" />
               </motion.svg>
             </motion.div>
-
+ 
             {/* Logo */}
             <motion.div
               initial={{ y: 20, opacity: 0 }}
@@ -84,7 +84,7 @@ export default function Preloader() {
                 priority
               />
             </motion.div>
-
+ 
             {/* Subtitle */}
             <motion.p
               initial={{ opacity: 0 }}
@@ -94,7 +94,7 @@ export default function Preloader() {
             >
               Excellence in Hospitality
             </motion.p>
-
+ 
             {/* Discreet Progress Line */}
             <div className="mt-12 w-40 h-[1px] bg-white/10 relative overflow-hidden">
               <motion.div
@@ -105,12 +105,13 @@ export default function Preloader() {
               />
             </div>
           </div>
-
-          {/* Decorative Curtain Background */}
+ 
+          {/* Decorative Curtain Background - Optimized with scaleY */}
           <motion.div 
-            initial={{ height: "0%" }}
-            animate={{ height: "100%" }}
-            className="absolute bottom-0 left-0 w-full bg-primary/5 z-0"
+            initial={{ scaleY: 0 }}
+            animate={{ scaleY: 1 }}
+            style={{ transformOrigin: "bottom" }}
+            className="absolute bottom-0 left-0 w-full h-full bg-primary/5 z-0"
             transition={{ duration: 2, ease: [0.76, 0, 0.24, 1] }}
           />
         </motion.div>

@@ -35,7 +35,6 @@ export default function Navbar() {
                 alt="Travel Morocco" 
                 fill
                 className={`object-contain transition-all duration-500 ${!isSolid ? 'brightness-0 invert' : ''}`}
-                priority
               />
             </div>
           </Link>
