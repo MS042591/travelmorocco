@@ -28,6 +28,19 @@ export async function generateMetadata({ params }: TourPageProps): Promise<Metad
   return {
     title: `${tour.title} | ${tour.category}`,
     description: tour.excerpt,
+    alternates: {
+      canonical: `/tours/${slug}`,
+    },
+    openGraph: {
+      images: [
+        {
+          url: tour.image,
+          width: 1200,
+          height: 800,
+          alt: tour.title,
+        },
+      ],
+    },
   };
 }
 
