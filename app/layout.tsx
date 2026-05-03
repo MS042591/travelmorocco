@@ -31,6 +31,21 @@ export const metadata: Metadata = {
   title: "Authentic Moroccan Adventures | Custom Travel & Tours 2024",
   description: "Discover and experience the magic of Morocco with Authentic Moroccan Adventures. Custom tours, desert treks, and imperial city experiences.",
   manifest: '/site.webmanifest',
+  openGraph: {
+    url: 'https://travelmorocco.co',
+    type: 'website',
+    siteName: 'Travel Morocco',
+    title: 'Authentic Moroccan Adventures | Custom Travel & Tours 2024',
+    description: 'Discover and experience the magic of Morocco with Authentic Moroccan Adventures. Custom tours, desert treks, and imperial city experiences.',
+    images: [
+      {
+        url: '/images/hero-sahara-opt.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Travel Morocco - Sahara Desert',
+      },
+    ],
+  },
   icons: {
     icon: [
       { url: '/icons/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
