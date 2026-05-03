@@ -14,7 +14,7 @@ export default function AboutPage() {
         {/* Hero Section */}
         <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
           <Image 
-            src="/images/tours/architecture-moroccan-archway-with-ornamental-tiles-interior-design.jpg" 
+            src="/images/tours/architecture-moroccan-archway-with-ornamental-tiles-interior-design.webp" 
             alt="About Travel Morocco Heritage" 
             fill 
             className="object-cover brightness-[0.6] grayscale-[0.1]"
@@ -65,7 +65,7 @@ export default function AboutPage() {
 
               <div className="relative h-[450px] rounded-[3rem] overflow-hidden shadow-2xl">
                 <Image 
-                  src="/images/tours/traveling-by-morocco-happy-young-woman-in-traditional-riad-interior-in-medina.jpg" 
+                  src="/images/tours/traveling-by-morocco-happy-young-woman-in-traditional-riad-interior-in-medina.webp" 
                   alt="Exploring Morocco" 
                   fill 
                   className="object-cover"

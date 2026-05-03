@@ -18,7 +18,7 @@ export default function Preloader() {
     // Realistic loading simulation
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2500);
+    }, 1200);
 
     return () => {
       clearTimeout(timer);
@@ -32,7 +32,7 @@ export default function Preloader() {
     },
     exit: {
       y: "-100%",
-      transition: { duration: 1.2, ease: [0.76, 0, 0.24, 1], delay: 0.2 }
+      transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.1 }
     }
   };
 
@@ -43,41 +43,18 @@ export default function Preloader() {
           variants={variants}
           initial="initial"
           exit="exit"
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-ink"
+          className="preloader-critical fixed inset-0 z-[9999] flex items-center justify-center bg-ink"
         >
           <div className="relative z-10 flex flex-col items-center">
-            {/* Elegant Moroccan Geometric Pattern Animation */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.5, ease: "easeOut" }}
-              className="relative w-32 h-32 mb-12"
-            >
-              <svg viewBox="0 0 100 100" className="w-full h-full text-primary fill-current opacity-20 absolute inset-0">
-                <path d="M50 0 L61 39 L100 50 L61 61 L50 100 L39 61 L0 50 L39 39 Z" />
-              </svg>
-              <motion.svg 
-                viewBox="0 0 100 100" 
-                className="w-full h-full text-primary stroke-current fill-none stroke-[0.5]"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 2, ease: "easeInOut" }}
-              >
-                <path d="M50 0 L61 39 L100 50 L61 61 L50 100 L39 61 L0 50 L39 39 Z" />
-                <circle cx="50" cy="50" r="15" />
-                <circle cx="50" cy="50" r="30" />
-              </motion.svg>
-            </motion.div>
- 
             {/* Logo */}
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-              className="relative h-12 w-56"
+              transition={{ delay: 0.2, duration: 0.6 }}
+              className="relative h-20 w-80"
             >
               <Image 
-                src="/logo.png" 
+                src="/logo.webp" 
                 alt="Travel Morocco" 
                 fill
                 className="object-contain brightness-0 invert"
@@ -89,7 +66,7 @@ export default function Preloader() {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.5 }}
-              transition={{ delay: 1, duration: 1 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
               className="mt-6 text-white text-[10px] font-black uppercase tracking-[0.5em] text-center"
             >
               Excellence in Hospitality

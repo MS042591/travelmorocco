@@ -2,9 +2,9 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import chefchaouenImg from '../src/assets/images/chefchaouen.jpg';
-import ouzoudImg from '../src/assets/images/ouzoud.jpg';
-import atlasImg from '../src/assets/images/ait-ben-haddou.jpg';
+import chefchaouenImg from '../src/assets/images/chefchaouen.webp';
+import ouzoudImg from '../src/assets/images/ouzoud.webp';
+import atlasImg from '../src/assets/images/ait-ben-haddou.webp';
 import { useModal } from '@/lib/ModalContext';
 import { motion } from 'framer-motion';
 

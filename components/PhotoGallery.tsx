@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
+import SmartImage from './SmartImage';
 
 interface PhotoGalleryProps {
   mainImage: string;
@@ -24,11 +24,11 @@ export default function PhotoGallery({ mainImage, gallery, title }: PhotoGallery
           className="md:col-span-2 md:row-span-2 relative group overflow-hidden cursor-pointer"
           onClick={() => setSelectedImage(mainImage)}
         >
-          <Image 
+          <SmartImage 
             src={mainImage} 
             alt={title}
             fill
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            className="object-cover group-hover:scale-105 transition-transform duration-700"
             priority
           />
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 z-10" />
@@ -41,11 +41,11 @@ export default function PhotoGallery({ mainImage, gallery, title }: PhotoGallery
             className="hidden md:block relative group overflow-hidden cursor-pointer"
             onClick={() => setSelectedImage(img)}
           >
-            <Image 
+            <SmartImage 
               src={img} 
               alt={`${title} gallery ${i + 1}`}
               fill
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              className="object-cover group-hover:scale-105 transition-transform duration-700"
             />
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 z-10" />
           </div>
@@ -83,7 +83,7 @@ export default function PhotoGallery({ mainImage, gallery, title }: PhotoGallery
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative w-full h-full max-w-6xl max-h-[85vh]">
-                <Image 
+                <SmartImage 
                   src={selectedImage} 
                   alt={title}
                   fill

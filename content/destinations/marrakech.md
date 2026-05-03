@@ -1,8 +1,8 @@
 ---
 title: "Marrakech"
-image: "/images/tours/marrakech-djemaa-el-fna-square.jpg"
+image: "/images/tours/marrakech-djemaa-el-fna-square.webp"
 description: "The Red City, a vibrant tapestry of ancient traditions and modern luxury, where the pulse of the medina meets the serenity of hidden riads."
-gallery: ["/images/tours/riad-in-marrakesh-medina.jpg", "/images/tours/moroccan-handmade-carpets-and-rugs-in-marrakech.jpg", "/images/tours/woman-looking-at-koutoubia-mosque-minarettourism-in-marrakech-morocco.jpg", "/images/tours/beautiful-sunset-in-the-jemaa-el-fna-square-in-the-city-of-marrakech-with-bustle-activity-street-food-market-lights-and-colorful-sky-picture-taken-during-travel-vacations-in-morocco.jpg"]
+gallery: ["/images/tours/riad-in-marrakesh-medina.webp", "/images/tours/moroccan-handmade-carpets-and-rugs-in-marrakech.webp", "/images/tours/woman-looking-at-koutoubia-mosque-minarettourism-in-marrakech-morocco.webp", "/images/tours/beautiful-sunset-in-the-jemaa-el-fna-square-in-the-city-of-marrakech-with-bustle-activity-street-food-market-lights-and-colorful-sky-picture-taken-during-travel-vacations-in-morocco.webp"]
 highlights: ["Jemaa el-Fnaa Square", "Majorelle Garden", "Bahia Palace", "Koutoubia Mosque"]
 ---
 

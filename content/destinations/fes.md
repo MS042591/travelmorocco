@@ -1,8 +1,8 @@
 ---
 title: "Fes"
-image: "/images/tours/fes-tannery-overview.jpg"
+image: "/images/tours/fes-tannery-overview.webp"
 description: "The spiritual and intellectual heart of Morocco, home to the world's oldest university and a medieval medina that remains unchanged for centuries."
-gallery: ["/images/tours/upright-view-at-the-golden-palace-door-with-ornamental-decorations-in-fes-morocco.jpg", "/images/tours/view-of-fez-old-town-from-the-roof-top-terrace-fes-medina-morocco-africa.jpg", "/images/tours/beautiful-aerial-sunset-view-of-fes-or-fez-medina-with-the-middle-atlas-mountains-in-background.jpg", "/images/tours/architecture-moroccan-archway-with-ornamental-tiles-interior-design.jpg"]
+gallery: ["/images/tours/upright-view-at-the-golden-palace-door-with-ornamental-decorations-in-fes-morocco.webp", "/images/tours/view-of-fez-old-town-from-the-roof-top-terrace-fes-medina-morocco-africa.webp", "/images/tours/beautiful-aerial-sunset-view-of-fes-or-fez-medina-with-the-middle-atlas-mountains-in-background.webp", "/images/tours/architecture-moroccan-archway-with-ornamental-tiles-interior-design.webp"]
 highlights: ["Fes el-Bali (Medina)", "Al-Attarine Madrasa", "Chouara Tannery", "Bab Bou Jeloud"]
 ---
 

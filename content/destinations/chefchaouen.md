@@ -1,8 +1,8 @@
 ---
 title: "Chefchaouen"
-image: "/images/tours/tourist-observing-a-panoramic-view-of-blue-city-of-chefchaouen-from-point-of-view-morocco.jpg"
+image: "/images/tours/tourist-observing-a-panoramic-view-of-blue-city-of-chefchaouen-from-point-of-view-morocco.webp"
 description: "The Blue Pearl of the Rif Mountains, famous for its dreamlike blue-washed streets and serene mountain atmosphere."
-gallery: ["/images/tours/small-colorful-streets-in-medina-of-chefchaouen.jpg", "/images/tours/sunset-over-chefchaouen-medina-in-morocco-travel-destination-in-morocco.jpg", "/images/tours/woman-admiring-the-blue-houses-in-chefchaouen.jpg", "/images/tours/woman-sits-on-the-stairs-in-a-narrow-blue-street-of-the-old-medina-in-chefchaouen-town-in-morocco.jpg"]
+gallery: ["/images/tours/small-colorful-streets-in-medina-of-chefchaouen.webp", "/images/tours/sunset-over-chefchaouen-medina-in-morocco-travel-destination-in-morocco.webp", "/images/tours/woman-admiring-the-blue-houses-in-chefchaouen.webp", "/images/tours/woman-sits-on-the-stairs-in-a-narrow-blue-street-of-the-old-medina-in-chefchaouen-town-in-morocco.webp"]
 highlights: ["The Blue Medina", "Ras el-Maa Waterfall", "Spanish Mosque", "Rif Mountain Treks"]
 ---
 

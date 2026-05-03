@@ -1,22 +1,22 @@
 "use client";
 
 import { useState, useEffect, useCallback } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
+import SmartImage from './SmartImage';
 
 const slides = [
-  { src: "/images/tours/sunset-on-the-dunes-and-camels-of-the-merzouga-desert-in-morocco.jpg", alt: "Sahara Desert golden dunes" },
-  { src: "/images/tours/blue-stairway-with-colourful-flowerpots.jpg", alt: "Blue streets of Chefchaouen" },
-  { src: "/images/tours/ait-benhaddou-kasbah-at-dawn-morocco.jpg", alt: "Ancient Kasbah Ait Ben Haddou" },
-  { src: "/images/tours/beautiful-sunset-in-the-jemaa-el-fna-square-in-the-city-of-marrakech-with-bustle-activity-street-food-market-lights-and-colorful-sky-picture-taken-during-travel-vacations-in-morocco.jpg", alt: "Vibrant Marrakech market" },
-  { src: "/images/tours/blue-wooden-rowboats-port-essaouira-harbor-morocco-north-africa.jpg", alt: "Essaouira coastal harbour" },
+  { src: "/images/tours/sunset-on-the-dunes-and-camels-of-the-merzouga-desert-in-morocco.webp", alt: "Sahara Desert golden dunes" },
+  { src: "/images/tours/blue-stairway-with-colourful-flowerpots.webp", alt: "Blue streets of Chefchaouen" },
+  { src: "/images/tours/ait-benhaddou-kasbah-at-dawn-morocco.webp", alt: "Ancient Kasbah Ait Ben Haddou" },
+  { src: "/images/tours/beautiful-sunset-in-the-jemaa-el-fna-square-in-the-city-of-marrakech-with-bustle-activity-street-food-market-lights-and-colorful-sky-picture-taken-during-travel-vacations-in-morocco.webp", alt: "Vibrant Marrakech market" },
+  { src: "/images/tours/blue-wooden-rowboats-port-essaouira-harbor-morocco-north-africa.webp", alt: "Essaouira coastal harbour" },
 ];
 
 const destinations = [
-  { label: "Sahara Desert", image: "/images/tours/beautiful-sand-dunes-in-the-sahara-desert-morocco-at-sunset.jpg", href: "/tours?category=Desert+Tours", count: 10 },
-  { label: "Marrakech", image: "/images/tours/marrakech-djemaa-el-fna-square.jpg", href: "/tours?category=Tours+from+Marrakech", count: 8 },
-  { label: "Chefchaouen", image: "/images/tours/morocco-rif-area-chefchaouen-chaouen-town-the-blue-city.jpg", href: "/tours?category=Tours+from+Tangier", count: 6 },
-  { label: "Imperial Cities", image: "/images/tours/the-royal-palace-golden-doors-fez-morocco.jpg", href: "/tours?category=Tours+from+Casablanca", count: 8 },
+  { label: "Sahara Desert", image: "/images/tours/beautiful-sand-dunes-in-the-sahara-desert-morocco-at-sunset.webp", href: "/tours?category=Desert+Tours", count: 10 },
+  { label: "Marrakech", image: "/images/tours/marrakech-djemaa-el-fna-square.webp", href: "/tours?category=Tours+from+Marrakech", count: 8 },
+  { label: "Chefchaouen", image: "/images/tours/morocco-rif-area-chefchaouen-chaouen-town-the-blue-city.webp", href: "/tours?category=Tours+from+Tangier", count: 6 },
+  { label: "Imperial Cities", image: "/images/tours/the-royal-palace-golden-doors-fez-morocco.webp", href: "/tours?category=Tours+from+Casablanca", count: 8 },
 ];
 
 export default function Hero() {
@@ -45,7 +45,7 @@ export default function Hero() {
           className="absolute inset-0 z-0 transition-opacity duration-1000 ease-in-out"
           style={{ opacity: index === current && !isTransitioning ? 1 : 0 }}
         >
-          <Image
+          <SmartImage
             src={slide.src}
             alt={slide.alt}
             fill
@@ -105,7 +105,7 @@ export default function Hero() {
                 href={dest.href}
                 className="group relative h-16 md:h-20 rounded-2xl overflow-hidden border border-white/15 hover:border-white/30 transition-all duration-300 hover:scale-[1.02]"
               >
-                <Image
+                <SmartImage
                   src={dest.image}
                   alt={dest.label}
                   fill

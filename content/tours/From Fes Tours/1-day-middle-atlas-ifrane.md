@@ -3,17 +3,17 @@ title: "Alpine Morocco: 1-Day Middle Atlas & Ifrane Day Trip"
 category: "From Fes Tours"
 duration: "1 Day (8 hours)"
 price: "From $85"
-image: "/images/tours/group-of-tourists-going-for-a-caml-trip-in-the-middle-of-deserts-with-old-nomads.jpg"
+image: "/images/tours/group-of-tourists-going-for-a-caml-trip-in-the-middle-of-deserts-with-old-nomads.webp"
 excerpt: "Escape to the cool alpine scenery of the Middle Atlas mountains and the charming town of Ifrane."
 description: "Escape to the cool alpine scenery of the Middle Atlas mountains on this one-day adventure from Fes. Visit the charming alpine town of Ifrane, often called the \"Switzerland of Morocco,\" explore cedar forests, and experience the dramatic contrast between the desert plains and mountain peaks. This tour offers natural beauty, cultural immersion, and a refreshing break from the desert heat."
 date: "2024-06-12"
-gallery: ["/images/tours/high-atlas-mountains-in-morocco-hiking-to-jebel-toubkal.jpg", "/images/tours/the-kasbah-castle-from-the-middle-atlas-and-the-tadla-plain-of-morocco-protecting-and-overlooking-the-moroccan-city-of-beni-mellaljenifra-under-an-orange-sky-concept-morocco-castle-city-landscape.jpg", "/images/tours/caravan-going-through-the-sand-dunes-in-the-sahara-desert-morocco-merzuga-tourist-visit-the-desert-on-camels-during-the-holidays-adventure-and-freedom-during-a-trip-safari-organized-travel.jpg", "/images/tours/camels-in-ourika-valley-at-the-foot-of-high-atlas-moutains.jpg"]
+gallery: ["/images/tours/high-atlas-mountains-in-morocco-hiking-to-jebel-toubkal.webp", "/images/tours/the-kasbah-castle-from-the-middle-atlas-and-the-tadla-plain-of-morocco-protecting-and-overlooking-the-moroccan-city-of-beni-mellaljenifra-under-an-orange-sky-concept-morocco-castle-city-landscape.webp", "/images/tours/caravan-going-through-the-sand-dunes-in-the-sahara-desert-morocco-merzuga-tourist-visit-the-desert-on-camels-during-the-holidays-adventure-and-freedom-during-a-trip-safari-organized-travel.webp", "/images/tours/camels-in-ourika-valley-at-the-foot-of-high-atlas-moutains.webp"]
 highlights: ["Middle Atlas mountains with dramatic scenery", "Charming alpine town of Ifrane with European architecture", "Cedar forests and mountain wildlife", "Lake Dayet Aoua with scenic views", "Panoramic mountain views and photography opportunities", "Interaction with local mountain communities"]
 itinerary:
   - day: 1
     title: "Middle Atlas Exploration"
     description: "Depart Fes and drive through the Middle Atlas mountains toward Ifrane. Stop at cedar forests and scenic viewpoints. Arrive in Ifrane and explore the charming alpine town with its European-style architecture. Visit Lake Dayet Aoua for scenic views. Explore local markets and interact with residents. Lunch at a local restaurant. Afternoon exploration of additional mountain areas or hiking. Return to Fes by evening."
-    image: "/images/tours/ouzoud-falls-waterfall-near-the-middle-atlas-village-of-tanaghmeilt-azilal-province-beni-mellalkhenifra-region-morocco-north-africa-africa.jpg"
+    image: "/images/tours/ouzoud-falls-waterfall-near-the-middle-atlas-village-of-tanaghmeilt-azilal-province-beni-mellalkhenifra-region-morocco-north-africa-africa.webp"
 included: ["Private AC van with professional driver", "English-speaking guide", "All meals (breakfast, lunch, refreshments)", "Entrance fees to natural sites", "Guided exploration of mountains and town"]
 excluded: ["International flights and travel insurance", "Tips for guides and drivers (recommended 10%)", "Personal expenses and souvenirs", "Alcoholic beverages"]
 essentials:

@@ -34,7 +34,7 @@ export function getAllTours(): TourData[] {
         category: data.category || "General",
         duration: data.duration || "Contact for duration",
         price: data.price || "Price on request",
-        image: data.image || "/images/placeholder.jpg",
+        image: data.image || "/images/placeholder.webp",
         gallery: data.gallery || [],
         excerpt: data.excerpt || "Discover the magic of Morocco on this curated journey.",
         description: data.description || "",

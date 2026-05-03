@@ -14,6 +14,7 @@ import PhotoGallery from '@/components/PhotoGallery';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import BookingCard from '@/components/BookingCard';
 import MapWrapper from '@/components/MapWrapper';
+import SmartImage from '@/components/SmartImage';
 
 interface TourPageProps {
   params: Promise<{ slug: string }>;
@@ -48,7 +49,7 @@ export default async function TourPage({ params }: TourPageProps) {
   return (
     <div className="min-h-screen bg-canvas">
       <Navbar />
-      <article className="pt-24 pb-32">
+      <article className="pt-40 pb-32">
         {/* Title and Stats */}
         <div className="container mx-auto px-4 md:px-8 lg:px-20 mb-8">
           <Breadcrumbs items={[
@@ -269,7 +270,7 @@ export default async function TourPage({ params }: TourPageProps) {
               {relatedTours.map(t => (
                 <Link key={t.slug} href={`/tours/${t.slug}`} className="group block">
                   <div className="relative aspect-square rounded-airbnb-md overflow-hidden mb-3 shadow-sm">
-                    <Image 
+                    <SmartImage 
                       src={t.image} 
                       alt={t.title} 
                       fill 

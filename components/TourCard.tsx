@@ -4,9 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TourData } from '@/lib/tours-shared';
-import Image from 'next/image';
-
-import Skeleton from './Skeleton';
+import SmartImage from './SmartImage';
 
 interface TourCardProps {
   tour: TourData;
@@ -17,8 +15,6 @@ export default function TourCard({ tour, index }: TourCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showQuickLook, setShowQuickLook] = useState(false);
-  const [isImageLoading, setIsImageLoading] = useState(true);
-  const [isModalImageLoading, setIsModalImageLoading] = useState(true);
   
   // Hover Gallery Effect
   useEffect(() => {
@@ -59,7 +55,6 @@ export default function TourCard({ tour, index }: TourCardProps) {
         <div className="group cursor-pointer block relative">
           <Link href={`/tours/${tour.slug}`}>
             <div className="relative aspect-square overflow-hidden rounded-airbnb-md mb-3 shadow-sm group-hover:shadow-airbnb transition-all">
-              {isImageLoading && <Skeleton className="absolute inset-0 z-10" />}
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentImageIndex}
@@ -69,12 +64,11 @@ export default function TourCard({ tour, index }: TourCardProps) {
                   transition={{ duration: 0.5 }}
                   className="absolute inset-0"
                 >
-                  <Image 
+                  <SmartImage 
                     src={isHovered && tour.gallery && tour.gallery[currentImageIndex] ? tour.gallery[currentImageIndex] : tour.image} 
                     alt={tour.title}
                     fill
-                    onLoad={() => setIsImageLoading(false)}
-                    className={`object-cover transition-transform duration-700 ease-out ${isImageLoading ? 'opacity-0' : 'opacity-100'}`}
+                    className="object-cover transition-transform duration-700 ease-out"
                   />
                 </motion.div>
               </AnimatePresence>
@@ -120,9 +114,6 @@ export default function TourCard({ tour, index }: TourCardProps) {
               >
                 Quick View
               </button>
-
-
-
             </div>
           </Link>
           
@@ -174,13 +165,11 @@ export default function TourCard({ tour, index }: TourCardProps) {
               </button>
 
               <div className="w-full md:w-1/2 relative h-64 md:h-auto">
-                {isModalImageLoading && <Skeleton className="absolute inset-0 z-10" />}
-                <Image 
+                <SmartImage 
                   src={tour.image} 
                   alt={tour.title}
                   fill
-                  onLoad={() => setIsModalImageLoading(false)}
-                  className={`object-cover transition-opacity duration-500 ${isModalImageLoading ? 'opacity-0' : 'opacity-100'}`}
+                  className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent md:hidden" />
                 <div className="absolute bottom-6 left-6 text-white md:hidden">

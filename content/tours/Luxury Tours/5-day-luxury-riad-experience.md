@@ -3,33 +3,33 @@ title: "Imperial Elegance: 5-Day Luxury Riad Experience"
 category: "Luxury Tours"
 duration: "5 Days / 4 Nights"
 price: "From $1,450"
-image: "/images/tours/wide-shot-of-couple-being-served-tea-in-courtyard-of-luxury-hotel.jpg"
+image: "/images/tours/wide-shot-of-couple-being-served-tea-in-courtyard-of-luxury-hotel.webp"
 excerpt: "Experience Morocco's imperial cities in ultimate luxury with five-star riads and private guides."
 description: "Experience Morocco's imperial cities in ultimate luxury on this five-day tour featuring five-star riads, private guides, and gourmet cuisine. Stay in beautifully restored traditional riads in Fes and Marrakech, explore UNESCO-listed medinas with personalized guides, and enjoy spa treatments and wellness activities. This tour combines cultural immersion, historical significance, and premium comfort in one elegant journey."
 date: "2024-06-14"
-gallery: ["/images/tours/traveling-by-morocco-happy-young-woman-relaxing-in-traditional-riad-interior-in-medina.jpg", "/images/tours/traveling-by-morocco-happy-young-woman-in-hat-relaxing-in-traditional-riad-interior-in-medina.jpg", "/images/tours/close-up-shot-of-man-pouring-mint-tea-on-rooftop-deck-of-luxury-hotel.jpg", "/images/tours/wide-shot-of-couple-holding-hands-while-sitting-in-courtyard-of-luxury-hotel.jpg"]
+gallery: ["/images/tours/traveling-by-morocco-happy-young-woman-relaxing-in-traditional-riad-interior-in-medina.webp", "/images/tours/traveling-by-morocco-happy-young-woman-in-hat-relaxing-in-traditional-riad-interior-in-medina.webp", "/images/tours/close-up-shot-of-man-pouring-mint-tea-on-rooftop-deck-of-luxury-hotel.webp", "/images/tours/wide-shot-of-couple-holding-hands-while-sitting-in-courtyard-of-luxury-hotel.webp"]
 highlights: ["Five-star luxury riads in imperial cities", "Private guide and dedicated driver", "UNESCO-listed medinas with personalized exploration", "Gourmet cuisine prepared by professional chefs", "Spa treatments and wellness activities", "Authentic cultural interactions with premium comfort", "Personalized itinerary tailored to interests"]
 itinerary:
   - day: 1
     title: "Arrival in Fes"
     description: "Arrive in Fes. Private transfer to luxury riad. Settle in and relax. Spa treatment at riad. Overnight in luxury riad. Gourmet dinner."
-    image: "/images/tours/happy-asian-woman-in-turban-travels-in-sahara-desert-oasis-and-bedouin-village-at-the-background-adventure-and-life-experience-concept.jpg"
+    image: "/images/tours/happy-asian-woman-in-turban-travels-in-sahara-desert-oasis-and-bedouin-village-at-the-background-adventure-and-life-experience-concept.webp"
   - day: 2
     title: "Fes Exploration"
     description: "Full day exploring Fes medina with private guide. Visit tanneries, souks, and historical sites. Lunch at a local restaurant. Afternoon spa treatment. Overnight in luxury riad. Gourmet dinner."
-    image: "/images/tours/wide-shot-smiling-woman-relaxing-in-alcove-of-ornately-decorated-riad.jpg"
+    image: "/images/tours/wide-shot-smiling-woman-relaxing-in-alcove-of-ornately-decorated-riad.webp"
   - day: 3
     title: "Fes to Marrakech"
     description: "Private transfer to Marrakech through scenic routes. Arrive in the afternoon. Settle into luxury riad. Explore medina at leisure. Overnight in luxury riad. Gourmet dinner."
-    image: "/images/tours/wide-shot-of-mature-woman-working-on-laptop-in-riad-during-vacation.jpg"
+    image: "/images/tours/wide-shot-of-mature-woman-working-on-laptop-in-riad-during-vacation.webp"
   - day: 4
     title: "Marrakech Exploration"
     description: "Full day exploring Marrakech with private guide. Visit medina, Jemaa el-Fnaa, and cultural sites. Lunch at a local restaurant. Afternoon spa treatment or optional day trip. Overnight in luxury riad. Gourmet dinner."
-    image: "/images/tours/riad-in-marrakesh-medina.jpg"
+    image: "/images/tours/riad-in-marrakesh-medina.webp"
   - day: 5
     title: "Departure"
     description: "Leisurely morning at riad. Private transfer to airport for departure."
-    image: "/images/tours/a-luxury-camp-in-the-moroccan-sahara-desert-near-erg-chebbi.jpg"
+    image: "/images/tours/a-luxury-camp-in-the-moroccan-sahara-desert-near-erg-chebbi.webp"
 included: ["Luxury AC SUV with dedicated driver", "Private English-speaking guide", "All accommodations (4 nights in 5-star riads)", "All meals (breakfast, lunch, dinner) with gourmet options", "Selected beverages (non-alcoholic)", "Entrance fees to cultural sites", "Spa treatments and wellness activities", "Guided medina exploration", "Complimentary toiletries and premium amenities"]
 excluded: ["International flights and travel insurance", "Tips and gratuities (recommended 20%)", "Alcoholic beverages (available for purchase)", "Personal shopping and souvenirs", "Activities outside the agreed itinerary"]
 essentials:

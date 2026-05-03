@@ -16,7 +16,7 @@ const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
   display: "swap",
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["400", "700", "900"],
 });
 
 const playfair = Playfair_Display({
@@ -40,6 +40,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`scroll-smooth ${inter.variable} ${montserrat.variable} ${playfair.variable}`}>
+      <head>
+        <style dangerouslySetInnerHTML={{ __html: `
+          .preloader-critical {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background-color: #222222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        `}} />
+      </head>
       <body className="min-h-screen bg-canvas text-ink antialiased font-inter">
         <ModalProvider>
           <Preloader />

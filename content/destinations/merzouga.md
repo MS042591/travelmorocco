@@ -1,8 +1,8 @@
 ---
 title: "Merzouga"
-image: "/images/tours/sunset-on-the-dunes-and-camels-of-the-merzouga-desert-in-morocco.jpg"
+image: "/images/tours/sunset-on-the-dunes-and-camels-of-the-merzouga-desert-in-morocco.webp"
 description: "The gateway to the Sahara, where the towering golden dunes of Erg Chebbi meet the infinite desert sky."
-gallery: ["/images/tours/tourists-enjoying-with-camel-caravan-in-the-sahara-desert-erg-chebbi-merzouga-morocco.jpg", "/images/tours/selective-focus-silhouette-of-two-people-walking-on-the-sand-dunes-of-the-merzouga-desert-during-a-stunning-sunset-merzouga-morocco.jpg", "/images/tours/woman-caressing-a-camel-in-the-merzouga-desert.jpg", "/images/tours/young-couple-enjoying-the-sunset-in-dunes-romantic-traveler-walking-on-the-sahara-desert-adventure-travel-lifestyle-concept.jpg"]
+gallery: ["/images/tours/tourists-enjoying-with-camel-caravan-in-the-sahara-desert-erg-chebbi-merzouga-morocco.webp", "/images/tours/selective-focus-silhouette-of-two-people-walking-on-the-sand-dunes-of-the-merzouga-desert-during-a-stunning-sunset-merzouga-morocco.webp", "/images/tours/woman-caressing-a-camel-in-the-merzouga-desert.webp", "/images/tours/young-couple-enjoying-the-sunset-in-dunes-romantic-traveler-walking-on-the-sahara-desert-adventure-travel-lifestyle-concept.webp"]
 highlights: ["Erg Chebbi Dunes", "Overnight Luxury Camping", "Camel Trekking", "Stargazing"]
 ---
 

@@ -1,8 +1,8 @@
 ---
 title: "Sahara Desert"
 description: "Spend a night under the stars in the golden dunes of Merzouga."
-image: "/images/hero-sahara.jpg"
-gallery: ["/images/hero-sahara.jpg", "/images/sahara-sunset.png", "/images/atlas-village.png", "/images/riad-interior.png", "/images/tajine-spread.png"]
+image: "/images/hero-sahara.webp"
+gallery: ["/images/hero-sahara.webp", "/images/sahara-sunset.webp", "/images/atlas-village.webp", "/images/riad-interior.webp", "/images/tajine-spread.webp"]
 highlights:
   - "Camel trek at sunset"
   - "Luxury desert glamping"
