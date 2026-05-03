@@ -69,19 +69,7 @@ export default function TourListing({ initialTours }: TourListingProps) {
     });
 
     // Sorting logic
-    if (sortBy === 'Price: Low to High') {
-      result.sort((a, b) => {
-        const priceA = parseInt(a.price.replace(/[^\d]/g, ''));
-        const priceB = parseInt(b.price.replace(/[^\d]/g, ''));
-        return priceA - priceB;
-      });
-    } else if (sortBy === 'Price: High to Low') {
-      result.sort((a, b) => {
-        const priceA = parseInt(a.price.replace(/[^\d]/g, ''));
-        const priceB = parseInt(b.price.replace(/[^\d]/g, ''));
-        return priceB - priceA;
-      });
-    } else if (sortBy === 'Duration: Shortest') {
+    if (sortBy === 'Duration: Shortest') {
       result.sort((a, b) => parseInt(a.duration) - parseInt(b.duration));
     } else if (sortBy === 'Duration: Longest') {
       result.sort((a, b) => parseInt(b.duration) - parseInt(a.duration));
@@ -141,8 +129,6 @@ export default function TourListing({ initialTours }: TourListingProps) {
                 className="bg-white border border-hairline rounded-full px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-ink hover:border-ink transition-all cursor-pointer focus:outline-none"
               >
                 <option value="Featured">Featured</option>
-                <option value="Price: Low to High">Price: Low to High</option>
-                <option value="Price: High to Low">Price: High to Low</option>
                 <option value="Duration: Shortest">Duration: Shortest</option>
                 <option value="Duration: Longest">Duration: Longest</option>
               </select>
@@ -184,7 +170,7 @@ export default function TourListing({ initialTours }: TourListingProps) {
         ) : activeCategory === 'All' ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-4 max-w-[1400px] mx-auto">
             {filteredTours.map((tour, index) => (
-              <TourCard key={tour.slug} tour={tour} index={index} />
+              <TourCard key={tour.slug} tour={tour} index={index} priority={index < 6} />
             ))}
           </div>
         ) : (
@@ -204,7 +190,7 @@ export default function TourListing({ initialTours }: TourListingProps) {
                   </SectionReveal>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 px-4 max-w-[1400px] mx-auto">
                     {toursInCategory.map((tour, index) => (
-                      <TourCard key={tour.slug} tour={tour} index={index} />
+                      <TourCard key={tour.slug} tour={tour} index={index} priority={index < 3 && catIndex === 0} />
                     ))}
                   </div>
                   <SectionReveal delay={0.2}>

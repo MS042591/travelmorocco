@@ -1,11 +1,18 @@
-"use client";
-
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
 import SectionReveal from '@/components/SectionReveal';
 import Link from 'next/link';
+import { Metadata } from 'next';
+import { WhyHero, ValueItem, FeatureImage } from '@/components/WhyChooseUsClient';
+
+export const metadata: Metadata = {
+  title: 'Why Choose Us | Travel Morocco - The Standard of Excellence',
+  description: 'Slow travel, deep immersion, and Moroccan heritage. Discover why Authentic Moroccan Adventures is the preferred choice for discerning travelers.',
+  openGraph: {
+    title: 'Why Choose Us | Travel Morocco - The Standard of Excellence',
+    description: 'Slow travel, deep immersion, and Moroccan heritage. Discover why Authentic Moroccan Adventures is the preferred choice for discerning travelers.',
+  }
+};
 
 const features = [
   {
@@ -55,7 +62,7 @@ const values = [
     desc: "From landing to departure, our team is a WhatsApp message away.",
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
       </svg>
     )
   }
@@ -66,55 +73,14 @@ export default function WhyChooseUsPage() {
     <>
       <Navbar />
       <main className="bg-canvas">
-        {/* Editorial Hero */}
-        <section className="relative pt-48 pb-40 overflow-hidden border-b border-hairline">
-          <Image 
-            src="/images/tours/beautiful-sunset-in-the-jemaa-el-fna-square-in-the-city-of-marrakech-with-bustle-activity-street-food-market-lights-and-colorful-sky-picture-taken-during-travel-vacations-in-morocco.webp"
-            alt="Morocco Background"
-            fill
-            className="object-cover brightness-[0.35] grayscale-[0.2]"
-            priority
-          />
-          <div className="absolute inset-0 bg-black/40 z-[5]" />
-          <div className="container mx-auto px-4 md:px-8 lg:px-20 relative z-10 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="max-w-4xl mx-auto"
-            >
-              <span className="text-[10px] font-black uppercase tracking-[0.6em] text-primary mb-6 block">The Travel Morocco Standard</span>
-              <h1 className="text-5xl md:text-8xl font-bold !text-white tracking-tighter font-heading leading-none mb-10">
-                Crafting Legacies, <br />
-                <span className="!text-white/60 italic font-serif">Not Just Trips</span>
-              </h1>
-              <p className="text-white/80 text-xl md:text-2xl leading-relaxed max-w-2xl mx-auto font-medium">
-                Morocco is a symphony of history and hospitality. We are the conductors who ensure every note is played to perfection.
-              </p>
-            </motion.div>
-          </div>
-        </section>
+        <WhyHero />
 
         {/* Core Values Strip */}
         <section className="py-16 bg-surface-soft border-b border-hairline">
           <div className="container mx-auto px-4 md:px-8 lg:px-20">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
               {values.map((v, i) => (
-                <motion.div 
-                  key={v.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="flex gap-6 items-start"
-                >
-                  <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-primary shadow-sm border border-hairline flex-shrink-0">
-                    {v.icon}
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-ink text-lg mb-1">{v.title}</h3>
-                    <p className="text-sm text-muted leading-relaxed">{v.desc}</p>
-                  </div>
-                </motion.div>
+                <ValueItem key={v.title} v={v} i={i} />
               ))}
             </div>
           </div>
@@ -125,15 +91,7 @@ export default function WhyChooseUsPage() {
           {features.map((f, i) => (
             <div key={f.title} className="container mx-auto px-4 md:px-8 lg:px-20">
               <div className={`flex flex-col ${f.align === 'right' ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-16 lg:gap-24`}>
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.8 }}
-                  className="w-full lg:w-1/2 relative aspect-[4/3] md:aspect-video lg:aspect-[4/3] rounded-[3rem] overflow-hidden shadow-2xl"
-                >
-                  <Image src={f.image} alt={f.title} fill className="object-cover" />
-                </motion.div>
+                <FeatureImage image={f.image} title={f.title} />
                 
                 <div className="w-full lg:w-1/2 space-y-8">
                   <SectionReveal>

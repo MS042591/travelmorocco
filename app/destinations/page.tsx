@@ -3,6 +3,16 @@ import Footer from '@/components/Footer';
 import { getAllDestinations } from '@/lib/destinations';
 import DestinationCard from '@/components/DestinationCard';
 import SectionReveal from '@/components/SectionReveal';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Explore Morocco | Iconic Cities & Hidden Gems',
+  description: 'A curated guide to Morocco\'s most iconic destinations. From the blue streets of Chefchaouen to the red dunes of Merzouga.',
+  openGraph: {
+    title: 'Explore Morocco | Iconic Cities & Hidden Gems',
+    description: 'A curated guide to Morocco\'s most iconic destinations. From the blue streets of Chefchaouen to the red dunes of Merzouga.',
+  }
+};
 
 export default function DestinationsPage() {
   const destinations = getAllDestinations();
@@ -17,8 +27,8 @@ export default function DestinationsPage() {
             <SectionReveal>
               <span className="text-[10px] font-black uppercase tracking-[0.6em] text-primary mb-6 block">The Collection</span>
               <h1 className="text-5xl md:text-8xl font-bold text-ink tracking-tighter font-heading leading-none mb-10">
-                Morocco&apos;s <br />
-                <span className="text-muted-soft italic font-serif">Living Heritage</span>
+                Explore Morocco: <br />
+                <span className="text-muted-soft italic font-serif">Iconic Destinations</span>
               </h1>
               <div className="w-20 h-1 bg-primary/20 mx-auto mb-10 rounded-full" />
               <p className="text-muted text-xl md:text-2xl leading-relaxed max-w-2xl mx-auto font-medium">

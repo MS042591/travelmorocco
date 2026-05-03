@@ -28,15 +28,15 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://travelmorocco.co'),
-  title: "Authentic Moroccan Adventures | Custom Travel & Tours 2024",
-  description: "Discover and experience the magic of Morocco with Authentic Moroccan Adventures. Custom tours, desert treks, and imperial city experiences.",
+  title: "Authentic Moroccan Adventures | Premium Custom Travel & Tours 2026",
+  description: "Experience the soul of Morocco through curated, premium journeys. From luxury Sahara camps to hidden Medina gems, discover authentic adventures tailored for the modern explorer.",
   manifest: '/site.webmanifest',
   openGraph: {
     url: 'https://travelmorocco.co',
     type: 'website',
     siteName: 'Travel Morocco',
-    title: 'Authentic Moroccan Adventures | Custom Travel & Tours 2024',
-    description: 'Discover and experience the magic of Morocco with Authentic Moroccan Adventures. Custom tours, desert treks, and imperial city experiences.',
+    title: 'Authentic Moroccan Adventures | Premium Custom Travel & Tours 2026',
+    description: 'Experience the soul of Morocco through curated, premium journeys. From luxury Sahara camps to hidden Medina gems, discover authentic adventures tailored for the modern explorer.',
     images: [
       {
         url: '/images/hero-sahara-opt.jpg',
@@ -45,6 +45,24 @@ export const metadata: Metadata = {
         alt: 'Travel Morocco - Sahara Desert',
       },
     ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Authentic Moroccan Adventures | Premium Custom Travel & Tours 2026',
+    description: 'Experience the soul of Morocco through curated, premium journeys. From luxury Sahara camps to hidden Medina gems.',
+    images: ['/images/hero-sahara-opt.jpg'],
+  },
+  keywords: ["Morocco tours", "custom Morocco travel", "Sahara desert treks", "imperial city tours", "luxury Morocco travel", "private Morocco guide", "authentic Moroccan adventures", "Marrakech tours", "Fes guided tours"],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   icons: {
     icon: [
@@ -75,17 +93,55 @@ export default function RootLayout({
       <body className="min-h-screen bg-canvas text-ink antialiased font-inter">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "name": "Travel Morocco",
-            "url": "https://travelmorocco.co",
-            "logo": "https://travelmorocco.co/logo.webp",
-            "sameAs": [
-              "https://www.facebook.com/travelmorocco",
-              "https://www.instagram.com/travelmorocco"
-            ]
-          }) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Travel Morocco",
+              "url": "https://travelmorocco.co",
+              "logo": "https://travelmorocco.co/logo.webp",
+              "sameAs": [
+                "https://www.facebook.com/travelmorocco",
+                "https://www.instagram.com/travelmorocco"
+              ]
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "TravelAgency",
+              "name": "Authentic Moroccan Adventures",
+              "image": "https://travelmorocco.co/images/hero-sahara-opt.jpg",
+              "@id": "https://travelmorocco.co",
+              "url": "https://travelmorocco.co",
+              "telephone": "+212000000000",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Medina",
+                "addressLocality": "Marrakech",
+                "postalCode": "40000",
+                "addressCountry": "MA"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 31.6295,
+                "longitude": -7.9811
+              },
+              "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                  "Sunday"
+                ],
+                "opens": "00:00",
+                "closes": "23:59"
+              },
+              "priceRange": "$$$"
+            }
+          ]) }}
         />
         <ModalProvider>
           <PageTransition>

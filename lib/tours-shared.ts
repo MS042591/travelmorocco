@@ -1,3 +1,12 @@
+export interface Review {
+  author: string;
+  location: string;
+  rating: number;
+  date: string;
+  comment: string;
+  avatar?: string;
+}
+
 export interface TourData {
   slug: string;
   title: string;
@@ -23,6 +32,7 @@ export interface TourData {
   };
   faqs?: { q: string; a: string }[];
   route?: string[];
+  reviews?: Review[];
 }
 
 export const TOUR_CATEGORIES = [

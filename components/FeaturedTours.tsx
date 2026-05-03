@@ -31,7 +31,7 @@ export default function FeaturedTours({ tours, totalToursCount }: FeaturedToursP
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {tours.map((tour, index) => (
-            <TourCard key={tour.slug} tour={tour} index={index} />
+            <TourCard key={tour.slug} tour={tour} index={index} priority={index < 3} />
           ))}
         </div>
         </div>

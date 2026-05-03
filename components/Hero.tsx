@@ -13,10 +13,10 @@ const slides = [
 ];
 
 const destinations = [
-  { label: "Sahara Desert", image: "/images/tours/beautiful-sand-dunes-in-the-sahara-desert-morocco-at-sunset.webp", href: "/tours?category=Desert+Tours", count: 10 },
-  { label: "Marrakech", image: "/images/tours/marrakech-djemaa-el-fna-square.webp", href: "/tours?category=Tours+from+Marrakech", count: 8 },
-  { label: "Chefchaouen", image: "/images/tours/morocco-rif-area-chefchaouen-chaouen-town-the-blue-city.webp", href: "/tours?category=Tours+from+Tangier", count: 6 },
-  { label: "Imperial Cities", image: "/images/tours/the-royal-palace-golden-doors-fez-morocco.webp", href: "/tours?category=Tours+from+Casablanca", count: 8 },
+  { label: "Sahara Desert", image: "/images/tours/beautiful-sand-dunes-in-the-sahara-desert-morocco-at-sunset.webp", href: "/tours/category/desert-tours", count: 10 },
+  { label: "Marrakech", image: "/images/tours/marrakech-djemaa-el-fna-square.webp", href: "/tours/category/marrakech-tours", count: 8 },
+  { label: "Chefchaouen", image: "/images/tours/morocco-rif-area-chefchaouen-chaouen-town-the-blue-city.webp", href: "/tours/category/tangier-tours", count: 6 },
+  { label: "Imperial Cities", image: "/images/tours/the-royal-palace-golden-doors-fez-morocco.webp", href: "/tours/category/casablanca-tours", count: 8 },
 ];
 
 export default function Hero() {
@@ -66,8 +66,8 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 w-full max-w-5xl px-4 flex flex-col items-center text-center">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold !text-white mb-6 tracking-tight font-heading drop-shadow-xl max-w-4xl leading-[1.1]">
-          The Soul of Morocco, <br />
-          <span className="!text-white/90">Curated for You.</span>
+          Private Morocco Tours <br />
+          <span className="!text-white/90">& Custom Journeys.</span>
         </h1>
 
         <p className="text-white/75 text-base md:text-lg max-w-xl mb-10 leading-relaxed font-light">

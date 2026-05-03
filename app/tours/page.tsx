@@ -4,8 +4,13 @@ import { getAllTours } from '@/lib/tours';
 import TourListing from '@/components/TourListing';
 
 export const metadata = {
-  title: 'Luxury Morocco Tour Packages | Curated Journeys',
-  description: 'Experience the magic of Morocco with our curated collection of premium tours.',
+  title: 'Luxury Morocco Tour Packages | Premium Curated Journeys 2026',
+  description: 'Experience the magic of Morocco with our curated collection of premium tours. From desert expeditions to imperial city explorations.',
+  openGraph: {
+    title: 'Luxury Morocco Tour Packages | Premium Curated Journeys 2026',
+    description: 'Experience the magic of Morocco with our curated collection of premium tours. From desert expeditions to imperial city explorations.',
+    type: 'website',
+  },
 };
 
 export default function ToursPage() {
@@ -17,7 +22,7 @@ export default function ToursPage() {
       <main className="min-h-screen bg-canvas pt-40">
         <div className="container mx-auto px-4 md:px-8 lg:px-20 mb-12">
           <h1 className="text-3xl md:text-4xl font-bold text-ink mb-2 tracking-tight font-heading">
-            Moroccan Expeditions
+            Private Morocco Tours & Custom Expeditions
           </h1>
           <p className="text-sm text-muted">
             {allTours.length > 0 

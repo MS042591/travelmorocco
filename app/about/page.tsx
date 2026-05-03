@@ -1,45 +1,31 @@
-"use client";
-
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import SectionReveal from '@/components/SectionReveal';
+import AboutHero, { MissionCard } from '@/components/AboutClient';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Our Story | Travel Morocco - Authentic Heritage',
+  description: 'Discover the passion behind Travel Morocco. Founded in the alleys of Fes, we bridge the gap between curious travelers and the authentic soul of the Kingdom.',
+  openGraph: {
+    title: 'Our Story | Travel Morocco - Authentic Heritage',
+    description: 'Discover the passion behind Travel Morocco. Founded in the alleys of Fes, we bridge the gap between curious travelers and the authentic soul of the Kingdom.',
+  }
+};
 
 export default function AboutPage() {
+  const missionValues = [
+    { title: "Authenticity", desc: "We bypass the tourist traps to show you the real, unfiltered Morocco.", icon: "🏺" },
+    { title: "Expertise", desc: "Our local guides are storytellers with decades of ancestral knowledge.", icon: "📖" },
+    { title: "Impact", desc: "We support local artisans and communities to ensure sustainable tourism.", icon: "🤝" }
+  ];
+
   return (
     <>
       <Navbar />
       <main className="bg-canvas">
-        {/* Hero Section */}
-        <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
-          <Image 
-            src="/images/tours/architecture-moroccan-archway-with-ornamental-tiles-interior-design.webp" 
-            alt="About Travel Morocco Heritage" 
-            fill 
-            className="object-cover brightness-[0.6] grayscale-[0.1]"
-            priority
-          />
-          <div className="absolute inset-0 bg-black/40 z-[5]" />
-          <div className="relative z-10 text-center px-4">
-            <motion.span 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-[10px] font-black uppercase tracking-[0.4em] text-white mb-4 block"
-            >
-              Our Heritage
-            </motion.span>
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="text-5xl md:text-7xl font-bold !text-white tracking-tight font-heading"
-            >
-              The Soul of <br />
-              <span className="italic font-serif text-white/90 text-primary">Our Story</span>
-            </motion.h1>
-          </div>
-        </section>
+        <AboutHero />
 
         {/* Narrative Section */}
         <section className="py-24">
@@ -84,23 +70,8 @@ export default function AboutPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-              {[
-                { title: "Authenticity", desc: "We bypass the tourist traps to show you the real, unfiltered Morocco.", icon: "🏺" },
-                { title: "Expertise", desc: "Our local guides are storytellers with decades of ancestral knowledge.", icon: "📖" },
-                { title: "Impact", desc: "We support local artisans and communities to ensure sustainable tourism.", icon: "🤝" }
-              ].map((value, i) => (
-                <motion.div 
-                  key={value.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="bg-white p-10 rounded-[2.5rem] shadow-sm hover:shadow-xl transition-all group"
-                >
-                  <div className="text-4xl mb-6 group-hover:scale-110 transition-transform">{value.icon}</div>
-                  <h3 className="text-xl font-bold text-ink mb-4">{value.title}</h3>
-                  <p className="text-muted leading-relaxed">{value.desc}</p>
-                </motion.div>
+              {missionValues.map((value, i) => (
+                <MissionCard key={value.title} value={value} index={i} />
               ))}
             </div>
           </div>

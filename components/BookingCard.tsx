@@ -4,21 +4,19 @@ import { useState } from 'react';
 import TourBookingButton from './TourBookingButton';
 
 interface BookingCardProps {
-  price: string;
+  price?: string;
   tourTitle: string;
 }
 
-export default function BookingCard({ price, tourTitle }: BookingCardProps) {
+export default function BookingCard({ tourTitle }: BookingCardProps) {
   const [guests, setGuests] = useState(1);
-  const basePrice = parseInt(price.replace(/[^0-9]/g, '')) || 0;
-  const totalPrice = basePrice * guests;
 
   return (
     <div className="bg-white rounded-airbnb-md p-6 shadow-airbnb border border-hairline">
       <div className="flex justify-between items-end mb-6">
         <div>
-          <span className="text-xl font-bold text-ink">${basePrice}</span>
-          <span className="text-muted text-sm ml-1">per person</span>
+          <span className="text-xl font-bold text-ink">Personalized Route</span>
+          <span className="text-muted text-sm ml-1 block">Private tour experience</span>
         </div>
       </div>
       
@@ -34,14 +32,12 @@ export default function BookingCard({ price, tourTitle }: BookingCardProps) {
                 defaultValue={new Date().toISOString().split('T')[0]}
               />
             </div>
-            {/* Overlay to handle the click anywhere in the box */}
-            <div className="absolute inset-0 pointer-events-none" />
           </div>
           <div className="p-3 flex flex-col hover:bg-surface-soft transition-colors">
             <div className="flex justify-between items-center">
               <div className="flex flex-col">
-                <span className="text-[10px] font-extrabold uppercase text-ink">Guests</span>
-                <span className="text-sm text-ink font-medium">{guests} {guests === 1 ? 'guest' : 'guests'}</span>
+                <span className="text-[10px] font-extrabold uppercase text-ink">Travelers</span>
+                <span className="text-sm text-ink font-medium">{guests} {guests === 1 ? 'traveler' : 'travelers'}</span>
               </div>
               <div className="flex items-center gap-3">
                 <button 
@@ -64,20 +60,16 @@ export default function BookingCard({ price, tourTitle }: BookingCardProps) {
 
       <TourBookingButton tourTitle={tourTitle} />
       
-      <p className="text-center text-[12px] text-muted mt-4 font-medium italic">You won&apos;t be charged yet</p>
+      <p className="text-center text-[12px] text-muted mt-4 font-medium italic">Our experts will customize this journey for you</p>
       
       <div className="mt-6 pt-6 border-t border-hairline space-y-4">
-        <div className="flex justify-between text-ink text-sm">
-          <span className="underline">${basePrice} x {guests} {guests === 1 ? 'guest' : 'guests'}</span>
-          <span>${totalPrice}</span>
-        </div>
-        <div className="flex justify-between text-ink text-sm">
-          <span className="underline">Service fee</span>
-          <span>$0</span>
-        </div>
-        <div className="flex justify-between font-bold text-ink text-lg pt-4 border-t border-hairline">
-          <span>Total</span>
-          <span>${totalPrice}</span>
+        <div className="flex items-start gap-3 text-ink text-sm">
+          <div className="mt-1 w-4 h-4 flex-shrink-0">
+             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-full h-full fill-primary"><path d="m16 2a14 14 0 1 0 14 14 14.016 14.016 0 0 0 -14-14zm0 26a12 12 0 1 1 12-12 12.014 12.014 0 0 1 -12 12zm1-13h6a1 1 0 0 1 0 2h-7a1 1 0 0 1 -1-1v-8a1 1 0 0 1 2 0z"></path></svg>
+          </div>
+          <p className="text-xs text-muted leading-relaxed">
+            All itineraries are flexible and can be adapted to your interests and pace.
+          </p>
         </div>
       </div>
     </div>

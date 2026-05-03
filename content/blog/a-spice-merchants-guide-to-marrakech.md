@@ -3,6 +3,8 @@ title: "A Spice Merchant's Guide to Marrakech"
 date: "2024-05-15"
 excerpt: "Beyond the red walls and bustling souks lies a world of scent and color. Learn the secrets of Taliouine Saffron and the legendary Ras el Hanout from a local perspective."
 image: "/images/tours/panoramic-view-of-marrakesh-and-the-snow-capped-atlas-mountains-morocco.webp"
+category: "Culture"
+tags: ["Marrakech", "Culinary", "Souks"]
 ---
 
 Marrakech is a city that breathes through its spices. As you walk through the **Rahba Kedima** square, the air thickens with the scent of ground ginger, toasted cumin, and the sweet, heavy notes of orange blossom. To the uninitiated, the spice souks are a beautiful chaos; to the merchant, they are a library of Moroccan history.

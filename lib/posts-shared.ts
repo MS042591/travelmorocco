@@ -5,4 +5,6 @@ export interface PostData {
   excerpt: string;
   image: string;
   content: string;
+  category?: string;
+  tags?: string[];
 }

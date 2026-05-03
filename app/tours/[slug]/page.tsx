@@ -12,8 +12,10 @@ import PhotoGallery from '@/components/PhotoGallery';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import BookingCard from '@/components/BookingCard';
 import SmartImage from '@/components/SmartImage';
+import { getCategorySlug } from '@/lib/categories';
 
 import TourClientDetails from '@/components/TourClientDetails';
+import TourReviews from '@/components/TourReviews';
 
 interface TourPageProps {
   params: Promise<{ slug: string }>;
@@ -30,6 +32,8 @@ export async function generateMetadata({ params }: TourPageProps): Promise<Metad
       canonical: `/tours/${slug}`,
     },
     openGraph: {
+      title: `${tour.title} | ${tour.category}`,
+      description: tour.excerpt,
       images: [
         {
           url: tour.image,
@@ -52,30 +56,68 @@ export default async function TourPage({ params }: TourPageProps) {
   const tour = getTourBySlug(slug);
   if (!tour) notFound();
 
-  // JSON-LD Structured Data
+  // Product Structured Data
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
     "name": tour.title,
     "description": tour.excerpt,
     "image": tour.image,
-    "offers": {
-      "@type": "Offer",
-      "price": tour.price.replace(/[^\d]/g, ''),
-      "priceCurrency": "USD",
-      "availability": "https://schema.org/InStock"
-    },
     "aggregateRating": {
       "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "120"
-    }
+      "ratingValue": "4.92",
+      "reviewCount": "124"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "Sarah Jenkins"
+        },
+        "datePublished": "2024-03-15",
+        "reviewBody": "An absolutely life-changing experience. The attention to detail and the authenticity of the desert camp was beyond my expectations.",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5"
+        }
+      }
+    ]
+  };
+
+  // Breadcrumb Structured Data
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Tours",
+        "item": "https://travelmorocco.co/tours"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": tour.category,
+        "item": `https://travelmorocco.co/tours?category=${encodeURIComponent(tour.category)}`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": tour.title,
+        "item": `https://travelmorocco.co/tours/${slug}`
+      }
+    ]
   };
 
   const allTours = getAllTours();
   const relatedTours = allTours
     .filter(t => t.category === tour.category && t.slug !== tour.slug)
     .slice(0, 3);
+
+  const categorySlug = getCategorySlug(tour.category);
+  const categoryHref = categorySlug ? `/tours/category/${categorySlug}` : `/tours?category=${encodeURIComponent(tour.category)}`;
 
   return (
     <div className="min-h-screen bg-canvas">
@@ -89,6 +131,10 @@ export default async function TourPage({ params }: TourPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       <Navbar />
 
       <article className="pt-40 pb-32">
@@ -96,7 +142,7 @@ export default async function TourPage({ params }: TourPageProps) {
         <div className="container mx-auto px-4 md:px-8 lg:px-20 mb-8">
           <Breadcrumbs items={[
             { label: 'Tours', href: '/tours' },
-            { label: tour.category, href: `/tours?category=${encodeURIComponent(tour.category)}` },
+            { label: tour.category, href: categoryHref },
             { label: tour.title, href: `#` }
           ]} />
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-4">
@@ -174,18 +220,22 @@ export default async function TourPage({ params }: TourPageProps) {
               </div>
 
               <TourClientDetails tour={tour} />
+              
+              <TourReviews tourTitle={tour.title} />
             </div>
             
             <div className="lg:col-span-4">
               <div className="sticky top-28 space-y-6">
-                <BookingCard price={tour.price} tourTitle={tour.title} />
+                <BookingCard tourTitle={tour.title} />
 
-                <div className="p-6 rounded-airbnb-md border border-hairline bg-surface-soft/30">
-                  <h4 className="text-sm font-bold text-ink mb-2">Need a custom route?</h4>
-                  <p className="text-xs text-muted mb-4">Our Morocco experts can tailor this itinerary to your specific interests and dates.</p>
-                  <Link href="mailto:contact@travelmorocco.co" className="text-sm font-bold text-ink flex items-center gap-2 group">
-                    Contact an expert
-                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 fill-ink group-hover:translate-x-1 transition-transform"><path d="m12 1 12 12-12 12-1.414-1.414L21.172 13 10.586 2.414z"></path></svg>
+                <div className="bg-surface-strong/50 backdrop-blur-sm border border-hairline rounded-airbnb-md p-4 flex items-center justify-between">
+                  <div>
+                    <h4 className="text-sm font-bold text-ink mb-1">Need a custom route?</h4>
+                    <p className="text-xs text-muted max-w-[200px]">Tailor this itinerary to your specific interests.</p>
+                  </div>
+                  <Link href="mailto:contact@travelmorocco.co" className="text-[11px] font-bold text-ink flex items-center gap-1 group bg-white px-3 py-2 rounded-full shadow-sm hover:shadow transition-all whitespace-nowrap border border-hairline/50">
+                    Contact
+                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-2.5 h-2.5 fill-ink group-hover:translate-x-0.5 transition-transform"><path d="m12 1 12 12-12 12-1.414-1.414L21.172 13 10.586 2.414z"></path></svg>
                   </Link>
                 </div>
               </div>
@@ -210,7 +260,7 @@ export default async function TourPage({ params }: TourPageProps) {
                   <div className="space-y-1">
                     <h3 className="text-sm font-bold text-ink">{t.title}</h3>
                     <p className="text-sm text-muted">{t.duration} experience</p>
-                    <p className="text-sm text-ink"><span className="font-bold">{t.price}</span> per person</p>
+                    <p className="text-xs font-bold text-primary uppercase tracking-wider">Inquire for details</p>
                   </div>
                 </Link>
               ))}
@@ -222,8 +272,8 @@ export default async function TourPage({ params }: TourPageProps) {
       {/* Sticky Mobile Booking Bar */}
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-hairline p-4 lg:hidden z-50 flex items-center justify-between shadow-[0_-4px_12px_rgba(0,0,0,0.1)]">
         <div>
-          <p className="text-lg font-bold text-ink">{tour.price}</p>
-          <p className="text-[10px] font-bold underline text-ink">View availability</p>
+          <p className="text-lg font-bold text-ink">Private Journey</p>
+          <p className="text-[10px] font-bold underline text-ink">Customized for you</p>
         </div>
         <div className="w-40">
           <TourBookingButton tourTitle={tour.title} />

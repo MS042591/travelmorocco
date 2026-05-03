@@ -8,6 +8,11 @@ import SectionReveal from '@/components/SectionReveal';
 export const metadata = {
   title: 'Journal | Travel Morocco - Stories of the Kingdom',
   description: 'Deep dives into Moroccan culture, travel guides, and hidden gems from our local experts.',
+  openGraph: {
+    title: 'Journal | Travel Morocco - Stories of the Kingdom',
+    description: 'Deep dives into Moroccan culture, travel guides, and hidden gems from our local experts.',
+    type: 'website',
+  },
 };
 
 export default function BlogPage() {
@@ -25,8 +30,8 @@ export default function BlogPage() {
             <SectionReveal>
               <span className="text-[10px] font-black uppercase tracking-[0.6em] text-primary mb-6 block">The Journal</span>
               <h1 className="text-5xl md:text-8xl font-bold text-ink tracking-tighter font-heading leading-none mb-10">
-                Stories from <br />
-                <span className="text-muted-soft italic font-serif">The Kingdom</span>
+                The Morocco Journal: <br />
+                <span className="text-muted-soft italic font-serif">Travel Guides & Stories</span>
               </h1>
               <p className="text-muted text-xl md:text-2xl leading-relaxed max-w-2xl font-medium">
                 Deep dives into Moroccan culture, secret Riads, and the legends carved into the landscape.
@@ -44,6 +49,7 @@ export default function BlogPage() {
                       src={featured.image} 
                       alt={featured.title} 
                       fill 
+                      priority
                       className="object-cover group-hover:scale-105 transition-transform duration-[2s] ease-out"
                     />
                     <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
@@ -83,6 +89,7 @@ export default function BlogPage() {
                       src={post.image} 
                       alt={post.title} 
                       fill 
+                      priority={index < 2}
                       className="object-cover group-hover:scale-110 transition-transform duration-[1.5s] ease-out"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />

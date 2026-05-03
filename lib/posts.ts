@@ -32,6 +32,8 @@ export function getAllPosts(): PostData[] {
         excerpt: data.excerpt,
         image: fixPath(data.image),
         content,
+        category: data.category,
+        tags: data.tags,
       } as PostData;
     });
 
@@ -51,6 +53,8 @@ export function getPostBySlug(slug: string): PostData | null {
       excerpt: data.excerpt,
       image: fixPath(data.image),
       content,
+      category: data.category,
+      tags: data.tags,
     } as PostData;
   } catch (error) {
     return null;

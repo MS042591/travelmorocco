@@ -9,9 +9,10 @@ import SmartImage from './SmartImage';
 interface TourCardProps {
   tour: TourData;
   index: number;
+  priority?: boolean;
 }
 
-export default function TourCard({ tour, index }: TourCardProps) {
+export default function TourCard({ tour, index, priority = false }: TourCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [showQuickLook, setShowQuickLook] = useState(false);
   
@@ -43,12 +44,13 @@ export default function TourCard({ tour, index }: TourCardProps) {
         <div className="group cursor-pointer block relative">
           <Link href={`/tours/${tour.slug}`}>
               <div className="relative aspect-square overflow-hidden rounded-airbnb-md mb-3 shadow-sm group-hover:shadow-airbnb transition-all">
-                <SmartImage 
-                  src={tour.image} 
-                  alt={tour.title}
-                  fill
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                />
+                  <SmartImage 
+                    src={tour.image} 
+                    alt={tour.title}
+                    fill
+                    priority={priority}
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                  />
 
               {/* Badges */}
               <div className="absolute top-3 left-3 flex flex-col gap-2 z-20">
@@ -94,7 +96,7 @@ export default function TourCard({ tour, index }: TourCardProps) {
               <p className="text-sm text-muted">{tour.duration} experience</p>
               <p className="text-sm text-muted line-clamp-1">{tour.excerpt}</p>
               <div className="flex items-center justify-between mt-2 pt-2 border-t border-hairline/50">
-                <p className="text-sm text-ink"><span className="font-bold">{tour.price}</span> per person</p>
+                <p className="text-sm text-ink font-bold">Details & Booking</p>
                 <div className="flex gap-1.5">
                   <span className="px-2 py-0.5 bg-surface-soft text-[9px] font-bold text-muted-soft rounded uppercase tracking-tighter">Verified</span>
                   {tour.bestSeller && <span className="px-2 py-0.5 bg-primary/5 text-[9px] font-bold text-primary rounded uppercase tracking-tighter">Top Pick</span>}
@@ -153,7 +155,7 @@ export default function TourCard({ tour, index }: TourCardProps) {
                     </div>
                   </div>
                   <h2 className="text-3xl font-bold text-ink tracking-tight mb-2">{tour.title}</h2>
-                  <p className="text-muted font-medium">{tour.duration} • {tour.price} per person</p>
+                  <p className="text-muted font-medium">{tour.duration} experience</p>
                 </div>
 
                 <div className="space-y-8">

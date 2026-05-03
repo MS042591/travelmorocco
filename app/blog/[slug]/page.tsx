@@ -8,6 +8,8 @@ import Footer from '@/components/Footer';
 import ReactMarkdown from 'react-markdown';
 import ReadingProgress from '@/components/ReadingProgress';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import { getAllTours } from '@/lib/tours';
+import BlogRelatedTours from '@/components/BlogRelatedTours';
 
 interface PostPageProps {
   params: Promise<{ slug: string }>;
@@ -49,8 +51,50 @@ export default async function PostPage({ params }: PostPageProps) {
     notFound();
   }
 
+  // Breadcrumb Structured Data
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Journal",
+        "item": "https://travelmorocco.co/blog"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": post.title,
+        "item": `https://travelmorocco.co/blog/${slug}`
+      }
+    ]
+  };
+
+  // Find related tours based on tags or category
+  const allTours = getAllTours();
+  const relatedTours = allTours.filter(tour => {
+    // Match by category
+    const matchesCategory = post.category && tour.category.toLowerCase().includes(post.category.toLowerCase());
+    if (matchesCategory) return true;
+    
+    // Match by tags
+    if (post.tags) {
+      return post.tags.some(tag => 
+        tour.title.toLowerCase().includes(tag.toLowerCase()) || 
+        tour.excerpt.toLowerCase().includes(tag.toLowerCase()) ||
+        tour.category.toLowerCase().includes(tag.toLowerCase())
+      );
+    }
+    return false;
+  }).slice(0, 3);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       <Navbar />
       <ReadingProgress />
       <main className="bg-canvas">
@@ -127,6 +171,8 @@ export default async function PostPage({ params }: PostPageProps) {
                 Plan Your Journey
               </Link>
             </div>
+
+            <BlogRelatedTours tours={relatedTours} postTitle={post.title} />
           </div>
         </article>
       </main>
