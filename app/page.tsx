@@ -16,7 +16,7 @@ export default function Home() {
       <link 
         rel="preload" 
         as="image" 
-        href="/images/tours/sunset-on-the-dunes-and-camels-of-the-merzouga-desert-in-morocco.webp"
+        href="/images/hero-sahara-opt.png"
         fetchPriority="high"
       />
       <Navbar />

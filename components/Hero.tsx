@@ -5,7 +5,7 @@ import Link from 'next/link';
 import SmartImage from './SmartImage';
 
 const slides = [
-  { src: "/images/tours/sunset-on-the-dunes-and-camels-of-the-merzouga-desert-in-morocco.webp", alt: "Sahara Desert golden dunes" },
+  { src: "/images/hero-sahara-opt.png", alt: "Sahara Desert golden dunes" },
   { src: "/images/tours/blue-stairway-with-colourful-flowerpots.webp", alt: "Blue streets of Chefchaouen" },
   { src: "/images/tours/ait-benhaddou-kasbah-at-dawn-morocco.webp", alt: "Ancient Kasbah Ait Ben Haddou" },
   { src: "/images/tours/beautiful-sunset-in-the-jemaa-el-fna-square-in-the-city-of-marrakech-with-bustle-activity-street-food-market-lights-and-colorful-sky-picture-taken-during-travel-vacations-in-morocco.webp", alt: "Vibrant Marrakech market" },
@@ -50,6 +50,8 @@ export default function Hero() {
             alt={slide.alt}
             fill
             priority={index === 0}
+            data-fetchpriority={index === 0 ? "high" : "low"}
+            sizes="100vw"
             className="object-cover"
             style={{
               animation: index === current ? 'kenburns 6s ease-in-out forwards' : 'none',
@@ -109,6 +111,7 @@ export default function Hero() {
                   src={dest.image}
                   alt={dest.label}
                   fill
+                  sizes="(max-width: 768px) 45vw, 20vw"
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors duration-300"></div>
