@@ -14,6 +14,15 @@ function getRecursiveFiles(dir: string): string[] {
   return Array.prototype.concat(...files);
 }
 
+const BASE_PATH = '/travelmorocco';
+
+function fixPath(p: string): string {
+  if (!p) return p;
+  if (p.startsWith('http')) return p;
+  if (p.startsWith(BASE_PATH)) return p;
+  return `${BASE_PATH}${p.startsWith('/') ? '' : '/'}${p}`;
+}
+
 export function getAllTours(): TourData[] {
   if (!fs.existsSync(toursDirectory)) {
     return [];
@@ -34,8 +43,8 @@ export function getAllTours(): TourData[] {
         category: data.category || "General",
         duration: data.duration || "Contact for duration",
         price: data.price || "Price on request",
-        image: data.image || "/images/placeholder.webp",
-        gallery: data.gallery || [],
+        image: fixPath(data.image || "/images/placeholder.webp"),
+        gallery: (data.gallery || []).map((img: string) => fixPath(img)),
         excerpt: data.excerpt || "Discover the magic of Morocco on this curated journey.",
         description: data.description || "",
         date: data.date || "2024-01-01",
@@ -47,7 +56,7 @@ export function getAllTours(): TourData[] {
         excluded: data.excluded || [],
         essentials: data.essentials || null,
         faqs: data.faqs || [],
-        route: data.route || [],
+        route: (data.route || []).map((p: any) => ({ ...p, image: fixPath(p.image) })),
       } as TourData;
     });
 
@@ -74,8 +83,8 @@ export function getTourBySlug(slug: string): TourData | null {
       category: data.category,
       duration: data.duration,
       price: data.price,
-      image: data.image,
-      gallery: data.gallery || [],
+      image: fixPath(data.image),
+      gallery: (data.gallery || []).map((img: string) => fixPath(img)),
       excerpt: data.excerpt,
       description: data.description || "",
       date: data.date,
@@ -87,7 +96,7 @@ export function getTourBySlug(slug: string): TourData | null {
       excluded: data.excluded || [],
       essentials: data.essentials || null,
       faqs: data.faqs || [],
-      route: data.route || [],
+      route: (data.route || []).map((p: any) => ({ ...p, image: fixPath(p.image) })),
     } as TourData;
   } catch (error) {
     return null;

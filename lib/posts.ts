@@ -5,6 +5,15 @@ import { PostData } from './posts-shared';
 
 const postsDirectory = path.join(process.cwd(), 'content/blog');
 
+const BASE_PATH = '/travelmorocco';
+
+function fixPath(p: string): string {
+  if (!p) return p;
+  if (p.startsWith('http')) return p;
+  if (p.startsWith(BASE_PATH)) return p;
+  return `${BASE_PATH}${p.startsWith('/') ? '' : '/'}${p}`;
+}
+
 export function getAllPosts(): PostData[] {
   if (!fs.existsSync(postsDirectory)) {
     return [];
@@ -24,7 +33,7 @@ export function getAllPosts(): PostData[] {
         title: data.title,
         date: data.date,
         excerpt: data.excerpt,
-        image: data.image,
+        image: fixPath(data.image),
         content,
       } as PostData;
     });
@@ -43,7 +52,7 @@ export function getPostBySlug(slug: string): PostData | null {
       title: data.title,
       date: data.date,
       excerpt: data.excerpt,
-      image: data.image,
+      image: fixPath(data.image),
       content,
     } as PostData;
   } catch (error) {

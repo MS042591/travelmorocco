@@ -8,31 +8,31 @@ const items = [
   {
     title: "The Spirit of Craft",
     subtitle: "Hand-carved stories in every stone",
-    image: "/images/tours/architecture-moroccan-archway-with-ornamental-tiles-interior-design.webp",
+    image: "/travelmorocco/images/tours/architecture-moroccan-archway-with-ornamental-tiles-interior-design.webp",
     className: "md:col-span-2 md:row-span-2 aspect-square md:aspect-auto"
   },
   {
     title: "The Golden Pour",
     subtitle: "A tradition of hospitality",
-    image: "/images/tours/moroccan-man-preparing-maghrebi-mint-tea.webp",
+    image: "/travelmorocco/images/tours/moroccan-man-preparing-maghrebi-mint-tea.webp",
     className: "md:col-span-1 md:row-span-1 aspect-square"
   },
   {
     title: "Market Rhythms",
     subtitle: "The vibrant pulse of the souk",
-    image: "/images/tours/colorful-spices-and-herbs-on-display-in-the-souk.webp",
+    image: "/travelmorocco/images/tours/colorful-spices-and-herbs-on-display-in-the-souk.webp",
     className: "md:col-span-1 md:row-span-2 aspect-square md:aspect-auto"
   },
   {
     title: "Woven Dreams",
     subtitle: "Patterns of the Berber tribes",
-    image: "/images/tours/moroccan-handmade-carpets-and-rugs-in-marrakech.webp",
+    image: "/travelmorocco/images/tours/moroccan-handmade-carpets-and-rugs-in-marrakech.webp",
     className: "md:col-span-1 md:row-span-1 aspect-square"
   },
   {
     title: "Artisan Soul",
     subtitle: "Mastery in every detail",
-    image: "/images/tours/young-traveling-woman-visiting-a-copper-souvenir-handicraft-shop-in-marrakesh-morocco-travel-lifestyle-concept.webp",
+    image: "/travelmorocco/images/tours/young-traveling-woman-visiting-a-copper-souvenir-handicraft-shop-in-marrakesh-morocco-travel-lifestyle-concept.webp",
     className: "md:col-span-2 md:row-span-1 aspect-video md:aspect-auto"
   }
 ];

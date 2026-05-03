@@ -31,7 +31,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center group">
             <div className={`relative transition-all duration-500 group-hover:scale-105 ${scrolled ? 'h-12 w-48' : 'h-24 w-96'}`}>
               <Image 
-                src="/logo.webp" 
+                src="/travelmorocco/logo.webp" 
                 alt="Travel Morocco" 
                 fill
                 className={`object-contain transition-all duration-500 ${!isSolid ? 'brightness-0 invert' : ''}`}

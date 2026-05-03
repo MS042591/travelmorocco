@@ -86,6 +86,12 @@ export default async function TourPage({ params }: TourPageProps) {
 
   return (
     <div className="min-h-screen bg-canvas">
+      <link 
+        rel="preload" 
+        as="image" 
+        href={tour.image}
+        fetchPriority="high"
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

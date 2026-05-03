@@ -9,7 +9,7 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-1">
             <div className="relative h-10 w-40 mb-6">
               <Image 
-                src="/logo.webp" 
+                src="/travelmorocco/logo.webp" 
                 alt="Travel Morocco" 
                 fill
                 className="object-contain"

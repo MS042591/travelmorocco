@@ -13,6 +13,12 @@ export default function Home() {
 
   return (
     <>
+      <link 
+        rel="preload" 
+        as="image" 
+        href="/travelmorocco/images/tours/sunset-on-the-dunes-and-camels-of-the-merzouga-desert-in-morocco.webp"
+        fetchPriority="high"
+      />
       <Navbar />
       <main>
         <Hero />

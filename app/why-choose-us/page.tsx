@@ -12,21 +12,21 @@ const features = [
     tag: "Philosophy",
     title: "Slow Travel, Deep Immersion",
     desc: "We don&apos;t believe in rushed itineraries or &apos;checking boxes&apos;. Our journeys are designed to let you breathe, to sit for a third glass of mint tea, and to truly connect with the rhythm of Moroccan life.",
-    image: "/images/tours/moroccan-man-preparing-maghrebi-mint-tea.webp",
+    image: "/travelmorocco/images/tours/moroccan-man-preparing-maghrebi-mint-tea.webp",
     align: "left"
   },
   {
     tag: "Expertise",
     title: "Born in Marrakech, Vetted for Excellence",
     desc: "Our founders are Moroccans who have spent decades exploring every corner of the Kingdom. We personally stay at every Riad and vet every guide to ensure they meet our rigorous standards of hospitality and knowledge.",
-    image: "/images/tours/riad-in-marrakesh-medina.webp",
+    image: "/travelmorocco/images/tours/riad-in-marrakesh-medina.webp",
     align: "right"
   },
   {
     tag: "Access",
     title: "Beyond the Velvet Rope",
     desc: "Because of our deep local roots, we open doors that are closed to others. Private dinners in hidden palaces, workshops with master artisans, and exclusive desert camps far from the tourist trails.",
-    image: "/images/tours/architecture-moroccan-archway-with-ornamental-tiles-interior-design.webp",
+    image: "/travelmorocco/images/tours/architecture-moroccan-archway-with-ornamental-tiles-interior-design.webp",
     align: "left"
   }
 ];
@@ -69,7 +69,7 @@ export default function WhyChooseUsPage() {
         {/* Editorial Hero */}
         <section className="relative pt-48 pb-40 overflow-hidden border-b border-hairline">
           <Image 
-            src="/images/tours/beautiful-sunset-in-the-jemaa-el-fna-square-in-the-city-of-marrakech-with-bustle-activity-street-food-market-lights-and-colorful-sky-picture-taken-during-travel-vacations-in-morocco.webp"
+            src="/travelmorocco/images/tours/beautiful-sunset-in-the-jemaa-el-fna-square-in-the-city-of-marrakech-with-bustle-activity-street-food-market-lights-and-colorful-sky-picture-taken-during-travel-vacations-in-morocco.webp"
             alt="Morocco Background"
             fill
             className="object-cover brightness-[0.35] grayscale-[0.2]"

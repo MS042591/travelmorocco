@@ -54,7 +54,7 @@ export default function Preloader() {
               className="relative h-20 w-80"
             >
               <Image 
-                src="/logo.webp" 
+                src="/travelmorocco/logo.webp" 
                 alt="Travel Morocco" 
                 fill
                 className="object-contain brightness-0 invert"

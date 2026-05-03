@@ -7,7 +7,7 @@ export default function DestinationHero() {
   return (
     <section className="relative h-[80vh] flex items-center justify-center overflow-hidden border-b border-hairline">
       <Image 
-        src="/images/tours/panoramic-view-of-marrakesh-and-the-snow-capped-atlas-mountains-morocco.webp"
+        src="/travelmorocco/images/tours/panoramic-view-of-marrakesh-and-the-snow-capped-atlas-mountains-morocco.webp"
         alt="Morocco Destinations"
         fill
         className="object-cover brightness-[0.4] grayscale-[0.2]"

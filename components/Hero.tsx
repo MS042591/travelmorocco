@@ -5,18 +5,18 @@ import Link from 'next/link';
 import SmartImage from './SmartImage';
 
 const slides = [
-  { src: "/images/tours/sunset-on-the-dunes-and-camels-of-the-merzouga-desert-in-morocco.webp", alt: "Sahara Desert golden dunes" },
-  { src: "/images/tours/blue-stairway-with-colourful-flowerpots.webp", alt: "Blue streets of Chefchaouen" },
-  { src: "/images/tours/ait-benhaddou-kasbah-at-dawn-morocco.webp", alt: "Ancient Kasbah Ait Ben Haddou" },
-  { src: "/images/tours/beautiful-sunset-in-the-jemaa-el-fna-square-in-the-city-of-marrakech-with-bustle-activity-street-food-market-lights-and-colorful-sky-picture-taken-during-travel-vacations-in-morocco.webp", alt: "Vibrant Marrakech market" },
-  { src: "/images/tours/blue-wooden-rowboats-port-essaouira-harbor-morocco-north-africa.webp", alt: "Essaouira coastal harbour" },
+  { src: "/travelmorocco/images/tours/sunset-on-the-dunes-and-camels-of-the-merzouga-desert-in-morocco.webp", alt: "Sahara Desert golden dunes" },
+  { src: "/travelmorocco/images/tours/blue-stairway-with-colourful-flowerpots.webp", alt: "Blue streets of Chefchaouen" },
+  { src: "/travelmorocco/images/tours/ait-benhaddou-kasbah-at-dawn-morocco.webp", alt: "Ancient Kasbah Ait Ben Haddou" },
+  { src: "/travelmorocco/images/tours/beautiful-sunset-in-the-jemaa-el-fna-square-in-the-city-of-marrakech-with-bustle-activity-street-food-market-lights-and-colorful-sky-picture-taken-during-travel-vacations-in-morocco.webp", alt: "Vibrant Marrakech market" },
+  { src: "/travelmorocco/images/tours/blue-wooden-rowboats-port-essaouira-harbor-morocco-north-africa.webp", alt: "Essaouira coastal harbour" },
 ];
 
 const destinations = [
-  { label: "Sahara Desert", image: "/images/tours/beautiful-sand-dunes-in-the-sahara-desert-morocco-at-sunset.webp", href: "/tours?category=Desert+Tours", count: 10 },
-  { label: "Marrakech", image: "/images/tours/marrakech-djemaa-el-fna-square.webp", href: "/tours?category=Tours+from+Marrakech", count: 8 },
-  { label: "Chefchaouen", image: "/images/tours/morocco-rif-area-chefchaouen-chaouen-town-the-blue-city.webp", href: "/tours?category=Tours+from+Tangier", count: 6 },
-  { label: "Imperial Cities", image: "/images/tours/the-royal-palace-golden-doors-fez-morocco.webp", href: "/tours?category=Tours+from+Casablanca", count: 8 },
+  { label: "Sahara Desert", image: "/travelmorocco/images/tours/beautiful-sand-dunes-in-the-sahara-desert-morocco-at-sunset.webp", href: "/tours?category=Desert+Tours", count: 10 },
+  { label: "Marrakech", image: "/travelmorocco/images/tours/marrakech-djemaa-el-fna-square.webp", href: "/tours?category=Tours+from+Marrakech", count: 8 },
+  { label: "Chefchaouen", image: "/travelmorocco/images/tours/morocco-rif-area-chefchaouen-chaouen-town-the-blue-city.webp", href: "/tours?category=Tours+from+Tangier", count: 6 },
+  { label: "Imperial Cities", image: "/travelmorocco/images/tours/the-royal-palace-golden-doors-fez-morocco.webp", href: "/tours?category=Tours+from+Casablanca", count: 8 },
 ];
 
 export default function Hero() {
