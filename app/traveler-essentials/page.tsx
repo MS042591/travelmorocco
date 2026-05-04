@@ -10,6 +10,9 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: "Traveler's Essentials | Prepare for Morocco",
   description: 'Everything you need to know before you land. Packing lists, cultural etiquette, and practical logistics for your Moroccan journey.',
+  alternates: {
+    canonical: '/traveler-essentials',
+  },
 };
 
 export default function EssentialsPage() {

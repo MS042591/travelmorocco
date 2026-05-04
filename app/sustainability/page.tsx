@@ -6,6 +6,9 @@ import SectionReveal from '@/components/SectionReveal';
 export const metadata = {
   title: 'Sustainability & Impact | Travel Morocco',
   description: 'Our commitment to ethical travel, local empowerment, and environmental preservation in the Kingdom of Morocco.',
+  alternates: {
+    canonical: '/sustainability',
+  },
 };
 
 export default function SustainabilityPage() {

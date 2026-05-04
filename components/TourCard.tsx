@@ -135,9 +135,6 @@ export default function TourCard({ tour, index, priority = false }: TourCardProp
             <Link href={`/tours/${tour.slug}`}>
               <div className="flex justify-between items-start">
                 <h3 className="text-sm font-bold text-ink group-hover:underline line-clamp-1">{tour.title}</h3>
-                <div className="flex items-center space-x-1 text-sm text-ink">
-                  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 fill-ink"><path d="M15.094 1.579l-4.124 8.885-9.86 1.27a1 1 0 0 0-.542 1.736l7.293 6.565-1.965 9.752a1 1 0 0 0 1.483 1.061L16 25.951l8.625 4.918a1 1 0 0 0 1.482-1.06l-1.965-9.753 7.293-6.565a1 1 0 0 0-.542-1.736l-9.86-1.27-4.124-8.885a1 1 0 0 0-1.812 0z"></path></svg>
-                  <span>4.92</span>
                 </div>
               </div>
               <p className="text-sm text-muted">{tour.duration} experience</p>

@@ -9,7 +9,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Contact Us | Plan Your Custom Morocco Journey',
     description: 'Ready to start your adventure? Contact our Morocco travel experts for custom itineraries, private tours, and local insights.',
-  }
+  },
+  alternates: {
+    canonical: '/contact',
+  },
 };
 
 export default function ContactPage() {

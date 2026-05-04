@@ -13,7 +13,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Explore Morocco | Iconic Cities & Hidden Gems',
     description: 'A curated guide to Morocco\'s most iconic destinations. From the blue streets of Chefchaouen to the red dunes of Merzouga.',
-  }
+  },
+  alternates: {
+    canonical: 'https://travelmorocco.co/destinations/',
+  },
 };
 
 export default function DestinationsPage() {

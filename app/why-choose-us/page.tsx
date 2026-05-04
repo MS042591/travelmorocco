@@ -12,7 +12,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Why Choose Us | Travel Morocco - The Standard of Excellence',
     description: 'Slow travel, deep immersion, and Moroccan heritage. Discover why Authentic Moroccan Adventures is the preferred choice for discerning travelers.',
-  }
+  },
+  alternates: {
+    canonical: '/why-choose-us',
+  },
 };
 
 const features = [

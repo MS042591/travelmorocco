@@ -74,6 +74,9 @@ export const metadata: Metadata = {
       { url: '/icons/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
   },
+  alternates: {
+    canonical: 'https://travelmorocco.co/',
+  },
 };
 
 export const viewport = {
@@ -178,6 +181,21 @@ export default function RootLayout({
               "priceRange": "$$$"
             }
           ]) }}
+        />
+        {/* Security & Domain Consolidation Script */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
+                var isWww = window.location.hostname.startsWith('www.');
+                var isHttp = window.location.protocol === 'http:';
+                if (isWww || isHttp) {
+                  var newHost = window.location.hostname.replace('www.', '');
+                  window.location.replace('https://' + newHost + window.location.pathname + window.location.search);
+                }
+              }
+            `,
+          }}
         />
         <ModalProvider>
           <PageTransition>

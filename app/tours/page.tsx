@@ -12,6 +12,9 @@ export const metadata = {
     description: 'Experience the magic of Morocco with our curated collection of premium tours. From desert expeditions to imperial city explorations.',
     type: 'website',
   },
+  alternates: {
+    canonical: 'https://travelmorocco.co/tours/',
+  },
 };
 
 export default function ToursPage() {

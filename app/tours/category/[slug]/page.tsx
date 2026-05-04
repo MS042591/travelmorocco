@@ -27,7 +27,10 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
       title: metadata.title,
       description: metadata.description,
       images: [metadata.heroImage],
-    }
+    },
+    alternates: {
+      canonical: `/tours/category/${slug}`,
+    },
   };
 }
 

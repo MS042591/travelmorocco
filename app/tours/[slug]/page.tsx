@@ -25,7 +25,10 @@ interface TourPageProps {
 export async function generateMetadata({ params }: TourPageProps): Promise<Metadata> {
   const { slug } = await params;
   const tour = getTourBySlug(slug);
-  if (!tour) return { title: 'Tour Not Found' };
+  if (!tour) return { 
+    title: `Experience Not Found: ${slug} | Travel Morocco`,
+    description: `The requested Moroccan journey (${slug}) is currently unavailable. Explore our other curated Sahara desert tours and imperial city experiences.`
+  };
   return {
     title: `${tour.title} | ${tour.category}`,
     description: tour.excerpt,

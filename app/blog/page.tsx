@@ -12,7 +12,9 @@ export const metadata = {
   openGraph: {
     title: 'Journal | Travel Morocco - Stories of the Kingdom',
     description: 'Deep dives into Moroccan culture, travel guides, and hidden gems from our local experts.',
-    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://travelmorocco.co/blog/',
   },
 };
 

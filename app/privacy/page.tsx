@@ -35,7 +35,11 @@ export default function PrivacyPage() {
           <div className="max-w-4xl mx-auto bg-white p-12 md:p-20 rounded-[3rem] shadow-sm border border-hairline">
             <SectionReveal>
               <div className="prose prose-lg prose-ink max-w-none">
-                <p className="text-muted italic mb-12">Last Updated: May 2026</p>
+                <p className="text-muted italic mb-8">Last Updated: May 2026</p>
+                
+                <p className="text-xl text-ink font-medium leading-relaxed mb-12 border-l-4 border-primary pl-8 py-2">
+                  Your trust is the foundation of our hospitality. At Travel Morocco, we handle your personal data with the same care and respect we show our guests in the Kingdom. This policy outlines how we protect your journey&apos;s details.
+                </p>
                 
                 <h2 className="text-2xl font-bold text-ink mb-6 font-heading">1. Data Collection</h2>
                 <p className="text-muted mb-8 leading-relaxed">

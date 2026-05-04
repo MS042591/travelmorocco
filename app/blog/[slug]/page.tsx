@@ -22,7 +22,8 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 
   if (!post) {
     return {
-      title: 'Post Not Found',
+      title: `Journal Entry Not Found: ${slug} | Travel Morocco`,
+      description: `The requested story (${slug}) could not be found in our journal. Discover more Moroccan travel guides and cultural insights on our blog.`
     };
   }
 
@@ -33,6 +34,9 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
       title: post.title,
       description: post.excerpt,
       images: [post.image],
+    },
+    alternates: {
+      canonical: `/blog/${slug}`,
     },
   };
 }
@@ -72,6 +76,33 @@ export default async function PostPage({ params }: PostPageProps) {
     ]
   };
 
+  // BlogPosting Structured Data
+  const blogPostLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.excerpt,
+    "image": post.image,
+    "datePublished": post.date,
+    "author": {
+      "@type": "Organization",
+      "name": "Travel Morocco Curators",
+      "url": "https://travelmorocco.co"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Travel Morocco",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://travelmorocco.co/logo.webp"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://travelmorocco.co/blog/${slug}`
+    }
+  };
+
   // Find related tours based on tags or category
   const allTours = getAllTours();
   const relatedTours = allTours.filter(tour => {
@@ -92,6 +123,10 @@ export default async function PostPage({ params }: PostPageProps) {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}

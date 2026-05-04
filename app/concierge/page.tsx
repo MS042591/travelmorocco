@@ -9,6 +9,9 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Private Concierge & Custom Planning | Travel Morocco',
   description: 'Design your perfect, bespoke Moroccan journey. Our private concierge service handles everything from curated Riads to exclusive desert experiences.',
+  alternates: {
+    canonical: '/concierge',
+  },
 };
 
 export default function ConciergePage() {

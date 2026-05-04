@@ -79,12 +79,9 @@ export default function Navbar() {
                 priority
                 className="object-contain transition-all duration-500"
                 style={{
-                  height: scrolled ? "137%" : "100%",
-                  width: "100%",
-                  left: 0,
                   top: scrolled ? "-8px" : "0",
-                  right: 0,
-                  bottom: 0,
+                  transform: scrolled ? "scale(1.3)" : "scale(1)",
+                  transformOrigin: "left center",
                 }}
                 src="/new_logo.png"
                 fill

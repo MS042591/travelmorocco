@@ -37,12 +37,21 @@ export default function GalleryPage() {
 
         <div className="container mx-auto px-4 md:px-8 lg:px-20 py-32">
           {/* Gallery Header */}
-          <div className="max-w-3xl mb-24">
+          <div className="max-w-4xl mb-32">
             <SectionReveal>
               <h2 className="text-sm font-black uppercase tracking-[0.4em] text-primary mb-8">Curated Moments</h2>
-              <p className="text-muted text-xl md:text-2xl leading-relaxed font-medium">
-                Morocco is a sensory masterpiece. This lookbook is a tribute to the light of the desert, the blue of the medinas, and the timeless heritage of the Kingdom.
+              <p className="text-3xl md:text-5xl font-bold text-ink mb-10 tracking-tight font-heading leading-tight">
+                Morocco is a <span className="italic font-serif text-muted-soft">sensory masterpiece</span> of light and heritage.
               </p>
+              <div className="w-24 h-px bg-primary/30 mb-10" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-muted text-lg leading-relaxed font-medium">
+                <p>
+                  Every photograph in this collection is a tribute to the timeless rhythm of the Kingdom. From the specific, golden hue of the Sahara at dawn to the intricate geometry of a thousand-year-old Fes courtyard, we capture the moments that define the Moroccan experience.
+                </p>
+                <p>
+                  Our visual journey spans the snow-capped peaks of the High Atlas to the Atlantic breezes of Essaouira. These are not just images; they are windows into the soul of a land where tradition and modern elegance coexist in perfect, vibrant harmony.
+                </p>
+              </div>
             </SectionReveal>
           </div>
 

@@ -9,6 +9,9 @@ import UniversalHero from '@/components/UniversalHero';
 export const metadata: Metadata = {
   title: 'Testimonials | Traveler Stories & Reviews',
   description: 'Read first-hand accounts of journeys through Morocco. Our guests share their experiences of desert camps, mountain treks, and medina magic.',
+  alternates: {
+    canonical: '/testimonials',
+  },
 };
 
 export default function TestimonialsPage() {

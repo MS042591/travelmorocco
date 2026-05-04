@@ -11,7 +11,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Our Story | Travel Morocco - Authentic Heritage',
     description: 'Discover the passion behind Travel Morocco. Founded in the alleys of Fes, we bridge the gap between curious travelers and the authentic soul of the Kingdom.',
-  }
+  },
+  alternates: {
+    canonical: 'https://travelmorocco.co/about/',
+  },
 };
 
 export default function AboutPage() {

@@ -9,6 +9,9 @@ import MapClientWrapper from '@/components/MapClientWrapper';
 export const metadata: Metadata = {
   title: 'Discovery Map | Explore Morocco Interactively',
   description: 'Use our interactive map to discover key Moroccan destinations and plan your perfect journey from the Atlas to the Sahara.',
+  alternates: {
+    canonical: '/map',
+  },
 };
 
 export default function MapPage() {
@@ -47,22 +50,52 @@ export default function MapPage() {
           {/* Map Info Section */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-40 mb-32">
             <SectionReveal>
-              <h3 className="text-xl font-bold text-ink mb-4 font-heading">The Imperial North</h3>
-              <p className="text-muted text-sm leading-relaxed italic">
-                From the bustling port of Tangier to the blue-washed walls of Chefchaouen and the ancient labyrinth of Fes.
-              </p>
+              <div className="p-10 bg-white rounded-[3rem] border border-hairline shadow-sm h-full">
+                <h3 className="text-xl font-bold text-ink mb-6 font-heading flex items-center gap-3">
+                  <span className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xs">01</span>
+                  The Imperial North
+                </h3>
+                <p className="text-muted text-sm leading-relaxed mb-6">
+                  The gateway between Europe and Africa. From the cosmopolitan energy of Tangier to the spiritual heart of Fes, the North is defined by its deep history and the iconic blue-washed streets of the Rif Mountains.
+                </p>
+                <ul className="text-[10px] font-black uppercase tracking-widest text-primary/60 space-y-2">
+                  <li>• Chefchaouen</li>
+                  <li>• Fes Medina</li>
+                  <li>• Volubilis Ruins</li>
+                </ul>
+              </div>
             </SectionReveal>
             <SectionReveal delay={0.1}>
-              <h3 className="text-xl font-bold text-ink mb-4 font-heading">The Heart & Coast</h3>
-              <p className="text-muted text-sm leading-relaxed italic">
-                The cosmopolitan Casablanca, the political Rabat, the vibrant Marrakech, and the windy Essaouira.
-              </p>
+              <div className="p-10 bg-white rounded-[3rem] border border-hairline shadow-sm h-full">
+                <h3 className="text-xl font-bold text-ink mb-6 font-heading flex items-center gap-3">
+                  <span className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xs">02</span>
+                  The Heart & Coast
+                </h3>
+                <p className="text-muted text-sm leading-relaxed mb-6">
+                  Where the vibrant energy of Marrakech meets the Atlantic breeze. This region blends the artistic soul of Essaouira with the modern leadership of Casablanca and Rabat, offering a perfect balance of heritage and comfort.
+                </p>
+                <ul className="text-[10px] font-black uppercase tracking-widest text-primary/60 space-y-2">
+                  <li>• Marrakech Jemaa el-Fna</li>
+                  <li>• Essaouira Port</li>
+                  <li>• Hassan II Mosque</li>
+                </ul>
+              </div>
             </SectionReveal>
             <SectionReveal delay={0.2}>
-              <h3 className="text-xl font-bold text-ink mb-4 font-heading">The Deep South</h3>
-              <p className="text-muted text-sm leading-relaxed italic">
-                The cinematic Ouarzazate, the UNESCO Kasbahs, and the legendary golden dunes of Merzouga and Zagora.
-              </p>
+              <div className="p-10 bg-white rounded-[3rem] border border-hairline shadow-sm h-full">
+                <h3 className="text-xl font-bold text-ink mb-6 font-heading flex items-center gap-3">
+                  <span className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xs">03</span>
+                  The Deep South
+                </h3>
+                <p className="text-muted text-sm leading-relaxed mb-6">
+                  The cinematic landscapes of the Sahara and the Draa Valley. Home to the legendary golden dunes of Merzouga and the ancient mud-brick Kasbahs that have stood as sentinels of the desert for centuries.
+                </p>
+                <ul className="text-[10px] font-black uppercase tracking-widest text-primary/60 space-y-2">
+                  <li>• Erg Chebbi Dunes</li>
+                  <li>• Ait Benhaddou</li>
+                  <li>• Skoura Palmaries</li>
+                </ul>
+              </div>
             </SectionReveal>
           </div>
 
