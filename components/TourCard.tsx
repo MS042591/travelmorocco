@@ -76,6 +76,8 @@ export default function TourCard({ tour, index, priority = false }: TourCardProp
                           src={src} 
                           alt={`${tour.title} ${i + 1}`}
                           fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          quality={65}
                           priority={priority && i === 0}
                           className="object-cover transition-transform duration-700 ease-out group-hover/card:scale-105"
                         />

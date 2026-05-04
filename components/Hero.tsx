@@ -50,7 +50,8 @@ export default function Hero() {
             alt={slide.alt}
             fill
             priority={index === 0}
-            data-fetchpriority={index === 0 ? "high" : "low"}
+            fetchPriority={index === 0 ? "high" : "low"}
+            quality={70}
             sizes="100vw"
             className="object-cover"
             style={{
@@ -101,7 +102,7 @@ export default function Hero() {
       <div className="absolute bottom-0 left-0 right-0 z-10">
         <div className="container mx-auto px-4 md:px-8 lg:px-20 pb-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-            {destinations.map((dest) => (
+            {destinations.map((dest, idx) => (
               <Link
                 key={dest.label}
                 href={dest.href}
@@ -111,7 +112,10 @@ export default function Hero() {
                   src={dest.image}
                   alt={dest.label}
                   fill
-                  sizes="(max-width: 768px) 45vw, 20vw"
+                  priority={idx < 2}
+                  fetchPriority={idx < 2 ? "high" : "auto"}
+                  quality={65}
+                  sizes="(max-width: 768px) 50vw, 25vw"
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors duration-300"></div>

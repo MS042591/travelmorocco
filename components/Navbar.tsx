@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useModal } from "@/lib/ModalContext";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import SearchOverlay from "./SearchOverlay";
+import dynamic from "next/dynamic";
+const SearchOverlay = dynamic(() => import("./SearchOverlay"), { ssr: false });
 import Image from "next/image";
 
 export default function Navbar() {
@@ -85,6 +86,8 @@ export default function Navbar() {
                 }}
                 src="/new_logo.png"
                 fill
+                sizes="(max-width: 768px) 200px, 400px"
+                quality={85}
               />
             </div>
           </Link>
