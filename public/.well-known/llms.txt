@@ -1,0 +1,11 @@
+# Travel Morocco AI Overview
+
+Travel Morocco is a premium travel agency offering curated, luxury tours and travel experiences across Morocco.
+
+## Site Structure
+
+- **Homepage**: `/`
+- **Destinations**: `/destinations/`
+- **Tours**: `/tours/`
+
+This website contains detailed tour itineraries, destination guides, and an interactive Concierge Trip Planner. 

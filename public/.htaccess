@@ -81,3 +81,13 @@
     RewriteCond %{REQUEST_FILENAME}.html -f
     RewriteRule ^(.*)$ $1.html [L]
 </IfModule>
+
+# ------------------------------------------------------------------------------
+# | AI Agent Discovery (Link Headers)                                          |
+# ------------------------------------------------------------------------------
+<IfModule mod_headers.c>
+    # Add Link header for AI Agent Discovery on the homepage
+    <FilesMatch "^index\.html$">
+        Header add Link "</.well-known/llms.txt>; rel=\"service-desc\""
+    </FilesMatch>
+</IfModule>

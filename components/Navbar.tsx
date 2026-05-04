@@ -36,7 +36,7 @@ export default function Navbar() {
                 alt="Travel Morocco" 
                 fill
                 sizes="(max-width: 768px) 150px, 200px"
-                className={`object-contain transition-all duration-500 ${!isSolid ? 'brightness-0 invert' : ''}`}
+                className={`object-contain transition-all duration-500 ${isSolid ? 'mix-blend-multiply' : 'invert mix-blend-screen opacity-90'}`}
               />
             </div>
           </Link>

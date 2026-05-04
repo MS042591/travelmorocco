@@ -13,7 +13,7 @@ export default function Footer() {
                 alt="Travel Morocco" 
                 fill
                 sizes="(max-width: 768px) 150px, 200px"
-                className="object-contain"
+                className="object-contain mix-blend-multiply"
               />
             </div>
             <p className="text-sm text-ink/70 max-w-xs">
