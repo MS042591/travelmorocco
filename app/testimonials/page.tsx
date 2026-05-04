@@ -1,9 +1,10 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import TestimonialsHero from '@/components/TestimonialsHero';
 import SectionReveal from '@/components/SectionReveal';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Metadata } from 'next';
+import UniversalHero from '@/components/UniversalHero';
 
 export const metadata: Metadata = {
   title: 'Testimonials | Traveler Stories & Reviews',
@@ -48,7 +49,11 @@ export default function TestimonialsPage() {
     <>
       <Navbar />
       <main className="bg-canvas">
-        <TestimonialsHero />
+        <UniversalHero 
+          subtitle="Guest Stories"
+          title="Voices of Morocco"
+          image="/images/tours/beautiful-tourist-couple-smiling-and-taking-photo-selfie-with-cityscape-of-essaouira-a-unesco-world-heritage-site-in-morocco-north-africa.webp"
+        />
 
         <div className="container mx-auto px-4 md:px-8 lg:px-20 py-32">
           {/* Intro Section */}
@@ -112,8 +117,8 @@ export default function TestimonialsPage() {
               <h2 className="text-3xl md:text-5xl font-bold text-ink mb-10 font-heading">Be our next story.</h2>
               <p className="text-muted text-lg mb-12 italic max-w-xl mx-auto">Your Moroccan adventure is waiting to be written. Let&apos;s start the first chapter today.</p>
               <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6">
-                <a href="/tours" className="text-[11px] font-black uppercase tracking-[0.3em] bg-ink text-white px-10 py-5 rounded-full hover:bg-primary transition-all shadow-xl">Browse Journeys</a>
-                <a href="/contact" className="text-[11px] font-black uppercase tracking-[0.3em] bg-white text-ink border border-hairline px-10 py-5 rounded-full hover:bg-canvas transition-all">Contact Us</a>
+                <Link href="/tours" className="text-[11px] font-black uppercase tracking-[0.3em] bg-ink text-white px-10 py-5 rounded-full hover:bg-primary transition-all shadow-xl">Browse Journeys</Link>
+                <Link href="/contact" className="text-[11px] font-black uppercase tracking-[0.3em] bg-white text-ink border border-hairline px-10 py-5 rounded-full hover:bg-canvas transition-all">Contact Us</Link>
               </div>
             </SectionReveal>
           </div>

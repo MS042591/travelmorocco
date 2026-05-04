@@ -1,9 +1,10 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import MapHero from '@/components/MapHero';
-import DiscoveryMap from '@/components/DiscoveryMap';
 import SectionReveal from '@/components/SectionReveal';
 import { Metadata } from 'next';
+import UniversalHero from '@/components/UniversalHero';
+import Link from 'next/link';
+import MapClientWrapper from '@/components/MapClientWrapper';
 
 export const metadata: Metadata = {
   title: 'Discovery Map | Explore Morocco Interactively',
@@ -15,7 +16,11 @@ export default function MapPage() {
     <>
       <Navbar />
       <main className="bg-canvas">
-        <MapHero />
+        <UniversalHero 
+          subtitle="Spatial Discovery"
+          title="The Discovery Map"
+          image="/images/tours/high-view-of-old-city-medina-in-fez-morocco.webp"
+        />
 
         <div className="container mx-auto px-4 md:px-8 lg:px-20 py-32">
           {/* Page Introduction */}
@@ -36,7 +41,7 @@ export default function MapPage() {
 
           {/* Interactive Map Component */}
           <SectionReveal>
-            <DiscoveryMap />
+            <MapClientWrapper />
           </SectionReveal>
 
           {/* Map Info Section */}
@@ -66,9 +71,9 @@ export default function MapPage() {
             <div className="bg-ink p-20 rounded-[5rem] text-center">
               <h2 className="text-3xl md:text-5xl font-bold text-white mb-10 font-heading tracking-tight">Need help mapping your <br /><span className="italic font-serif text-primary">ideal route?</span></h2>
               <p className="text-white/60 mb-12 max-w-lg mx-auto italic font-medium leading-relaxed">Our curators specialize in optimizing routes to maximize discovery and minimize travel time.</p>
-              <a href="/concierge" className="text-[11px] font-black uppercase tracking-[0.3em] bg-primary text-white px-10 py-5 rounded-full hover:scale-105 transition-all shadow-2xl inline-block">
+              <Link href="/concierge" className="text-[11px] font-black uppercase tracking-[0.3em] bg-primary text-white px-10 py-5 rounded-full hover:scale-105 transition-all shadow-2xl inline-block">
                 Consult a Curator
-              </a>
+              </Link>
             </div>
           </SectionReveal>
         </div>

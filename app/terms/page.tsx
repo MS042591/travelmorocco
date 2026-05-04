@@ -1,8 +1,8 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SectionReveal from '@/components/SectionReveal';
-import Image from 'next/image';
 import { Metadata } from 'next';
+import UniversalHero from '@/components/UniversalHero';
 
 export const metadata: Metadata = {
   title: 'Terms & Conditions | Travel Morocco',
@@ -14,22 +14,11 @@ export default function TermsPage() {
     <>
       <Navbar />
       <main className="bg-canvas">
-        {/* Simple Legal Hero */}
-        <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
-          <Image 
-            src="/images/tours/a-stunning-mosque-in-koutoubia.webp" 
-            alt="Terms & Conditions" 
-            fill 
-            className="object-cover brightness-[0.6] grayscale-[0.1]"
-            priority
-          />
-          <div className="absolute inset-0 bg-black/40 z-[5]" />
-          <div className="relative z-10 text-center px-4">
-            <h1 className="text-5xl md:text-7xl font-bold !text-white tracking-tight font-heading">
-              Terms & <span className="italic font-serif text-white/90 text-primary">Conditions</span>
-            </h1>
-          </div>
-        </section>
+        <UniversalHero 
+          title="Terms & Conditions"
+          subtitle="Legal Framework"
+          image="/images/tours/a-stunning-mosque-in-koutoubia.webp"
+        />
 
         <div className="container mx-auto px-4 md:px-8 lg:px-20 py-24">
           <div className="max-w-4xl mx-auto bg-white p-12 md:p-20 rounded-[3rem] shadow-sm border border-hairline">
@@ -39,7 +28,7 @@ export default function TermsPage() {
                 
                 <h2 className="text-2xl font-bold text-ink mb-6 font-heading">1. Introduction</h2>
                 <p className="text-muted mb-8 leading-relaxed">
-                  These Terms and Conditions govern the relationship between Travel Morocco ("we", "us", "our") and the traveler ("you", "your"). By booking a tour with us, you agree to be bound by these terms.
+                  These Terms and Conditions govern the relationship between Travel Morocco (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) and the traveler (&quot;you&quot;, &quot;your&quot;). By booking a tour with us, you agree to be bound by these terms.
                 </p>
 
                 <h2 className="text-2xl font-bold text-ink mb-6 font-heading">2. Booking & Deposit</h2>
@@ -66,7 +55,7 @@ export default function TermsPage() {
 
                 <h2 className="text-2xl font-bold text-ink mb-6 font-heading">6. Force Majeure</h2>
                 <p className="text-muted mb-8 leading-relaxed">
-                  We are not responsible for changes or cancellations caused by "Force Majeure" events, including but not limited to war, threat of war, riot, civil strife, industrial dispute, terrorist activity, natural or nuclear disaster, fire, or adverse weather conditions.
+                  We are not responsible for changes or cancellations caused by &quot;Force Majeure&quot; events, including but not limited to war, threat of war, riot, civil strife, industrial dispute, terrorist activity, natural or nuclear disaster, fire, or adverse weather conditions.
                 </p>
               </div>
             </SectionReveal>

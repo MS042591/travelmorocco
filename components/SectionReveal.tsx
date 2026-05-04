@@ -7,11 +7,12 @@ interface SectionRevealProps {
   children: ReactNode;
   delay?: number;
   width?: "fit-content" | "100%";
+  className?: string;
 }
 
-export default function SectionReveal({ children, delay = 0, width = "100%" }: SectionRevealProps) {
+export default function SectionReveal({ children, delay = 0, width = "100%", className = "" }: SectionRevealProps) {
   return (
-    <div style={{ position: "relative", width, overflow: "visible" }}>
+    <div className={className} style={{ position: "relative", width, overflow: "visible" }}>
       <motion.div
         variants={{
           hidden: { opacity: 0, y: 30, scale: 0.98 },

@@ -4,6 +4,7 @@ import "./globals.css";
 import { ModalProvider } from "@/lib/ModalContext";
 import ModalWrapper from "@/components/ModalWrapper";
 import PageTransition from "@/components/PageTransition";
+import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -87,33 +88,33 @@ export default function RootLayout({
   return (
     <html lang="en" className={`scroll-smooth ${inter.variable} ${montserrat.variable} ${playfair.variable}`}>
       <head>
-        {/* Google Tag Manager */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KH8SHDFN');`,
-          }}
-        />
-        {/* End Google Tag Manager */}
-        {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHLJ7BD0LH"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-BHLJ7BD0LH');
-            `
-          }}
-        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className="min-h-screen bg-canvas text-ink antialiased font-inter">
+        {/* Google Tag Manager */}
+        <Script id="gtm-script" strategy="afterInteractive">
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-KH8SHDFN');`}
+        </Script>
+
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-BHLJ7BD0LH"
+          strategy="afterInteractive"
+        />
+        <Script id="ga-script" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-BHLJ7BD0LH');
+          `}
+        </Script>
+
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
@@ -124,8 +125,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
         {/* End Google Tag Manager (noscript) */}
-        <script
+        <Script
+          id="ld-json"
           type="application/ld+json"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify([
             {
               "@context": "https://schema.org",

@@ -1,8 +1,9 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import GalleryHero from '@/components/GalleryHero';
+import UniversalHero from '@/components/UniversalHero';
 import SectionReveal from '@/components/SectionReveal';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -28,7 +29,11 @@ export default function GalleryPage() {
     <>
       <Navbar />
       <main className="bg-canvas">
-        <GalleryHero />
+        <UniversalHero 
+          subtitle="A Visual Journey"
+          title="The Morocco Lookbook"
+          image="/images/tours/a-young-caucasian-woman-in-a-long-skirt-shirt-and-straw-hat-standing-on-top-of-a-sand-dune-and-looks-towards-the-sunrise-sunrise-in-the-merzouga-sahara-desert.webp"
+        />
 
         <div className="container mx-auto px-4 md:px-8 lg:px-20 py-32">
           {/* Gallery Header */}
@@ -70,9 +75,9 @@ export default function GalleryPage() {
                 Photos can only capture a fraction of the magic. The scent of orange blossom in a riad courtyard, the sound of the call to prayer, and the warmth of the Sahara sun are waiting for you.
               </p>
               <div className="flex justify-center">
-                <a href="/tours" className="text-[11px] font-black uppercase tracking-[0.3em] bg-ink text-white px-10 py-5 rounded-full hover:bg-primary transition-all hover:scale-105 shadow-xl">
+                <Link href="/tours" className="text-[11px] font-black uppercase tracking-[0.3em] bg-ink text-white px-10 py-5 rounded-full hover:bg-primary transition-all hover:scale-105 shadow-xl">
                   Explore our Journeys
-                </a>
+                </Link>
               </div>
             </SectionReveal>
           </div>
