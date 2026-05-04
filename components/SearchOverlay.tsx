@@ -3,8 +3,14 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { getSearchResults } from '@/lib/actions';
+import { performSearch, SearchData } from '@/lib/actions';
 import Image from 'next/image';
+
+declare global {
+  interface Window {
+    __SEARCH_INDEX__?: SearchData;
+  }
+}
 
 interface SearchOverlayProps {
   isOpen: boolean;
@@ -29,12 +35,15 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
 
   // Real-time search logic
   useEffect(() => {
-    const timer = setTimeout(async () => {
+    const timer = setTimeout(() => {
       if (query.length >= 2) {
         setIsSearching(true);
         try {
-          const data = await getSearchResults(query);
-          setResults(data);
+          const searchData = window.__SEARCH_INDEX__;
+          if (searchData) {
+            const data = performSearch(query, searchData);
+            setResults(data);
+          }
         } catch (error) {
           console.error("Search failed:", error);
         } finally {

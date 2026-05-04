@@ -5,6 +5,7 @@ import { ModalProvider } from "@/lib/ModalContext";
 import ModalWrapper from "@/components/ModalWrapper";
 import PageTransition from "@/components/PageTransition";
 import Script from "next/script";
+import { getSearchIndex } from "@/lib/actions";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -88,6 +89,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const searchIndex = getSearchIndex();
+
   return (
     <html lang="en" className={`scroll-smooth ${inter.variable} ${montserrat.variable} ${playfair.variable}`}>
       <head>
@@ -186,6 +189,7 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
+              window.__SEARCH_INDEX__ = ${JSON.stringify(searchIndex)};
               if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
                 var isWww = window.location.hostname.startsWith('www.');
                 var isHttp = window.location.protocol === 'http:';
