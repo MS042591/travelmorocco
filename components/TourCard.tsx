@@ -34,21 +34,33 @@ export default function TourCard({ tour, index, priority = false }: TourCardProp
   useEffect(() => {
     setBookingCount(Math.floor(Math.random() * 5) + 1);
   }, []);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setMousePosition({ x, y });
+  };
+
   return (
     <>
       <motion.div
         initial={{ opacity: 0, y: 30, scale: 0.95 }}
         whileInView={{ opacity: 1, y: 0, scale: 1 }}
-        whileHover={{ y: -8, scale: 1.02 }}
         viewport={{ once: true, margin: "-50px" }}
-        transition={{ 
-          type: "spring",
-          stiffness: 260,
-          damping: 20,
-          delay: index * 0.05 
+        onMouseMove={handleMouseMove}
+        onMouseLeave={() => {
+          setIsHovered(false);
+          setMousePosition({ x: 0, y: 0 });
         }}
         onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        style={{
+          perspective: 1000,
+          rotateX: mousePosition.y * -10,
+          rotateY: mousePosition.x * 10,
+          transition: "all 0.1s ease-out"
+        }}
         className="relative group/card"
       >
         <div className="group cursor-pointer block relative">

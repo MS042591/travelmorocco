@@ -8,6 +8,8 @@ import { getAllTours } from '@/lib/tours';
 import TourCard from '@/components/TourCard';
 import DestinationGallery from '@/components/DestinationGallery';
 import InquiryButton from '@/components/InquiryButton';
+import UniversalHero from '@/components/UniversalHero';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 export async function generateStaticParams() {
   const destinations = getAllDestinations();
@@ -36,41 +38,22 @@ export default async function DestinationDetailPage({ params }: { params: Promis
     <>
       <Navbar />
       <main className="bg-canvas">
-        {/* Hero Section */}
-        <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
-          <Image 
-            src={destination.image} 
-            alt={destination.title} 
-            fill 
-            className="object-cover brightness-[0.7]"
-            priority
-          />
-          <div className="relative z-10 text-center px-4">
-            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white mb-4 block">Destination</span>
-            <h1 className="text-6xl md:text-8xl font-bold !text-white tracking-tighter font-heading drop-shadow-2xl">
-              {destination.title}
-            </h1>
-          </div>
-          
-          {/* Curvy Section Divider */}
-          <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] transform translate-y-[1px] scale-y-[-1]">
-            <svg 
-              className="relative block w-[calc(100%+1.3px)] h-[80px]" 
-              viewBox="0 0 1200 120" 
-              preserveAspectRatio="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path 
-                d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5,73.84-4.36,147.54,16.88,218.2,35.26,69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" 
-                className="fill-canvas"
-              />
-            </svg>
-          </div>
-        </section>
+        <UniversalHero 
+          subtitle="Destination"
+          title={destination.title}
+          image={destination.image}
+        />
 
         {/* Content Section */}
         <section className="py-24">
           <div className="container mx-auto px-4 md:px-8 lg:px-20">
+            <div className="mb-12">
+              <Breadcrumbs items={[
+                { label: 'Destinations', href: '/destinations' },
+                { label: destination.title, href: '#' }
+              ]} />
+            </div>
+
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
               <div className="lg:col-span-2 space-y-12">
                 <SectionReveal>
@@ -89,21 +72,21 @@ export default async function DestinationDetailPage({ params }: { params: Promis
               </div>
 
               <div className="space-y-12">
-                <div className="bg-surface-soft p-10 rounded-[2.5rem] sticky top-32">
-                  <h3 className="text-xl font-bold text-ink mb-6 uppercase tracking-wider">Don&apos;t Miss</h3>
+                <div className="bg-surface-soft p-10 rounded-[2.5rem] sticky top-32 border border-hairline shadow-sm">
+                  <h3 className="text-xl font-bold text-ink mb-6 uppercase tracking-wider font-heading">Don&apos;t Miss</h3>
                   <ul className="space-y-6">
                     {destination.highlights.map((highlight) => (
-                      <li key={highlight} className="flex items-start gap-4">
-                        <div className="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <li key={highlight} className="flex items-start gap-4 group">
+                        <div className="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-primary/20 transition-colors">
                           <div className="w-1.5 h-1.5 bg-primary rounded-full" />
                         </div>
-                        <span className="text-ink font-medium">{highlight}</span>
+                        <span className="text-ink font-medium transition-colors group-hover:text-primary">{highlight}</span>
                       </li>
                     ))}
                   </ul>
                   
                   <div className="mt-12 pt-12 border-t border-hairline">
-                    <p className="text-xs text-muted-soft font-bold uppercase tracking-widest mb-4">Start your journey</p>
+                    <p className="text-[10px] text-muted-soft font-black uppercase tracking-[0.2em] mb-6">Design your journey</p>
                     <InquiryButton destinationTitle={destination.title} />
                   </div>
                 </div>
@@ -114,12 +97,12 @@ export default async function DestinationDetailPage({ params }: { params: Promis
 
         {/* Related Tours */}
         {relatedTours.length > 0 && (
-          <section className="py-24 bg-surface-soft">
+          <section className="py-24 bg-surface-soft border-t border-hairline">
             <div className="container mx-auto px-4 md:px-8 lg:px-20">
-              <div className="flex justify-between items-end mb-12">
-                <div>
-                  <h2 className="text-3xl font-bold text-ink mb-2">Expeditions through {destination.title}</h2>
-                  <p className="text-sm text-muted">Hand-picked journeys that feature this incredible destination.</p>
+              <div className="flex justify-between items-end mb-16">
+                <div className="max-w-2xl">
+                  <h2 className="text-3xl md:text-4xl font-bold text-ink mb-4 font-heading tracking-tight">Expeditions through {destination.title}</h2>
+                  <p className="text-muted text-lg leading-relaxed">Hand-picked journeys that feature this incredible destination, curated for authentic discovery.</p>
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">

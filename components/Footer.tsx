@@ -28,25 +28,31 @@ export default function Footer() {
               <li><Link href="/tours" className="hover:underline">Imperial Cities</Link></li>
               <li><Link href="/tours" className="hover:underline">Atlas Treks</Link></li>
               <li><Link href="/tours" className="hover:underline">Coastal Getaways</Link></li>
+              <li><Link href="/gallery" className="hover:underline">Visual Gallery</Link></li>
+              <li><Link href="/map" className="hover:underline font-bold text-primary">Discovery Map</Link></li>
+              <li><Link href="/concierge" className="hover:text-primary transition-colors font-bold">Private Concierge</Link></li>
             </ul>
           </div>
           
           <div>
             <h4 className="text-sm font-bold text-ink mb-4">Resources</h4>
             <ul className="space-y-3 text-sm text-ink">
+              <li><Link href="/traveler-essentials" className="hover:underline font-bold text-primary">Traveler&apos;s Essentials</Link></li>
               <li><Link href="/blog" className="hover:underline">Travel Journal</Link></li>
-              <li><Link href="#" className="hover:underline">Travel Tips</Link></li>
-              <li><Link href="#" className="hover:underline">Safety information</Link></li>
-              <li><Link href="#" className="hover:underline">FAQ</Link></li>
+              <li><Link href="/faq" className="hover:underline">Travel Tips</Link></li>
+              <li><Link href="/faq" className="hover:underline">Safety information</Link></li>
+              <li><Link href="/faq" className="hover:underline">FAQ</Link></li>
             </ul>
           </div>
           
           <div>
             <h4 className="text-sm font-bold text-ink mb-4">Company</h4>
             <ul className="space-y-3 text-sm text-ink">
-              <li><Link href="/about" className="hover:underline">About Us</Link></li>
-              <li><Link href="/why-choose-us" className="hover:underline">Why Choose Us</Link></li>
-              <li><Link href="#" className="hover:underline">Sustainability</Link></li>
+              <li><Link href="/about" className="hover:text-primary transition-colors">Our Story</Link></li>
+              <li><Link href="/testimonials" className="hover:text-primary transition-colors">Testimonials</Link></li>
+              <li><Link href="/faq" className="hover:text-primary transition-colors">FAQ</Link></li>
+              <li><Link href="/why-choose-us" className="hover:text-primary transition-colors">Why Choose Us</Link></li>
+              <li><Link href="/sustainability" className="hover:text-primary transition-colors">Sustainability</Link></li>
               <li><Link href="/contact" className="hover:underline">Contact</Link></li>
             </ul>
           </div>
@@ -56,11 +62,9 @@ export default function Footer() {
           <div className="flex flex-wrap justify-center lg:justify-start items-center space-x-2">
             <span>© 2026 Travel Morocco</span>
             <span className="hidden sm:inline">·</span>
-            <Link href="#" className="hover:underline">Privacy</Link>
+            <Link href="/privacy" className="hover:underline">Privacy</Link>
             <span className="hidden sm:inline">·</span>
-            <Link href="#" className="hover:underline">Terms</Link>
-            <span className="hidden sm:inline">·</span>
-            <Link href="#" className="hover:underline">Sitemap</Link>
+            <Link href="/terms" className="hover:underline">Terms</Link>
           </div>
         </div>
       </div>

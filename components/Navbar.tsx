@@ -4,20 +4,42 @@ import Link from 'next/link';
 import { useModal } from '@/lib/ModalContext';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import Image from 'next/image';
+import SearchOverlay from './SearchOverlay';
+
 export default function Navbar() {
   const { openPlanner } = useModal();
   const [scrolled, setScrolled] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const pathname = usePathname();
 
   const hasDarkHero = (path: string) => {
-    if (path === '/') return true;
-    if (path === '/about') return true;
-    if (path === '/why-choose-us') return true;
-    if (path.startsWith('/tours/') && path !== '/tours') return true;
-    if (path.startsWith('/destinations/') && path !== '/destinations') return true;
-    if (path.startsWith('/blog/') && path !== '/blog') return true;
-    return false;
+    const normalizedPath = path === '/' ? '/' : path.replace(/\/$/, '');
+    
+    // Explicit list of pages that have an immersive hero section (white text mode)
+    const darkPaths = [
+      '/', 
+      '/about', 
+      '/tours',
+      '/destinations', 
+      '/blog', 
+      '/faq',
+      '/gallery',
+      '/traveler-essentials',
+      '/testimonials',
+      '/map',
+      '/why-choose-us',
+      '/concierge',
+      '/sustainability',
+      '/terms',
+      '/privacy'
+    ];
+    
+    // Check for exact matches in the list
+    if (darkPaths.includes(normalizedPath)) return true;
+    
+    // Check for dynamic sub-paths (Tours, Destinations, Blog)
+    const dynamicPrefixes = ['/tours/', '/destinations/', '/blog/'];
+    return dynamicPrefixes.some(prefix => normalizedPath.startsWith(prefix));
   };
 
   useEffect(() => {
@@ -33,16 +55,27 @@ export default function Navbar() {
 
   return (
     <>
+      <SearchOverlay isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
       <nav className={`fixed w-full z-50 transition-all duration-500 flex items-center ${scrolled ? 'h-20 bg-white/80 backdrop-blur-xl border-b border-hairline shadow-sm' : 'h-32 bg-transparent'}`}>
         <div className="container mx-auto px-4 md:px-8 lg:px-20 flex justify-between items-center">
           <Link href="/" className="flex items-center group">
             <div className={`relative transition-all duration-500 group-hover:scale-105 ${scrolled ? 'h-12 w-48' : 'h-24 w-96'}`}>
-              <Image 
-                src="/new_logo.png" 
+              <img 
                 alt="Travel Morocco" 
-                fill
-                sizes="(max-width: 768px) 150px, 200px"
-                className="object-contain transition-all duration-500"
+                loading="lazy" 
+                decoding="async" 
+                className="object-contain transition-all duration-500" 
+                style={{
+                  position: 'absolute',
+                  height: scrolled ? '137%' : '100%',
+                  width: '100%',
+                  left: 0,
+                  top: scrolled ? '-8px' : '0',
+                  right: 0,
+                  bottom: 0,
+                  color: 'transparent'
+                }} 
+                src="/new_logo.png" 
               />
             </div>
           </Link>
@@ -71,6 +104,13 @@ export default function Navbar() {
           </div>
           
           <div className="flex items-center space-x-4">
+            <button 
+              onClick={() => setIsSearchOpen(true)}
+              aria-label="Search site"
+              className={`p-2.5 rounded-full border flex items-center justify-center transition-all ${isSolid ? 'border-hairline bg-white shadow-sm hover:shadow-md' : 'border-white/20 bg-white/10 text-white hover:bg-white/20'}`}
+            >
+              <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className={`w-5 h-5 fill-none stroke-current stroke-2 ${isSolid ? 'text-ink' : 'text-white'}`}><path d="m13 24c6.0751322 0 11-4.9248678 11-11 0-6.07513225-4.9248678-11-11-11-6.07513225 0-11 4.92486775-11 11 0 6.0751322 4.92486775 11 11 11zm8-3 9 9"></path></svg>
+            </button>
             <button 
               onClick={openPlanner}
               className={`hidden md:block text-[11px] font-black uppercase tracking-[0.2em] px-6 py-3 rounded-full transition-all duration-300 ${isSolid ? 'bg-primary text-white shadow-lg hover:bg-primary-active hover:scale-105' : 'bg-white text-ink hover:bg-white/90 shadow-xl'}`}

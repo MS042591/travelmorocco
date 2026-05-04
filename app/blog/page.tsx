@@ -4,6 +4,7 @@ import { getAllPosts } from '@/lib/posts';
 import Link from 'next/link';
 import Image from 'next/image';
 import SectionReveal from '@/components/SectionReveal';
+import JournalHero from '@/components/JournalHero';
 
 export const metadata = {
   title: 'Journal | Travel Morocco - Stories of the Kingdom',
@@ -23,20 +24,16 @@ export default function BlogPage() {
   return (
     <>
       <Navbar />
-      <main className="bg-canvas pt-40 pb-32">
-        <div className="container mx-auto px-4 md:px-8 lg:px-20">
-          {/* Editorial Header */}
-          <div className="max-w-4xl mb-24">
-            <SectionReveal>
-              <span className="text-[10px] font-black uppercase tracking-[0.6em] text-primary mb-6 block">The Journal</span>
-              <h1 className="text-5xl md:text-8xl font-bold text-ink tracking-tighter font-heading leading-none mb-10">
-                The Morocco Journal: <br />
-                <span className="text-muted-soft italic font-serif">Travel Guides & Stories</span>
-              </h1>
-              <p className="text-muted text-xl md:text-2xl leading-relaxed max-w-2xl font-medium">
-                Deep dives into Moroccan culture, secret Riads, and the legends carved into the landscape.
-              </p>
-            </SectionReveal>
+      <main className="bg-canvas">
+        <JournalHero />
+        
+        <div className="container mx-auto px-4 md:px-8 lg:px-20 pt-24">
+          <div className="max-w-3xl mb-20">
+            <h2 className="text-3xl font-bold text-ink mb-4 font-heading">Explorer&apos;s Chronicles</h2>
+            <p className="text-muted text-lg leading-relaxed">
+              Deep dives into Moroccan culture, secret Riads, and the legends carved into the landscape. 
+              Stories from our local experts to inspire your next journey.
+            </p>
           </div>
 
           {/* Featured Post */}

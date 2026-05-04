@@ -4,6 +4,7 @@ import { getAllDestinations } from '@/lib/destinations';
 import DestinationCard from '@/components/DestinationCard';
 import SectionReveal from '@/components/SectionReveal';
 import PlannerButton from '@/components/PlannerButton';
+import UniversalHero from '@/components/UniversalHero';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -21,22 +22,20 @@ export default function DestinationsPage() {
   return (
     <>
       <Navbar />
-      <main className="bg-canvas min-h-screen pt-40 pb-32">
-        <div className="container mx-auto px-4 md:px-8 lg:px-20">
-          {/* Refined Minimalist Header */}
-          <div className="max-w-4xl mx-auto text-center mb-24">
-            <SectionReveal>
-              <span className="text-[10px] font-black uppercase tracking-[0.6em] text-primary mb-6 block">The Collection</span>
-              <h1 className="text-5xl md:text-8xl font-bold text-ink tracking-tighter font-heading leading-none mb-10">
-                Explore Morocco: <br />
-                <span className="text-muted-soft italic font-serif">Iconic Destinations</span>
-              </h1>
-              <div className="w-20 h-1 bg-primary/20 mx-auto mb-10 rounded-full" />
-              <p className="text-muted text-xl md:text-2xl leading-relaxed max-w-2xl mx-auto font-medium">
-                From the imperial grandeur of Fes to the blue-washed tranquility of Chefchaouen. 
-                A curated guide to the Kingdom&apos;s most iconic destinations.
-              </p>
-            </SectionReveal>
+      <main className="bg-canvas">
+        <UniversalHero 
+          subtitle="The Collection"
+          title="Explore Morocco: Iconic Destinations"
+          image="/images/tours/blue-stairway-with-colourful-flowerpots.webp"
+        />
+        
+        <div className="container mx-auto px-4 md:px-8 lg:px-20 pt-24">
+          <div className="max-w-3xl mb-20">
+            <h2 className="text-3xl md:text-5xl font-bold text-ink mb-6 font-heading tracking-tight">The Tapestry of the Kingdom</h2>
+            <p className="text-muted text-xl leading-relaxed font-medium">
+              From the Atlantic breezes of Essaouira to the golden silence of the Sahara. 
+              Discover our curated guide to Morocco&apos;s most iconic hubs and hidden sanctuaries.
+            </p>
           </div>
 
           {/* Clean 3-Column Gallery Grid */}

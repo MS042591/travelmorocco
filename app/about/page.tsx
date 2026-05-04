@@ -1,8 +1,8 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import Image from 'next/image';
 import SectionReveal from '@/components/SectionReveal';
 import AboutHero, { MissionCard } from '@/components/AboutClient';
+import Image from 'next/image';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
