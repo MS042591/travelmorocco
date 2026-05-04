@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { performSearch, SearchData } from '@/lib/actions';
+import { performSearch, SearchData } from '@/lib/search-utils';
 import Image from 'next/image';
 
 declare global {

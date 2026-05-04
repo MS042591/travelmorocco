@@ -5,7 +5,7 @@ import { ModalProvider } from "@/lib/ModalContext";
 import ModalWrapper from "@/components/ModalWrapper";
 import PageTransition from "@/components/PageTransition";
 import Script from "next/script";
-import { getSearchIndex } from "@/lib/actions";
+import { getSearchIndex } from "@/lib/search-indexer";
 
 const inter = Inter({
   subsets: ["latin"],
