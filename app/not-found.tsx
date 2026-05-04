@@ -81,7 +81,7 @@ export default function NotFound() {
             </h1>
             
             <p className="text-xl md:text-2xl text-body font-light mb-12 max-w-2xl mx-auto leading-relaxed">
-              Even the best travelers lose their way sometimes. The path you're looking for seems to have shifted like the Sahara dunes.
+              Even the best travelers lose their way sometimes. The path you&apos;re looking for seems to have shifted like the Sahara dunes.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto">
