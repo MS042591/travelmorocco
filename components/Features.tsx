@@ -68,7 +68,6 @@ export default function Features() {
                 <div className="space-y-1">
                   <div className="flex justify-between items-start">
                     <h3 className="text-sm font-bold text-ink group-hover:underline">{feature.title}, Morocco</h3>
-                    </div>
                   </div>
                   <p className="text-sm text-muted">Stay with local host</p>
                   <p className="text-sm text-muted">Oct 22 – 27</p>

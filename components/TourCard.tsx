@@ -135,7 +135,6 @@ export default function TourCard({ tour, index, priority = false }: TourCardProp
             <Link href={`/tours/${tour.slug}`}>
               <div className="flex justify-between items-start">
                 <h3 className="text-sm font-bold text-ink group-hover:underline line-clamp-1">{tour.title}</h3>
-                </div>
               </div>
               <p className="text-sm text-muted">{tour.duration} experience</p>
               <p className="text-sm text-muted line-clamp-1">{tour.excerpt}</p>
