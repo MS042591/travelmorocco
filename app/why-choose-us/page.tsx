@@ -4,6 +4,7 @@ import SectionReveal from '@/components/SectionReveal';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { WhyHero, ValueItem, FeatureImage } from '@/components/WhyChooseUsClient';
+import PlannerButton from '@/components/PlannerButton';
 
 export const metadata: Metadata = {
   title: 'Why Choose Us | Travel Morocco - The Standard of Excellence',
@@ -138,9 +139,9 @@ export default function WhyChooseUsPage() {
              <SectionReveal>
                 <h2 className="text-4xl md:text-6xl font-bold text-ink mb-10 font-heading tracking-tight">Your story is waiting. <br />Shall we write the first chapter?</h2>
                 <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                  <Link href="/contact" className="bg-primary text-white px-12 py-5 rounded-full font-bold text-lg hover:bg-primary-active transition-all hover:scale-105 shadow-xl shadow-primary/20">
+                  <PlannerButton className="bg-primary text-white px-12 py-5 rounded-full font-bold text-lg hover:bg-primary-active transition-all hover:scale-105 shadow-xl shadow-primary/20">
                     Plan Your Journey
-                  </Link>
+                  </PlannerButton>
                   <Link href="/tours" className="text-ink font-bold group flex items-center gap-2">
                     Browse Signature Tours
                     <svg viewBox="0 0 24 24" className="w-5 h-5 fill-none stroke-current stroke-2 group-hover:translate-x-1 transition-transform" strokeLinecap="round" strokeLinejoin="round">

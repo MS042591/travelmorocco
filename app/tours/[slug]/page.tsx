@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 import { getTourBySlug, getAllTours } from '@/lib/tours';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import ReactMarkdown from 'react-markdown';
+import { MDXRemote } from 'next-mdx-remote/rsc';
 import TourBookingButton from '@/components/TourBookingButton';
 import PhotoGallery from '@/components/PhotoGallery';
 import Breadcrumbs from '@/components/Breadcrumbs';
@@ -56,13 +56,34 @@ export default async function TourPage({ params }: TourPageProps) {
   const tour = getTourBySlug(slug);
   if (!tour) notFound();
 
-  // Product Structured Data
+  // TouristTrip Structured Data
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Product",
+    "@type": "TouristTrip",
     "name": tour.title,
     "description": tour.excerpt,
     "image": tour.image,
+    "touristType": [
+      "Private Tour",
+      tour.category
+    ],
+    "provider": {
+      "@type": "TravelAgency",
+      "name": "Travel Morocco",
+      "url": "https://travelmorocco.co"
+    },
+    "itinerary": {
+      "@type": "ItemList",
+      "itemListElement": tour.itinerary?.map((day, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": {
+          "@type": "TouristDestination",
+          "name": day.title,
+          "description": day.description
+        }
+      })) || []
+    },
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.92",
@@ -213,7 +234,7 @@ export default async function TourPage({ params }: TourPageProps) {
                 <div className="space-y-6">
                   {tour.description && (
                     <div className="prose prose-sm max-w-none text-body leading-relaxed">
-                      <ReactMarkdown>{tour.description}</ReactMarkdown>
+                      <MDXRemote source={tour.description} />
                     </div>
                   )}
                 </div>

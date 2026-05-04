@@ -5,15 +5,20 @@ import { useModal } from '@/lib/ModalContext';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
-import dynamic from 'next/dynamic';
-const TripPlannerModal = dynamic(() => import('./TripPlannerModal'), { ssr: false });
-
 export default function Navbar() {
-  const { openBooking } = useModal();
+  const { openPlanner } = useModal();
   const [scrolled, setScrolled] = useState(false);
-  const [isPlannerOpen, setIsPlannerOpen] = useState(false);
   const pathname = usePathname();
-  const isHomepage = pathname === '/';
+
+  const hasDarkHero = (path: string) => {
+    if (path === '/') return true;
+    if (path === '/about') return true;
+    if (path === '/why-choose-us') return true;
+    if (path.startsWith('/tours/') && path !== '/tours') return true;
+    if (path.startsWith('/destinations/') && path !== '/destinations') return true;
+    if (path.startsWith('/blog/') && path !== '/blog') return true;
+    return false;
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,7 +28,8 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const isSolid = scrolled || !isHomepage;
+  const isDarkHero = hasDarkHero(pathname);
+  const isSolid = scrolled || !isDarkHero;
 
   return (
     <>
@@ -32,11 +38,11 @@ export default function Navbar() {
           <Link href="/" className="flex items-center group">
             <div className={`relative transition-all duration-500 group-hover:scale-105 ${scrolled ? 'h-12 w-48' : 'h-24 w-96'}`}>
               <Image 
-                src="/logo_tiny.jpg" 
+                src="/logo_tiny.png" 
                 alt="Travel Morocco" 
                 fill
                 sizes="(max-width: 768px) 150px, 200px"
-                className={`object-contain transition-all duration-500 ${isSolid ? 'mix-blend-multiply' : 'invert mix-blend-screen opacity-90'}`}
+                className={`object-contain transition-all duration-500 ${isSolid ? '' : 'brightness-0 invert opacity-90'}`}
               />
             </div>
           </Link>
@@ -66,7 +72,7 @@ export default function Navbar() {
           
           <div className="flex items-center space-x-4">
             <button 
-              onClick={() => setIsPlannerOpen(true)}
+              onClick={openPlanner}
               className={`hidden md:block text-[11px] font-black uppercase tracking-[0.2em] px-6 py-3 rounded-full transition-all duration-300 ${isSolid ? 'bg-primary text-white shadow-lg hover:bg-primary-active hover:scale-105' : 'bg-white text-ink hover:bg-white/90 shadow-xl'}`}
             >
               Plan Your Journey
@@ -80,8 +86,6 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
-
-      <TripPlannerModal isOpen={isPlannerOpen} onClose={() => setIsPlannerOpen(false)} />
     </>
   );
 }

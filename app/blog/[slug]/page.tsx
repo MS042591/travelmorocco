@@ -5,11 +5,12 @@ import { notFound } from 'next/navigation';
 import { getPostBySlug, getAllPosts } from '@/lib/posts';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import ReactMarkdown from 'react-markdown';
+import { MDXRemote } from 'next-mdx-remote/rsc';
 import ReadingProgress from '@/components/ReadingProgress';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { getAllTours } from '@/lib/tours';
 import BlogRelatedTours from '@/components/BlogRelatedTours';
+import PlannerButton from '@/components/PlannerButton';
 
 interface PostPageProps {
   params: Promise<{ slug: string }>;
@@ -158,7 +159,13 @@ export default async function PostPage({ params }: PostPageProps) {
               prose-ul:my-10 prose-li:mb-5
               first-letter-cap
             ">
-              <ReactMarkdown>{post.content}</ReactMarkdown>
+              <MDXRemote 
+                source={post.content} 
+                components={{
+                  PlannerButton,
+                  Image: (props: any) => <Image alt={props.alt || "Blog image"} {...props} className="rounded-airbnb-md shadow-lg my-10" />
+                }} 
+              />
             </div>
             
             <div className="mt-24 pt-16 border-t border-hairline flex flex-col items-center text-center">
@@ -167,9 +174,9 @@ export default async function PostPage({ params }: PostPageProps) {
               </div>
               <h3 className="text-2xl font-bold text-ink mb-4 font-heading">Inspired to see it for yourself?</h3>
               <p className="text-muted mb-10 max-w-md">Our curators can weave the experiences mentioned in this post into your personalized Moroccan itinerary.</p>
-              <Link href="/contact" className="bg-primary text-white px-12 py-5 rounded-full font-bold hover:bg-primary-active transition-all hover:scale-105 shadow-xl shadow-primary/20">
+              <PlannerButton>
                 Plan Your Journey
-              </Link>
+              </PlannerButton>
             </div>
 
             <BlogRelatedTours tours={relatedTours} postTitle={post.title} />

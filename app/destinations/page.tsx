@@ -3,6 +3,7 @@ import Footer from '@/components/Footer';
 import { getAllDestinations } from '@/lib/destinations';
 import DestinationCard from '@/components/DestinationCard';
 import SectionReveal from '@/components/SectionReveal';
+import PlannerButton from '@/components/PlannerButton';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -55,9 +56,9 @@ export default function DestinationsPage() {
             <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold text-ink mb-6 font-heading">Not sure where to start?</h2>
               <p className="text-muted mb-10 max-w-xl mx-auto">Our travel curators can help you design a multi-city journey that captures the perfect balance of discovery and relaxation.</p>
-              <button className="bg-primary text-white px-12 py-5 rounded-full font-bold hover:bg-primary-active transition-all hover:scale-105 shadow-xl shadow-primary/20">
+              <PlannerButton>
                 Talk to a Curator
-              </button>
+              </PlannerButton>
             </div>
             {/* Decorative Moroccan Pattern Background */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none">

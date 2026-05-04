@@ -63,18 +63,39 @@ const STEPS: Step[] = [
 export default function TripPlannerModal({ isOpen, onClose }: TripPlannerModalProps) {
   const [step, setStep] = useState(0);
   const [selections, setSelections] = useState<Record<string, any>>({});
+  const [formData, setFormData] = useState({ name: '', email: '', wishes: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
-    if (!isOpen) {
+    const saved = localStorage.getItem('tripPlannerState');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed.step !== undefined) setStep(parsed.step);
+        if (parsed.selections) setSelections(parsed.selections);
+        if (parsed.formData) setFormData(parsed.formData);
+      } catch (e) {}
+    }
+  }, []);
+
+  useEffect(() => {
+    if (step > 0 || Object.keys(selections).length > 0 || formData.name) {
+      localStorage.setItem('tripPlannerState', JSON.stringify({ step, selections, formData }));
+    }
+  }, [step, selections, formData]);
+
+  useEffect(() => {
+    if (!isOpen && isSuccess) {
       setTimeout(() => {
         setStep(0);
         setSelections({});
+        setFormData({ name: '', email: '', wishes: '' });
         setIsSuccess(false);
+        localStorage.removeItem('tripPlannerState');
       }, 500);
     }
-  }, [isOpen]);
+  }, [isOpen, isSuccess]);
 
   const handleSelect = (id: string, value: any) => {
     setSelections(prev => ({ ...prev, [id]: value }));
@@ -95,7 +116,7 @@ export default function TripPlannerModal({ isOpen, onClose }: TripPlannerModalPr
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...formProps,
+          ...formData,
           ...selections,
           type: 'planner',
           subject: 'New Trip Planner Submission'
@@ -104,6 +125,7 @@ export default function TripPlannerModal({ isOpen, onClose }: TripPlannerModalPr
 
       if (response.ok) {
         setIsSuccess(true);
+        localStorage.removeItem('tripPlannerState');
       } else {
         alert("Submission failed. Please try WhatsApp.");
       }
@@ -195,16 +217,25 @@ export default function TripPlannerModal({ isOpen, onClose }: TripPlannerModalPr
                           <input 
                             required
                             type="text" 
+                            name="name"
+                            value={formData.name}
+                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                             placeholder="Your Name"
                             className="w-full bg-surface-soft border-none rounded-2xl p-5 focus:ring-2 focus:ring-primary transition-all outline-none"
                           />
                           <input 
                             required
                             type="email" 
+                            name="email"
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             placeholder="Email Address"
                             className="w-full bg-surface-soft border-none rounded-2xl p-5 focus:ring-2 focus:ring-primary transition-all outline-none"
                           />
                           <textarea 
+                            name="wishes"
+                            value={formData.wishes}
+                            onChange={(e) => setFormData({ ...formData, wishes: e.target.value })}
                             placeholder="Any special wishes for your trip?"
                             rows={4}
                             className="w-full bg-surface-soft border-none rounded-2xl p-5 focus:ring-2 focus:ring-primary transition-all outline-none resize-none"

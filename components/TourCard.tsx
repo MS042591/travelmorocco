@@ -15,9 +15,19 @@ interface TourCardProps {
 export default function TourCard({ tour, index, priority = false }: TourCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [showQuickLook, setShowQuickLook] = useState(false);
-  
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  const allImages = [tour.image, ...(tour.gallery || [])].filter(Boolean);
 
+  const nextImage = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setCurrentImageIndex((prev) => (prev === allImages.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevImage = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setCurrentImageIndex((prev) => (prev === 0 ? allImages.length - 1 : prev - 1));
+  };
   // Social Proof: Random booking count for effect
   const [bookingCount, setBookingCount] = useState(0);
 
@@ -44,13 +54,50 @@ export default function TourCard({ tour, index, priority = false }: TourCardProp
         <div className="group cursor-pointer block relative">
           <Link href={`/tours/${tour.slug}`}>
               <div className="relative aspect-square overflow-hidden rounded-airbnb-md mb-3 shadow-sm group-hover:shadow-airbnb transition-all">
-                  <SmartImage 
-                    src={tour.image} 
-                    alt={tour.title}
-                    fill
-                    priority={priority}
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                  />
+                  <div 
+                    className="absolute inset-0 flex transition-transform duration-500 ease-out" 
+                    style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
+                  >
+                    {allImages.map((src, i) => (
+                      <div key={i} className="relative w-full h-full flex-shrink-0">
+                        <SmartImage 
+                          src={src} 
+                          alt={`${tour.title} ${i + 1}`}
+                          fill
+                          priority={priority && i === 0}
+                          className="object-cover transition-transform duration-700 ease-out group-hover/card:scale-105"
+                        />
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Carousel Controls */}
+                  {allImages.length > 1 && (
+                    <>
+                      <button 
+                        onClick={prevImage}
+                        className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow-md opacity-0 group-hover/card:opacity-100 transition-all z-30 hover:bg-white text-ink hover:scale-105"
+                      >
+                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 fill-current"><path d="M20 24L10 16l10-8v16z"/></svg>
+                      </button>
+                      <button 
+                        onClick={nextImage}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow-md opacity-0 group-hover/card:opacity-100 transition-all z-30 hover:bg-white text-ink hover:scale-105"
+                      >
+                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 fill-current"><path d="M12 8l10 8-10 8V8z"/></svg>
+                      </button>
+                      
+                      {/* Dots */}
+                      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1 z-30">
+                        {allImages.map((_, i) => (
+                          <div 
+                            key={i} 
+                            className={`w-1.5 h-1.5 rounded-full transition-all ${i === currentImageIndex ? 'bg-white scale-110' : 'bg-white/60'}`}
+                          />
+                        ))}
+                      </div>
+                    </>
+                  )}
 
               {/* Badges */}
               <div className="absolute top-3 left-3 flex flex-col gap-2 z-20">
@@ -70,20 +117,8 @@ export default function TourCard({ tour, index, priority = false }: TourCardProp
                   </motion.div>
                 )}
               </div>
-
-              {/* Quick Look Trigger */}
-              <button 
-                onClick={(e) => {
-                  e.preventDefault();
-                  setShowQuickLook(true);
-                }}
-                className={`absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-ink px-3 py-1.5 rounded-airbnb-pill text-[10px] font-bold shadow-sm hover:bg-white transition-all z-30 ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}
-              >
-                Quick View
-              </button>
             </div>
           </Link>
-          
           <div className="space-y-1">
             <Link href={`/tours/${tour.slug}`}>
               <div className="flex justify-between items-start">
@@ -97,10 +132,15 @@ export default function TourCard({ tour, index, priority = false }: TourCardProp
               <p className="text-sm text-muted line-clamp-1">{tour.excerpt}</p>
               <div className="flex items-center justify-between mt-2 pt-2 border-t border-hairline/50">
                 <p className="text-sm text-ink font-bold">Details & Booking</p>
-                <div className="flex gap-1.5">
-                  <span className="px-2 py-0.5 bg-surface-soft text-[9px] font-bold text-muted-soft rounded uppercase tracking-tighter">Verified</span>
-                  {tour.bestSeller && <span className="px-2 py-0.5 bg-primary/5 text-[9px] font-bold text-primary rounded uppercase tracking-tighter">Top Pick</span>}
-                </div>
+                <button 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setShowQuickLook(true);
+                  }}
+                  className="bg-surface-soft text-ink px-3 py-1 rounded-airbnb-pill text-[10px] font-bold hover:bg-surface-strong transition-all"
+                >
+                  Quick View
+                </button>
               </div>
             </Link>
           </div>
