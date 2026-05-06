@@ -93,6 +93,7 @@ export default function RootLayout({
 
   return (
     <html lang="en" style={{ height: '100%' }} className={`scroll-smooth ${inter.variable} ${montserrat.variable} ${playfair.variable}`}>
+      <head />
       <body className="min-h-screen bg-canvas text-ink antialiased font-inter">
         {/* Google Tag Manager */}
         <Script id="gtm-script" strategy="lazyOnload">
