@@ -1,10 +1,8 @@
 import { Metadata } from 'next';
-import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import BlogPreview from '@/components/BlogPreview';
 import FeaturedTours from '@/components/FeaturedTours';
 import SensoryPalette from '@/components/SensoryPalette';
-import Footer from '@/components/Footer';
 import { getAllPosts } from '@/lib/posts';
 import { getAllTours } from '@/lib/tours';
 
@@ -28,14 +26,10 @@ export default function Home() {
         href="/images/hero-sahara-opt.jpg"
         fetchPriority="high"
       />
-      <Navbar />
-      <main>
-        <Hero />
-        <FeaturedTours tours={tours} totalToursCount={getAllTours().length} />
-        <SensoryPalette />
-        <BlogPreview posts={posts} />
-      </main>
-      <Footer />
+      <Hero />
+      <FeaturedTours tours={tours} totalToursCount={getAllTours().length} />
+      <SensoryPalette />
+      <BlogPreview posts={posts} />
     </>
   );
 }

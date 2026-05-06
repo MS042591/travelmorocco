@@ -1,5 +1,3 @@
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import SectionReveal from '@/components/SectionReveal';
 import AboutHero, { MissionCard } from '@/components/AboutClient';
 import Image from 'next/image';
@@ -26,8 +24,7 @@ export default function AboutPage() {
 
   return (
     <>
-      <Navbar />
-      <main className="bg-canvas">
+      <div className="bg-canvas">
         <AboutHero />
 
         {/* Narrative Section */}
@@ -79,8 +76,7 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
-      </main>
-      <Footer />
+      </div>
     </>
   );
 }

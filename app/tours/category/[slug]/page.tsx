@@ -1,7 +1,5 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import Image from 'next/image';
 import { CATEGORY_METADATA } from '@/lib/categories';
 import { getAllTours } from '@/lib/tours';
@@ -49,8 +47,7 @@ export default async function CategoryLandingPage({ params }: CategoryPageProps)
 
   return (
     <>
-      <Navbar />
-      <main className="bg-canvas min-h-screen">
+      <div className="bg-canvas min-h-screen">
         {/* Authority Hero Section */}
         <section className="relative h-[65vh] flex items-center justify-center overflow-hidden">
           <Image 
@@ -127,8 +124,7 @@ export default async function CategoryLandingPage({ params }: CategoryPageProps)
             </div>
           </div>
         </section>
-      </main>
-      <Footer />
+      </div>
     </>
   );
 }

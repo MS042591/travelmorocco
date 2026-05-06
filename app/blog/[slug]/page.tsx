@@ -3,8 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getPostBySlug, getAllPosts } from '@/lib/posts';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import ReadingProgress from '@/components/ReadingProgress';
 import Breadcrumbs from '@/components/Breadcrumbs';
@@ -131,9 +129,8 @@ export default async function PostPage({ params }: PostPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
-      <Navbar />
       <ReadingProgress />
-      <main className="bg-canvas">
+      <div className="bg-canvas">
         {/* Immersive Blog Hero */}
         <header className="relative h-[70vh] flex items-center justify-center overflow-hidden">
           <Image 
@@ -217,8 +214,7 @@ export default async function PostPage({ params }: PostPageProps) {
             <BlogRelatedTours tours={relatedTours} postTitle={post.title} />
           </div>
         </article>
-      </main>
-      <Footer />
+      </div>
     </>
   );
 }

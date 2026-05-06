@@ -1,5 +1,3 @@
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import ContactForm from '@/components/ContactForm';
 import { Metadata } from 'next';
 
@@ -18,8 +16,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <Navbar />
-      <main className="bg-canvas pt-32 pb-24">
+      <div className="bg-canvas pt-32 pb-24">
         <div className="container mx-auto px-4 md:px-8 lg:px-20">
           <div className="flex flex-col lg:flex-row gap-16 lg:items-start">
             
@@ -91,8 +88,7 @@ export default function ContactPage() {
 
           </div>
         </div>
-      </main>
-      <Footer />
+      </div>
     </>
   );
 }

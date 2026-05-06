@@ -12,12 +12,7 @@ const slides = [
   { src: "/images/tours/blue-wooden-rowboats-port-essaouira-harbor-morocco-north-africa.webp", alt: "Essaouira coastal harbour" },
 ];
 
-const destinations = [
-  { label: "Sahara Desert", image: "/images/tours/beautiful-sand-dunes-in-the-sahara-desert-morocco-at-sunset.webp", href: "/tours/category/desert-tours", count: 10 },
-  { label: "Marrakech", image: "/images/tours/marrakech-djemaa-el-fna-square.webp", href: "/tours/category/marrakech-tours", count: 8 },
-  { label: "Chefchaouen", image: "/images/tours/morocco-rif-area-chefchaouen-chaouen-town-the-blue-city.webp", href: "/tours/category/tangier-tours", count: 6 },
-  { label: "Imperial Cities", image: "/images/tours/the-royal-palace-golden-doors-fez-morocco.webp", href: "/tours/category/casablanca-tours", count: 8 },
-];
+
 
 export default function Hero() {
   const [current, setCurrent] = useState(0);
@@ -87,7 +82,7 @@ export default function Hero() {
       </div>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-28 md:bottom-32 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex gap-2">
         {slides.map((_, index) => (
           <button
             key={index}
@@ -98,36 +93,6 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* Destination Strip */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
-        <div className="container mx-auto px-4 md:px-8 lg:px-20 pb-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-            {destinations.map((dest, idx) => (
-              <Link
-                key={dest.label}
-                href={dest.href}
-                className="group relative h-16 md:h-20 rounded-2xl overflow-hidden border border-white/15 hover:border-white/30 transition-all duration-300 hover:scale-[1.02]"
-              >
-                <SmartImage
-                  src={dest.image}
-                  alt={dest.label}
-                  fill
-                  priority={idx < 2}
-                  fetchPriority={idx < 2 ? "high" : "auto"}
-                  quality={65}
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                  className="object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors duration-300"></div>
-                <div className="absolute inset-0 flex items-center justify-between px-4">
-                  <span className="text-white text-xs font-bold tracking-wide">{dest.label}</span>
-                  <span className="text-white/70 text-[10px] font-bold">{dest.count} tours</span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </div>
     </section>
   );
 }

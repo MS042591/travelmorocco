@@ -5,7 +5,8 @@ import { ModalProvider } from "@/lib/ModalContext";
 import ModalWrapper from "@/components/ModalWrapper";
 import PageTransition from "@/components/PageTransition";
 import Script from "next/script";
-import { getSearchIndex } from "@/lib/search-indexer";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -89,14 +90,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const searchIndex = getSearchIndex();
 
   return (
-    <html lang="en" className={`scroll-smooth ${inter.variable} ${montserrat.variable} ${playfair.variable}`}>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      </head>
+    <html lang="en" style={{ height: '100%' }} className={`scroll-smooth ${inter.variable} ${montserrat.variable} ${playfair.variable}`}>
       <body className="min-h-screen bg-canvas text-ink antialiased font-inter">
         {/* Google Tag Manager */}
         <Script id="gtm-script" strategy="lazyOnload">
@@ -189,7 +185,6 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              window.__SEARCH_INDEX__ = ${JSON.stringify(searchIndex)};
               if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
                 var isWww = window.location.hostname.startsWith('www.');
                 var isHttp = window.location.protocol === 'http:';
@@ -202,9 +197,13 @@ export default function RootLayout({
           }}
         />
         <ModalProvider>
-          <PageTransition>
-            {children}
-          </PageTransition>
+          <Navbar />
+          <main id="main-content">
+            <PageTransition>
+              {children}
+            </PageTransition>
+          </main>
+          <Footer />
           <ModalWrapper />
         </ModalProvider>
       </body>

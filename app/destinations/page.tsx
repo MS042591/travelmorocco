@@ -1,8 +1,5 @@
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { getAllDestinations } from '@/lib/destinations';
 import DestinationCard from '@/components/DestinationCard';
-import SectionReveal from '@/components/SectionReveal';
 import PlannerButton from '@/components/PlannerButton';
 import UniversalHero from '@/components/UniversalHero';
 import { Metadata } from 'next';
@@ -24,8 +21,7 @@ export default function DestinationsPage() {
 
   return (
     <>
-      <Navbar />
-      <main className="bg-canvas">
+      <div className="bg-canvas">
         <UniversalHero 
           subtitle="The Collection"
           title="Explore Morocco: Iconic Destinations"
@@ -70,8 +66,7 @@ export default function DestinationsPage() {
             </div>
           </div>
         </div>
-      </main>
-      <Footer />
+      </div>
     </>
   );
 }

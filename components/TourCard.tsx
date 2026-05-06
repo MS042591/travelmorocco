@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TourData } from '@/lib/tours-shared';
@@ -34,13 +34,20 @@ export default function TourCard({ tour, index, priority = false }: TourCardProp
   useEffect(() => {
     setBookingCount(Math.floor(Math.random() * 5) + 1);
   }, []);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [rect, setRect] = useState<DOMRect | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
+    if (!rect) return;
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
     setMousePosition({ x, y });
+  };
+
+  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+    setIsHovered(true);
+    setRect(e.currentTarget.getBoundingClientRect());
   };
 
   return (
@@ -49,12 +56,13 @@ export default function TourCard({ tour, index, priority = false }: TourCardProp
         initial={{ opacity: 0, y: 30, scale: 0.95 }}
         whileInView={{ opacity: 1, y: 0, scale: 1 }}
         viewport={{ once: true, margin: "-50px" }}
-        onMouseMove={handleMouseMove}
+        onMouseEnter={handleMouseEnter}
         onMouseLeave={() => {
           setIsHovered(false);
+          setRect(null);
           setMousePosition({ x: 0, y: 0 });
         }}
-        onMouseEnter={() => setIsHovered(true)}
+        onMouseMove={handleMouseMove}
         style={{
           perspective: 1000,
           rotateX: mousePosition.y * -10,

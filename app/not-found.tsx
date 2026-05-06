@@ -3,8 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { Compass, Map, ArrowRight, Home } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -51,9 +49,7 @@ export default function NotFound() {
 
   return (
     <div className="min-h-screen bg-canvas flex flex-col">
-      <Navbar />
-      
-      <main className="flex-grow flex items-center justify-center relative overflow-hidden pt-20 pb-12 px-4">
+      <div className="flex-grow flex items-center justify-center relative overflow-hidden pt-20 pb-12 px-4">
         {/* Decorative Background Elements */}
         <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none">
           <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -120,9 +116,7 @@ export default function NotFound() {
             </div>
           </motion.div>
         </div>
-      </main>
-
-      <Footer />
+      </div>
     </div>
   );
 }

@@ -22,28 +22,34 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
   const [results, setResults] = useState<{tours: any[], destinations: any[], posts: any[]}>({ tours: [], destinations: [], posts: [] });
   const [isSearching, setIsSearching] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [searchIndex, setSearchIndex] = useState<SearchData | null>(null);
 
-  // Focus on open
+  // Focus and Fetch index on open
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => inputRef.current?.focus(), 100);
+      
+      // Fetch index if not already loaded
+      if (!searchIndex) {
+        fetch('/search.json')
+          .then(res => res.json())
+          .then(data => setSearchIndex(data))
+          .catch(err => console.error("Failed to load search index:", err));
+      }
     } else {
       setQuery('');
       setResults({ tours: [], destinations: [], posts: [] });
     }
-  }, [isOpen]);
+  }, [isOpen, searchIndex]);
 
   // Real-time search logic
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (query.length >= 2) {
+      if (query.length >= 2 && searchIndex) {
         setIsSearching(true);
         try {
-          const searchData = window.__SEARCH_INDEX__;
-          if (searchData) {
-            const data = performSearch(query, searchData);
-            setResults(data);
-          }
+          const data = performSearch(query, searchIndex);
+          setResults(data);
         } catch (error) {
           console.error("Search failed:", error);
         } finally {
@@ -55,7 +61,7 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
     }, 300); // Debounce
 
     return () => clearTimeout(timer);
-  }, [query]);
+  }, [query, searchIndex]);
 
   // Close on Escape
   useEffect(() => {

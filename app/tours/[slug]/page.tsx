@@ -4,8 +4,6 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { getTourBySlug, getAllTours } from '@/lib/tours';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import TourBookingButton from '@/components/TourBookingButton';
 import PhotoGallery from '@/components/PhotoGallery';
@@ -145,7 +143,7 @@ export default async function TourPage({ params }: TourPageProps) {
   const categoryHref = categorySlug ? `/tours/category/${categorySlug}` : `/tours?category=${encodeURIComponent(tour.category)}`;
 
   return (
-    <div className="min-h-screen bg-canvas">
+    <div className="bg-canvas">
       <link 
         rel="preload" 
         as="image" 
@@ -160,7 +158,6 @@ export default async function TourPage({ params }: TourPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
-      <Navbar />
 
       <article className="pb-32">
         <UniversalHero 
@@ -293,7 +290,6 @@ export default async function TourPage({ params }: TourPageProps) {
         )}
       </article>
 
-      {/* Sticky Mobile Booking Bar */}
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-hairline p-4 lg:hidden z-50 flex items-center justify-between shadow-[0_-4px_12px_rgba(0,0,0,0.1)]">
         <div>
           <p className="text-lg font-bold text-ink">Private Journey</p>
@@ -303,8 +299,6 @@ export default async function TourPage({ params }: TourPageProps) {
           <TourBookingButton tourTitle={tour.title} />
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 }

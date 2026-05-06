@@ -1,5 +1,4 @@
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import { Metadata } from 'next';
 import Image from 'next/image';
 import { getDestinationBySlug, getAllDestinations } from '@/lib/destinations';
 import { notFound } from 'next/navigation';
@@ -10,6 +9,26 @@ import DestinationGallery from '@/components/DestinationGallery';
 import InquiryButton from '@/components/InquiryButton';
 import UniversalHero from '@/components/UniversalHero';
 import Breadcrumbs from '@/components/Breadcrumbs';
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const destination = getDestinationBySlug(slug);
+  
+  if (!destination) return { title: 'Destination Not Found' };
+
+  return {
+    title: `${destination.title} | Travel Morocco Destinations`,
+    description: destination.description,
+    openGraph: {
+      title: destination.title,
+      description: destination.description,
+      images: [destination.image],
+    },
+    alternates: {
+      canonical: `/destinations/${slug}`,
+    },
+  };
+}
 
 export async function generateStaticParams() {
   const destinations = getAllDestinations();
@@ -36,8 +55,7 @@ export default async function DestinationDetailPage({ params }: { params: Promis
 
   return (
     <>
-      <Navbar />
-      <main className="bg-canvas">
+      <div className="bg-canvas">
         <UniversalHero 
           subtitle="Destination"
           title={destination.title}
@@ -113,8 +131,7 @@ export default async function DestinationDetailPage({ params }: { params: Promis
             </div>
           </section>
         )}
-      </main>
-      <Footer />
+      </div>
     </>
   );
 }
