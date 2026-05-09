@@ -7,6 +7,7 @@ import PageTransition from "@/components/PageTransition";
 import Script from "next/script";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import WhatsAppWidget from "@/components/WhatsAppWidget";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -118,6 +119,30 @@ export default function RootLayout({
           `}
         </Script>
 
+        {/* Meta Pixel Code */}
+        <Script id="facebook-pixel" strategy="afterInteractive">
+          {`
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '408178823267012');
+            fbq('track', 'PageView');
+          `}
+        </Script>
+        <noscript>
+          <img 
+            height="1" 
+            width="1" 
+            style={{ display: 'none' }} 
+            src="https://www.facebook.com/tr?id=408178823267012&ev=PageView&noscript=1" 
+          />
+        </noscript>
+
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
@@ -151,7 +176,7 @@ export default function RootLayout({
               "image": "https://travelmorocco.co/images/hero-sahara-opt.jpg",
               "@id": "https://travelmorocco.co",
               "url": "https://travelmorocco.co",
-              "telephone": "+212000000000",
+              "telephone": "+212699048087",
               "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "Medina",
@@ -206,6 +231,7 @@ export default function RootLayout({
           </main>
           <Footer />
           <ModalWrapper />
+          <WhatsAppWidget />
         </ModalProvider>
       </body>
     </html>
