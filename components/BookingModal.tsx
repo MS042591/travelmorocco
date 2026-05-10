@@ -57,7 +57,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
     const data = Object.fromEntries(formData.entries());
     
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("/api/contact.php", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...data, type: 'booking' })

@@ -61,6 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $vibe = isset($data["vibe"]) ? ucfirst($data["vibe"]) : "Not specified";
         $duration = isset($data["duration"]) ? ucfirst($data["duration"]) : "Not specified";
         $comfort = isset($data["comfort"]) ? ucfirst($data["comfort"]) : "Not specified";
+        $wishes = isset($data["wishes"]) ? strip_tags($data["wishes"]) : "None";
         
         $email_subject = "New Bespoke Trip Plan Request - $name";
         $email_html = "
@@ -79,6 +80,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <h3 style='font-size: 14px; color: #888; text-transform: uppercase; letter-spacing: 1px;'>Client Information</h3>
                     <p style='margin: 5px 0;'><strong>Name:</strong> $name</p>
                     <p style='margin: 5px 0;'><strong>Email:</strong> $email</p>
+                    <div style='background: #f9f9f9; padding: 15px; border-radius: 5px; margin-top: 20px;'>
+                        <p><strong>Special Wishes:</strong><br>$wishes</p>
+                    </div>
                 </div>
             </body>
             </html>";
