@@ -63,7 +63,7 @@ const STEPS: Step[] = [
 export default function TripPlannerModal({ isOpen, onClose }: TripPlannerModalProps) {
   const [step, setStep] = useState(0);
   const [selections, setSelections] = useState<Record<string, any>>({});
-  const [formData, setFormData] = useState({ name: '', email: '', wishes: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', wishes: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -90,7 +90,7 @@ export default function TripPlannerModal({ isOpen, onClose }: TripPlannerModalPr
       setTimeout(() => {
         setStep(0);
         setSelections({});
-        setFormData({ name: '', email: '', wishes: '' });
+        setFormData({ name: '', email: '', phone: '', wishes: '' });
         setIsSuccess(false);
         localStorage.removeItem('tripPlannerState');
       }, 500);
@@ -230,6 +230,14 @@ export default function TripPlannerModal({ isOpen, onClose }: TripPlannerModalPr
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             placeholder="Email Address"
+                            className="w-full bg-surface-soft border-none rounded-2xl p-5 focus:ring-2 focus:ring-primary transition-all outline-none"
+                          />
+                          <input 
+                            type="tel" 
+                            name="phone"
+                            value={formData.phone}
+                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                            placeholder="Phone Number (Optional)"
                             className="w-full bg-surface-soft border-none rounded-2xl p-5 focus:ring-2 focus:ring-primary transition-all outline-none"
                           />
                           <textarea 

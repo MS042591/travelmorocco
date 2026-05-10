@@ -8,7 +8,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import TourBookingButton from '@/components/TourBookingButton';
 import PhotoGallery from '@/components/PhotoGallery';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import BookingCard from '@/components/BookingCard';
+import BookingForm from '@/components/BookingForm';
 import SmartImage from '@/components/SmartImage';
 import { getCategorySlug } from '@/lib/categories';
 
@@ -247,7 +247,7 @@ export default async function TourPage({ params }: TourPageProps) {
             
             <div className="lg:col-span-4">
               <div className="sticky top-28 space-y-6">
-                <BookingCard tourTitle={tour.title} />
+                <BookingForm tourTitle={tour.title} />
 
                 <div className="bg-surface-strong/50 backdrop-blur-sm border border-hairline rounded-airbnb-md p-4 flex items-center justify-between">
                   <div>

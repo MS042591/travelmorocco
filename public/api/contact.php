@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $name = strip_tags(trim($data["name"]));
     $email = filter_var(trim($data["email"]), FILTER_SANITIZE_EMAIL);
+    $phone = isset($data["phone"]) ? strip_tags(trim($data["phone"])) : "Not provided";
     $type = isset($data["type"]) ? $data["type"] : "contact";
     
     $email_html = "";
@@ -51,6 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <p><strong>When:</strong> $timing</p>
                     <p><strong>Name:</strong> $name</p>
                     <p><strong>Email:</strong> $email</p>
+                    <p><strong>Phone:</strong> $phone</p>
                     <div style='background: #f9f9f9; padding: 15px; border-radius: 5px; margin-top: 20px;'>
                         <p><strong>Special Requests:</strong><br>$requests</p>
                     </div>
@@ -80,6 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <h3 style='font-size: 14px; color: #888; text-transform: uppercase; letter-spacing: 1px;'>Client Information</h3>
                     <p style='margin: 5px 0;'><strong>Name:</strong> $name</p>
                     <p style='margin: 5px 0;'><strong>Email:</strong> $email</p>
+                    <p style='margin: 5px 0;'><strong>Phone:</strong> $phone</p>
                     <div style='background: #f9f9f9; padding: 15px; border-radius: 5px; margin-top: 20px;'>
                         <p><strong>Special Wishes:</strong><br>$wishes</p>
                     </div>
@@ -98,6 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <h2 style='color: #ff385c; border-bottom: 1px solid #eee; padding-bottom: 10px;'>New Contact Inquiry</h2>
                     <p><strong>Name:</strong> $name</p>
                     <p><strong>Email:</strong> $email</p>
+                    <p><strong>Phone:</strong> $phone</p>
                     <p><strong>Subject:</strong> $subject</p>
                     <div style='background: #f9f9f9; padding: 15px; border-radius: 5px; margin-top: 20px;'>
                         <p><strong>Message:</strong><br>$msg</p>

@@ -59,6 +59,17 @@ export default function ContactForm() {
         </div>
 
         <div className="space-y-2">
+          <label htmlFor="phone" className="text-xs font-bold uppercase tracking-widest text-ink ml-1">Phone Number</label>
+          <input 
+            type="tel" 
+            id="phone"
+            name="phone"
+            placeholder="+1 (555) 000-0000"
+            className="w-full bg-white border border-hairline rounded-2xl px-6 py-4 focus:border-primary focus:outline-none transition-all shadow-sm"
+          />
+        </div>
+
+        <div className="space-y-2">
           <label htmlFor="subject" className="text-xs font-bold uppercase tracking-widest text-ink ml-1">Subject</label>
           <select 
             id="subject"

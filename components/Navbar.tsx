@@ -89,7 +89,7 @@ export default function Navbar() {
                 priority
                 className="object-contain transition-all duration-500"
                 style={{
-                  top: scrolled ? "-8px" : "0",
+                  top: scrolled ? "1px" : "0",
                   transform: scrolled ? "scale(1.3)" : "scale(1)",
                   transformOrigin: "left center",
                 }}

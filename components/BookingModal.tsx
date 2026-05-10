@@ -16,6 +16,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     tour: '',
     travelers: '1-2 Person',
     timing: 'This Month',
@@ -39,7 +40,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
   }, [isOpen, selectedTour]);
 
   useEffect(() => {
-    if (formData.name || formData.email || formData.requests) {
+    if (formData.name || formData.email || formData.phone || formData.requests) {
       localStorage.setItem('bookingModalState', JSON.stringify(formData));
     }
   }, [formData]);
@@ -70,7 +71,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
           onClose();
           setIsSubmitted(false);
           setIsSending(false);
-          setFormData({ name: '', email: '', tour: '', travelers: '1-2 Person', timing: 'This Month', requests: '' });
+          setFormData({ name: '', email: '', phone: '', tour: '', travelers: '1-2 Person', timing: 'This Month', requests: '' });
         }, 5000);
       } else {
         setError("Failed to send. Please try WhatsApp.");
@@ -144,16 +145,18 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-[10px] font-bold uppercase tracking-wider text-muted ml-1">Selected Tour</label>
+                      <label className="text-[10px] font-bold uppercase tracking-wider text-muted ml-1">Phone Number</label>
                       <input 
-                        type="text" 
-                        name="tour"
-                        value={formData.tour}
-                        onChange={(e) => setFormData({ ...formData, tour: e.target.value })}
-                        placeholder="e.g. Sahara Desert Trek"
-                        className="w-full bg-surface-soft border border-hairline rounded-airbnb-sm px-4 py-3 focus:border-ink focus:outline-none transition-all text-sm font-semibold text-ink"
+                        name="phone"
+                        type="tel" 
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        placeholder="+1 (555) 000-0000"
+                        className="w-full bg-white border border-hairline rounded-airbnb-sm px-4 py-3 focus:border-ink focus:outline-none transition-all text-sm"
                       />
                     </div>
+
+                    <input type="hidden" name="tour" value={formData.tour} />
 
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-1">

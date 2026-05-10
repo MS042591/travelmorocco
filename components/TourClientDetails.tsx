@@ -23,10 +23,64 @@ export default function TourClientDetails({ tour }: TourClientDetailsProps) {
   ];
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-12">
       {/* Itinerary Section */}
-      <div id="itinerary" className="pb-12 border-b border-hairline">
+      <div id="itinerary">
         <TourItinerary itinerary={tour.itinerary || []} duration={tour.duration} />
+      </div>
+
+      {/* Included/Excluded Section */}
+      <div className="pb-12 border-b border-hairline">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {/* Included */}
+          <div>
+            <h3 className="text-xl font-bold text-ink mb-6 font-heading flex items-center gap-2">
+              <span className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center">
+                <svg viewBox="0 0 24 24" className="w-4 h-4 text-emerald-600 fill-none stroke-current stroke-2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </span>
+              What&apos;s Included
+            </h3>
+            <ul className="space-y-4">
+              {tour.included && tour.included.length > 0 ? (
+                tour.included.map((item: string, index: number) => (
+                  <li key={index} className="flex items-start gap-3 text-sm text-muted leading-relaxed">
+                    <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full mt-2 flex-shrink-0" />
+                    {item}
+                  </li>
+                ))
+              ) : (
+                <li className="text-sm text-muted-soft italic">Included items not specified. Contact us for details.</li>
+              )}
+            </ul>
+          </div>
+
+          {/* Excluded */}
+          <div>
+            <h3 className="text-xl font-bold text-ink mb-6 font-heading flex items-center gap-2">
+              <span className="w-8 h-8 bg-rose-100 rounded-full flex items-center justify-center">
+                <svg viewBox="0 0 24 24" className="w-4 h-4 text-rose-600 fill-none stroke-current stroke-2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </span>
+              What&apos;s Excluded
+            </h3>
+            <ul className="space-y-4">
+              {tour.excluded && tour.excluded.length > 0 ? (
+                tour.excluded.map((item: string, index: number) => (
+                  <li key={index} className="flex items-start gap-3 text-sm text-muted leading-relaxed">
+                    <span className="w-1.5 h-1.5 bg-rose-300 rounded-full mt-2 flex-shrink-0" />
+                    {item}
+                  </li>
+                ))
+              ) : (
+                <li className="text-sm text-muted-soft italic">Excluded items not specified.</li>
+              )}
+            </ul>
+          </div>
+        </div>
       </div>
 
       {/* Map Section */}
@@ -42,7 +96,7 @@ export default function TourClientDetails({ tour }: TourClientDetailsProps) {
       </div>
 
       {/* Policies */}
-      <div className="pb-12">
+      <div>
         <h3 className="text-xl font-bold text-ink mb-6 font-heading">Cancellation Policy</h3>
         <div className="flex gap-4 items-start p-6 bg-surface-soft/30 rounded-2xl border border-hairline">
           <div className="w-10 h-10 bg-white rounded-full flex-shrink-0 flex items-center justify-center text-primary shadow-sm">
