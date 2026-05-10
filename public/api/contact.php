@@ -10,18 +10,30 @@ define('SMTP_USER', 'contact@travelmorocco.co');
 define('SMTP_PASS', ',1Q-9=p73%D8,{*f'); 
 
 function send_smtp_mail($to, $subject, $message, $from_email, $from_name, $reply_to) {
-    $header = "From: " . $from_name . " <" . SMTP_USER . ">\r\n";
-    $header .= "Reply-To: " . $reply_to . "\r\n";
-    $header .= "MIME-Version: 1.0\r\n";
-    $header .= "Content-Type: text/html; charset=UTF-8\r\n";
-    return mail($to, $subject, $message, $header);
+    $headers = "From: Travel Morocco <" . SMTP_USER . ">\r\n";
+    $headers .= "Reply-To: " . $reply_to . "\r\n";
+    $headers .= "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+    $headers .= "X-Mailer: PHP/" . phpversion();
+
+    // Use the '-f' parameter to set the envelope sender, which is often required on cPanel
+    $success = mail($to, $subject, $message, $headers, "-f" . SMTP_USER);
+    
+    if (!$success) {
+        error_log("[" . date("Y-m-d H:i:s") . "] Mail failed to: $to, Subject: $subject\n", 3, "mail_error.log");
+    }
+    return $success;
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Log the incoming request
+    error_log("[" . date("Y-m-d H:i:s") . "] Incoming request: " . file_get_contents('php://input') . "\n", 3, "request.log");
+
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
 
     if (!$data) {
+        error_log("[" . date("Y-m-d H:i:s") . "] Invalid JSON data\n", 3, "mail_error.log");
         http_response_code(400);
         echo json_encode(["error" => "Invalid JSON data"]);
         exit;
