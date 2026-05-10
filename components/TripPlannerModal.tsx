@@ -112,11 +112,11 @@ export default function TripPlannerModal({ isOpen, onClose }: TripPlannerModalPr
     const formProps = Object.fromEntries(formData);
     
     try {
-      const response = await fetch('/api/contact.php', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...formData,
+          ...formProps,
           ...selections,
           type: 'planner',
           subject: 'New Trip Planner Submission'

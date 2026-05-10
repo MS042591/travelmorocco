@@ -4,7 +4,7 @@ import nodemailer from 'nodemailer';
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, subject, message, tour, travelers, timing, requests, type } = body;
+    const { name, email, subject, message, tour, travelers, timing, requests, type, vibe, duration, comfort, wishes } = body;
 
     // Use environment variables for security
     const transporter = nodemailer.createTransport({
@@ -30,6 +30,17 @@ export async function POST(req: Request) {
         <p><strong>Travelers:</strong> ${travelers}</p>
         <p><strong>Timing:</strong> ${timing}</p>
         <p><strong>Special Requests:</strong> ${requests}</p>
+      `;
+    } else if (type === 'planner') {
+      emailSubject = `New Trip Planner: ${name}`;
+      emailHtml = `
+        <h2>New Trip Planner Submission</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Vibe:</strong> ${vibe}</p>
+        <p><strong>Duration:</strong> ${duration}</p>
+        <p><strong>Comfort Level:</strong> ${comfort}</p>
+        <p><strong>Special Wishes:</strong> ${wishes}</p>
       `;
     } else {
       emailSubject = `New Contact Inquiry: ${subject || 'General Inquiry'}`;
