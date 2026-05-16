@@ -61,19 +61,26 @@ export default async function TourPage({ params }: TourPageProps) {
   // TouristTrip Structured Data
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "TouristTrip",
+    "@type": ["Product", "TouristTrip"],
     "name": tour.title,
     "description": tour.excerpt,
     "image": tour.image,
+    "sku": slug,
+    "brand": {
+      "@type": "Brand",
+      "name": "Travel Morocco"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": `https://travelmorocco.co/tours/${slug}`,
+      "priceCurrency": "USD",
+      "price": tour.price && /\d/.test(tour.price) ? tour.price.replace(/[^0-9.]/g, '') : "0",
+      "availability": "https://schema.org/InStock"
+    },
     "touristType": [
       "Private Tour",
       tour.category
     ],
-    "provider": {
-      "@type": "TravelAgency",
-      "name": "Travel Morocco",
-      "url": "https://travelmorocco.co"
-    },
     "itinerary": {
       "@type": "ItemList",
       "itemListElement": tour.itinerary?.map((day, index) => ({
